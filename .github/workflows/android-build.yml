@@ -6,7 +6,7 @@ on:
       - "master"
       - "dev"
       - "ag/*"
-  pull-request:
+  pull_request:
     push:
       branches:
         - "master"
