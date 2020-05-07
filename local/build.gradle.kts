@@ -13,7 +13,6 @@ android {
         targetSdkVersion(variables.compileSdk)
         versionCode = variables.version
         versionName = variables.versionCode
-
         testInstrumentationRunner = variables.testRunner
     }
 
@@ -34,7 +33,6 @@ android {
         }
     }
 }
-
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to arrayOf("*.jar")))
     implementation(libs.kotlin.std)
@@ -45,4 +43,6 @@ dependencies {
     implementation(libs.room.core)
     implementation(libs.room.extensions)
     kapt(libs.room.compiler)
+    compileOnly(libs.androidx.annotations)
+    implementation(libs.paging.core)
 }

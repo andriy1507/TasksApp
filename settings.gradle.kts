@@ -1,5 +1,2 @@
-include(":local")
-include(":repository")
-include(":core")
-include(":app")
+include(":app", ":splash", ":local", ":repository", ":core")
 rootProject.name = "TasksApp"

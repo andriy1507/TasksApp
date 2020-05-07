@@ -4,9 +4,17 @@ import com.spaceapps.tasks.core.App
 import com.spaceapps.tasks.core.di.RepositoryProvider
 import com.spaceapps.tasks.local.di.LocalDataSourceComponent
 import com.spaceapps.tasks.local.di.LocalDataSourceProvider
+import com.spaceapps.tasks.repository.di.module.RepositoryModule
 import dagger.Component
 
-@Component(dependencies = [LocalDataSourceProvider::class])
+@Component(
+    dependencies = [
+        LocalDataSourceProvider::class
+    ],
+    modules = [
+        RepositoryModule::class
+    ]
+)
 interface RepositoryComponent : RepositoryProvider {
 
     @Component.Builder

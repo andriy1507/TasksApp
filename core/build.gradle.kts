@@ -40,4 +40,9 @@ dependencies {
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
+    implementation(libs.paging.core)
+    compileOnly(libs.androidx.annotations)
+    implementation(libs.coroutines.core)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.extensions)
 }

@@ -28,6 +28,32 @@ object libs {
         const val extensions = "androidx.room:room-ktx:$room_version"
     }
 
+    object paging {
+        private const val paging_version = "2.1.2"
+        const val core = "androidx.paging:paging-runtime:$paging_version"
+    }
+
+    object coroutines {
+        private const val coroutines_version = "1.3.5"
+        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    }
+
+    object constraint {
+        private const val constraint_version = "2.0.0-beta4"
+        const val layout = "com.android.support.constraint:constraint-layout:$constraint_version"
+    }
+
+    object material {
+        private const val material_version = "1.1.0-alpha10"
+        const val design = "com.google.android.material:material:$material_version"
+    }
+
+    object navigation {
+        private const val navigation_version = "2.3.0-alpha06"
+        const val fragment = "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+        const val extensions = "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    }
+
 }
 
 object variables {

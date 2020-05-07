@@ -38,12 +38,13 @@ android {
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to arrayOf("*.jar")))
     implementation(project(":core"))
-    implementation(project(":local"))
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
-    implementation(libs.dagger.core)
-    kapt(libs.dagger.compiler)
-    compileOnly(libs.androidx.annotations)
     implementation(libs.paging.core)
+    compileOnly(libs.androidx.annotations)
+    implementation(libs.coroutines.core)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.extensions)
+    implementation(libs.constraint.layout)
 }
