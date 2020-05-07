@@ -1,3 +1,5 @@
 package com.spaceapps.tasks.core.di
 
-interface ApplicationProvider
+interface ApplicationProvider : RepositoryProvider
+
+interface RepositoryProvider

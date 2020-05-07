@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
@@ -9,7 +9,6 @@ android {
     buildToolsVersion = variables.buildTools
 
     defaultConfig {
-        applicationId = "com.spaceapps.tasks"
         minSdkVersion(variables.minSdk)
         targetSdkVersion(variables.compileSdk)
         versionCode = variables.version
@@ -39,11 +38,10 @@ android {
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to arrayOf("*.jar")))
     implementation(project(":core"))
-    implementation(project(":repository"))
+    implementation(project(":local"))
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.dagger.core)
     kapt(libs.dagger.compiler)
-    compileOnly(libs.androidx.annotations)
 }
