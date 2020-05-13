@@ -7,3 +7,9 @@ fun debug(action: () -> Unit) {
         action()
     }
 }
+
+fun release(action: () -> Unit){
+    if (BuildConfig.RELEASE){
+        action()
+    }
+}

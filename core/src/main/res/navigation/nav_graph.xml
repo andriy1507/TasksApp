@@ -2,9 +2,73 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph.xml"
+    android:label="NavigationGraph"
     app:startDestination="@id/navigation_splash">
     <fragment
         android:id="@+id/navigation_splash"
         android:name="com.spaceapps.tasks.splash.SplashFragment"
-        android:label="SplashFragment" />
+        android:label="SplashFragment">
+        <action
+            android:id="@+id/navigation_main"
+            app:destination="@id/navigation_main" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_main"
+        android:name="com.spaceapps.tasks.main.MainFragment"
+        android:label="MainFragment">
+        <action
+            android:id="@+id/navigation_create"
+            app:destination="@id/navigation_create">
+            <argument
+                android:name="task"
+                android:defaultValue="@null"
+                app:argType="com.spaceapps.tasks.core.model.Task"
+                app:nullable="true" />
+        </action>
+        <action
+            android:id="@+id/navigation_view"
+            app:destination="@id/navigation_view">
+            <argument
+                android:name="task"
+                android:defaultValue="@null"
+                app:argType="com.spaceapps.tasks.core.model.Task"
+                app:nullable="true" />
+        </action>
+    </fragment>
+    <dialog
+        android:id="@+id/navigation_view"
+        android:name="com.spaceapps.tasks.main.TaskViewBottomSheet"
+        android:label="TaskViewBottomSheet">
+        <argument
+            android:name="task"
+            android:defaultValue="@null"
+            app:argType="com.spaceapps.tasks.core.model.Task"
+            app:nullable="true" />
+    </dialog>
+    <fragment
+        android:id="@+id/navigation_create"
+        android:name="com.spaceapps.tasks.create.CreateTaskFragment"
+        android:label="CreateTaskFragment" >
+        <argument
+            android:name="task"
+            android:defaultValue="@null"
+            app:argType="com.spaceapps.tasks.core.model.Task"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.spaceapps.tasks.profile.ProfileFragment"
+        android:label="ProfileFragment">
+        <action
+            android:id="@+id/navigation_login"
+            app:destination="@id/navigation_login" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_sign_in"
+        android:name="com.spaceapps.tasks.profile.SignInFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.spaceapps.tasks.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

@@ -3,6 +3,7 @@ object libs {
     object kotlin {
         const val version = "1.3.72"
         const val std = "org.jetbrains.kotlin:kotlin-stdlib:$version"
+        const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
     }
 
     object androidx {
@@ -12,7 +13,6 @@ object libs {
         const val appcompat = "androidx.appcompat:appcompat:$appcompat_version"
         private const val annotations_version = "1.1.0"
         const val annotations = "androidx.annotation:annotation:$annotations_version"
-
     }
 
     object dagger {
@@ -52,6 +52,42 @@ object libs {
         private const val navigation_version = "2.3.0-alpha06"
         const val fragment = "androidx.navigation:navigation-fragment-ktx:$navigation_version"
         const val extensions = "androidx.navigation:navigation-ui-ktx:$navigation_version"
+        const val safe_args = "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
+    }
+
+    object stetho{
+        private const val stetho_version = "1.5.1"
+        const val core ="com.facebook.stetho:stetho:$stetho_version"
+    }
+
+    object squareup {
+        private const val calendar_version = "1.6.5"
+        const val calendar = "com.squareup:android-times-square:$calendar_version@aar"
+    }
+
+    object logging {
+        private const val timber_version = "4.7.1"
+        const val timber = "com.jakewharton.timber:timber:$timber_version"
+    }
+
+    object lifecycle {
+        private const val lifecycle_version = "2.0.0"
+        const val runtime = "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+        const val extensions = "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+    }
+
+    object google {
+        private const val services_version = "4.3.3"
+        const val services = "com.google.gms:google-services:$services_version"
+        object firebase {
+            private const val analytics_version = "17.2.2"
+            const val analytics = "com.google.firebase:firebase-analytics:$analytics_version"
+        }
+    }
+
+    object android {
+        private const val tools_version = "4.0.0-rc01"
+        const val tools = "com.android.tools.build:gradle:$tools_version"
     }
 
 }

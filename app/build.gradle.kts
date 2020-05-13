@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("androidx.navigation.safeargs.kotlin")
 }
 android {
     compileSdkVersion(variables.compileSdk)
@@ -39,8 +40,14 @@ android {
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to arrayOf("*.jar")))
     implementation(project(":core"))
+    implementation(project(":core-ui"))
     implementation(project(":repository"))
     implementation(project(":splash"))
+    implementation(project(":main"))
+    implementation(project(":create"))
+    implementation(project(":profile"))
+    implementation(project(":settings"))
+    implementation(project(":account"))
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
@@ -51,4 +58,6 @@ dependencies {
     implementation(libs.material.design)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.extensions)
+    implementation(libs.stetho.core)
+    implementation(libs.logging.timber)
 }

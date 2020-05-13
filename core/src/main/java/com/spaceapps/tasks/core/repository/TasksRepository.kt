@@ -12,4 +12,6 @@ interface TasksRepository {
     fun changeTasks(vararg tasks: Task)
 
     fun addTasks(vararg tasks: Task)
+
+    fun getTasksByCategory(categoryId: Int): DataSource.Factory<Int, Task>
 }

@@ -4,7 +4,7 @@ import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.local.model.TaskLocal
 
 fun TaskLocal.toTask(): Task {
-    return Task(title, text, timestamp, isDone)
+    return Task(title, text, timestamp, isDone, color, icon)
 }
 
 fun Task.toTaskLocal(): TaskLocal {
@@ -12,6 +12,8 @@ fun Task.toTaskLocal(): TaskLocal {
         title = title,
         text = text,
         timestamp = timestamp,
-        isDone = isDone
+        isDone = isDone,
+        color = color,
+        icon = icon
     )
 }

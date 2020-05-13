@@ -5,17 +5,20 @@ import androidx.room.*
 import com.spaceapps.tasks.local.model.TaskLocal
 
 @Dao
-interface TasksDao {
+interface TasksDao : BaseDao<TaskLocal> {
 
     @Insert
-    fun insertTasks(vararg tasks: TaskLocal)
+    override fun insert(vararg items: TaskLocal)
 
     @Delete
-    fun deleteTasks(vararg tasks: TaskLocal)
+    override fun delete(vararg items: TaskLocal)
 
     @Update
-    fun updateTasks(vararg tasks: TaskLocal)
+    override fun update(vararg items: TaskLocal)
 
     @Query("SELECT * FROM TASKS")
-    fun selectAllTasks(): DataSource.Factory<Int, TaskLocal>
+    override fun selectAll(): DataSource.Factory<Int, TaskLocal>
+
+    @Query("SELECT * FROM TASKS WHERE categoryId = :categoryId")
+    fun selectByCategory(categoryId: Int): DataSource.Factory<Int, TaskLocal>
 }
