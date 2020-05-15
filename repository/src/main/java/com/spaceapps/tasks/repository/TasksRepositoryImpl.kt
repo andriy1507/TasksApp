@@ -25,8 +25,4 @@ class TasksRepositoryImpl
     override fun addTasks(vararg tasks: Task) {
         localDataSource.addTasks(*tasks.map { it.toTaskLocal() }.toTypedArray())
     }
-
-    override fun getTasksByCategory(categoryId: Int): DataSource.Factory<Int, Task> {
-        return localDataSource.getByCategory(categoryId).map { it.toTask() }
-    }
 }

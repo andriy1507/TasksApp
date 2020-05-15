@@ -12,6 +12,4 @@ interface TasksLocalDataSource {
     fun changeTasks(vararg tasks: TaskLocal)
 
     fun getTasks(): DataSource.Factory<Int, TaskLocal>
-
-    fun getByCategory(categoryId:Int):DataSource.Factory<Int,TaskLocal>
 }

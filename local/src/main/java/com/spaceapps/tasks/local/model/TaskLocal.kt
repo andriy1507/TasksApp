@@ -10,16 +10,12 @@ data class TaskLocal(
     val id: Long = 0,
     @ColumnInfo(name = "title")
     val title: String,
-    @ColumnInfo(name = "text")
-    val text: String,
     @ColumnInfo(name = "timestamp")
     val timestamp: Long,
-    @ColumnInfo
+    @ColumnInfo(name = "isDone")
     val isDone: Boolean,
     @ColumnInfo(name = "color")
     val color: Int? = null,
     @ColumnInfo(name = "icon")
-    val icon: Int? = null,
-    @ColumnInfo(name = "categoryId")
-    val category: Int? = null
+    val icon: Int? = null
 ) : LocalEntity

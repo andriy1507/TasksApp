@@ -20,7 +20,7 @@ class TasksAdapter @Inject constructor() : PagedListAdapter<Task, TasksAdapter.T
             oldItem.timestamp == newItem.timestamp
 
         override fun areContentsTheSame(oldItem: Task, newItem: Task) =
-            oldItem.text == newItem.text && oldItem.timestamp == newItem.timestamp
+            oldItem.timestamp == newItem.timestamp
     }
 ) {
 
@@ -44,7 +44,6 @@ class TasksAdapter @Inject constructor() : PagedListAdapter<Task, TasksAdapter.T
         fun bind(task: Task?, action: ((Task?) -> Unit)?) {
             itemView.apply {
                 titleTextView.text = task?.title
-                textTextView.text = task?.text
             }
             task?.let { task ->
                 setIcon(task)

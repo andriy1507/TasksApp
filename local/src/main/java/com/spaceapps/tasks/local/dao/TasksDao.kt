@@ -18,7 +18,4 @@ interface TasksDao : BaseDao<TaskLocal> {
 
     @Query("SELECT * FROM TASKS")
     override fun selectAll(): DataSource.Factory<Int, TaskLocal>
-
-    @Query("SELECT * FROM TASKS WHERE categoryId = :categoryId")
-    fun selectByCategory(categoryId: Int): DataSource.Factory<Int, TaskLocal>
 }

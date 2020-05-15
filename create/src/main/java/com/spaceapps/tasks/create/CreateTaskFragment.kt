@@ -40,7 +40,6 @@ class CreateTaskFragment : BaseFragment(R.layout.fragment_create_task) {
     private fun initTaskData() {
         task?.let {
             titleEditText.setText(it.title)
-            textEditText.setText(it.text)
             if (SelectableResources.COLORS.indexInList(it.color)) {
                 colorPickerView.selectItem(it.color)
             }
@@ -53,7 +52,6 @@ class CreateTaskFragment : BaseFragment(R.layout.fragment_create_task) {
     private fun getTask(): Task {
         return Task(
             titleEditText.text.toString(),
-            textEditText.text.toString(),
             System.currentTimeMillis(),
             false,
             colorPickerView.getSelected(),

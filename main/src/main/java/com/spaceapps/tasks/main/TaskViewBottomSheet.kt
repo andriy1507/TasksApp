@@ -9,7 +9,6 @@ import com.spaceapps.tasks.core_ui.BaseBottomSheetFragment
 import com.spaceapps.tasks.core_ui.SelectableResources
 import com.spaceapps.tasks.main.di.TaskViewScreenComponent
 import kotlinx.android.synthetic.main.bottom_sheet_task_view.*
-import kotlinx.android.synthetic.main.item_task.textTextView
 import kotlinx.android.synthetic.main.item_task.titleTextView
 import javax.inject.Inject
 
@@ -26,7 +25,6 @@ class TaskViewBottomSheet : BaseBottomSheetFragment(R.layout.bottom_sheet_task_v
         super.onViewCreated(view, savedInstanceState)
         TaskViewBottomSheetArgs.fromBundle(requireArguments()).task?.let {
             titleTextView.text = it.title
-            textTextView.text = it.text
             taskImageView.apply {
                 it.icon?.let { icon ->
                     if (SelectableResources.ICONS.indexInList(icon))

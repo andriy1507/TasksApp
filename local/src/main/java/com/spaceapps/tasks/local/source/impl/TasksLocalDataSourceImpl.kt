@@ -24,8 +24,4 @@ class TasksLocalDataSourceImpl
     override fun getTasks(): DataSource.Factory<Int, TaskLocal> {
         return tasksDao.selectAll()
     }
-
-    override fun getByCategory(categoryId: Int): DataSource.Factory<Int, TaskLocal> {
-        return tasksDao.selectByCategory(categoryId)
-    }
 }
