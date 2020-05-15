@@ -5,13 +5,16 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.spaceapps.tasks.core.extensions.indexInList
+import com.spaceapps.tasks.core.model.SubTask
 import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.core_ui.SelectableResources
 import com.spaceapps.tasks.core_ui.getThemeColor
 import com.spaceapps.tasks.create.di.CreateScreenComponent
+import com.spaceapps.tasks.create.recycler.SubTasksAdapter
 import kotlinx.android.synthetic.main.fragment_create_task.*
 import javax.inject.Inject
 
@@ -26,6 +29,9 @@ class CreateTaskFragment : BaseFragment(R.layout.fragment_create_task) {
     @Inject
     lateinit var viewModel: CreateTaskViewModel
 
+    @Inject
+    lateinit var subTasksAdapter: SubTasksAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         CreateTaskFragmentArgs.fromBundle(requireArguments()).task
@@ -35,6 +41,7 @@ class CreateTaskFragment : BaseFragment(R.layout.fragment_create_task) {
         super.onViewCreated(view, savedInstanceState)
         initTaskData()
         initClickListeners()
+        initRecyclerView()
     }
 
     private fun initTaskData() {
@@ -46,6 +53,14 @@ class CreateTaskFragment : BaseFragment(R.layout.fragment_create_task) {
             if (SelectableResources.ICONS.indexInList(it.icon)) {
                 iconPickerView.selectItem(it.icon)
             }
+            subTasksAdapter.submitList(it.subTasks)
+        }
+    }
+
+    private fun initRecyclerView() {
+        subTasksRecyclerView.apply {
+            adapter = subTasksAdapter
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         }
     }
 
@@ -77,6 +92,9 @@ class CreateTaskFragment : BaseFragment(R.layout.fragment_create_task) {
                         .show()
                 }
             }
+        }
+        addSubTaskButton.setOnClickListener {
+            subTasksAdapter.addItem(SubTask("", false))
         }
     }
 

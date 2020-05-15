@@ -9,5 +9,6 @@ data class Task(
     val timestamp: Long,
     var isDone: Boolean,
     val color: Int? = null,
-    val icon: Int? = null
+    val icon: Int? = null,
+    val subTasks: List<SubTask> = emptyList()
 ) : DomainEntity, Parcelable
