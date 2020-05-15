@@ -80,8 +80,7 @@ class CreateTaskFragment : BaseFragment(R.layout.fragment_create_task) {
         }
     }
 
-    private fun fieldsNotEmpty() =
-        (titleEditText.text.isNullOrBlank() && textEditText.text.isNullOrBlank()).not()
+    private fun fieldsNotEmpty() = titleEditText.text.isNullOrBlank().not()
 
     override fun onPause() {
         super.onPause()
