@@ -1,11 +1,10 @@
-package com.spaceapps.tasks.create.recycler
+package com.spaceapps.tasks.main
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.spaceapps.tasks.core.model.SubTask
-import com.spaceapps.tasks.create.R
 import kotlinx.android.synthetic.main.item_subtask.view.*
 import javax.inject.Inject
 
@@ -13,6 +12,8 @@ class SubTasksAdapter @Inject constructor() :
     RecyclerView.Adapter<SubTasksAdapter.SubTaskViewHolder>() {
 
     private val items: MutableList<SubTask> = mutableListOf()
+
+    fun getItems() = items.toList()
 
     private fun getItem(p: Int) = items[p]
 
@@ -23,7 +24,6 @@ class SubTasksAdapter @Inject constructor() :
         notifyItemInserted(itemCount - 1)
     }
 
-    fun getItems() = items.toList()
 
     fun submitList(newItems: List<SubTask>) {
         items.apply {

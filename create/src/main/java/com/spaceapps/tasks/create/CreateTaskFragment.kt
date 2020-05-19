@@ -70,7 +70,8 @@ class CreateTaskFragment : BaseFragment(R.layout.fragment_create_task) {
             System.currentTimeMillis(),
             false,
             colorPickerView.getSelected(),
-            iconPickerView.getSelected()
+            iconPickerView.getSelected(),
+            subTasksAdapter.getItems()
         )
     }
 

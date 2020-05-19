@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.spaceapps.tasks.core.extensions.indexInList
+import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core_ui.BaseBottomSheetFragment
 import com.spaceapps.tasks.core_ui.SelectableResources
 import com.spaceapps.tasks.main.di.TaskViewScreenComponent
@@ -17,12 +19,41 @@ class TaskViewBottomSheet : BaseBottomSheetFragment(R.layout.bottom_sheet_task_v
     @Inject
     lateinit var viewModel: TaskViewViewModel
 
+    @Inject
+    lateinit var subTasksAdapter: SubTasksAdapter
+
     override fun setupDependencies() {
         TaskViewScreenComponent.Initializer().init(this).inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initRecyclerView()
+        initTaskData()
+        initOnClickListener()
+    }
+
+    private fun initOnClickListener() {
+        saveButton.setOnClickListener {
+            getTask()?.let { task -> viewModel.updateTask(task) }
+        }
+    }
+
+    private fun getTask(): Task? {
+        return TaskViewBottomSheetArgs.fromBundle(requireArguments()).task?.copy(
+            title = titleTextView.text.toString(),
+            subTasks = subTasksAdapter.getItems()
+        )
+    }
+
+    private fun initRecyclerView() {
+        subTasksRecyclerView.apply {
+            adapter = subTasksAdapter
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        }
+    }
+
+    private fun initTaskData() {
         TaskViewBottomSheetArgs.fromBundle(requireArguments()).task?.let {
             titleTextView.text = it.title
             taskImageView.apply {
@@ -43,6 +74,7 @@ class TaskViewBottomSheet : BaseBottomSheetFragment(R.layout.bottom_sheet_task_v
                     }
                 }
             }
+            subTasksAdapter.submitList(it.subTasks)
         }
     }
 
