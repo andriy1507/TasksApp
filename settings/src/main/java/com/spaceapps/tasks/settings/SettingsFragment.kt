@@ -3,11 +3,17 @@ package com.spaceapps.tasks.settings
 import android.accounts.AccountManager
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import com.spaceapps.tasks.core_ui.BaseFragment
-import kotlinx.android.synthetic.main.fragment_settings.*
+import com.spaceapps.tasks.settings.databinding.FragmentSettingsBinding
 
-class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
+class SettingsFragment : BaseFragment() {
+
+    override val binding by lazy { FragmentSettingsBinding.inflate(layoutInflater) }
+
+    private val notificationsSwitch by lazy { binding.notificationsSwitch }
+    private val notificationsLabelTextView by lazy { binding.notificationsLabelTextView }
+    private val notificationsTitleTextView by lazy { binding.notificationsTitleTextView }
+    private val deleteAccountButton by lazy { binding.deleteAccountButton }
 
     override fun setupDependencies() = Unit
 

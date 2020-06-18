@@ -1,7 +1,8 @@
+@Suppress("CLASSNAME")
 object libs {
 
     object kotlin {
-        const val version = "1.3.72"
+        private const val version = "1.3.72"
         const val std = "org.jetbrains.kotlin:kotlin-stdlib:$version"
         const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
     }
@@ -86,12 +87,17 @@ object libs {
     }
 
     object android {
-        private const val tools_version = "4.0.0-rc01"
+        private const val tools_version = "4.0.0"
         const val tools = "com.android.tools.build:gradle:$tools_version"
     }
 
+    object groupie {
+        private const val groupie_version = "2.8.0"
+        const val core = "com.xwray:groupie:$groupie_version"
+    }
 }
 
+@Suppress("CLASSNAME")
 object variables {
     const val minSdk = 24
     const val compileSdk = 29

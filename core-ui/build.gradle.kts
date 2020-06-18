@@ -33,6 +33,9 @@ android {
             )
         }
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -44,4 +47,5 @@ dependencies {
     implementation(libs.material.design)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.extensions)
+    implementation(libs.groupie.core)
 }

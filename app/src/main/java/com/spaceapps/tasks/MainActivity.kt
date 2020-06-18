@@ -1,13 +1,23 @@
 package com.spaceapps.tasks
 
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.spaceapps.tasks.core_ui.gone
 import com.spaceapps.tasks.core_ui.visible
-import kotlinx.android.synthetic.main.activity_main.*
+import com.spaceapps.tasks.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity() {
+
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val bottomNavigationView by lazy { binding.bottomNavigationView }
+    private val navHostFragment by lazy { binding.navHostFragment }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+    }
 
     override fun onResume() {
         super.onResume()
@@ -30,7 +40,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun setupNavigation() {
         NavigationUI.setupWithNavController(
             bottomNavigationView,
-            nav_host_fragment.findNavController()
+            navHostFragment.findNavController()
         )
     }
 }

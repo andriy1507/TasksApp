@@ -1,26 +1,38 @@
 package com.spaceapps.tasks.main
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.spaceapps.tasks.core.extensions.indexInList
+import com.spaceapps.tasks.core.model.SubTask
 import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core_ui.BaseBottomSheetFragment
 import com.spaceapps.tasks.core_ui.SelectableResources
+import com.spaceapps.tasks.main.databinding.BottomSheetTaskViewBinding
 import com.spaceapps.tasks.main.di.TaskViewScreenComponent
-import kotlinx.android.synthetic.main.bottom_sheet_task_view.*
-import kotlinx.android.synthetic.main.item_task.titleTextView
+import com.spaceapps.tasks.main.model.SubTaskPresentation
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 import javax.inject.Inject
 
-class TaskViewBottomSheet : BaseBottomSheetFragment(R.layout.bottom_sheet_task_view) {
+class TaskViewBottomSheet : BaseBottomSheetFragment() {
+
+    override val binding by lazy { BottomSheetTaskViewBinding.inflate(layoutInflater) }
+
+    private val subTasksRecyclerView by lazy { binding.subTasksRecyclerView }
+    private val saveButton by lazy { binding.saveButton }
+    private val titleTextView by lazy { binding.titleTextView }
+    private val taskImageView by lazy { binding.taskImageView }
 
     @Inject
     lateinit var viewModel: TaskViewViewModel
 
-    @Inject
-    lateinit var subTasksAdapter: SubTasksAdapter
+    private val subTasksAdapter by lazy { GroupAdapter<GroupieViewHolder>() }
 
     override fun setupDependencies() {
         TaskViewScreenComponent.Initializer().init(this).inject(this)
@@ -42,26 +54,32 @@ class TaskViewBottomSheet : BaseBottomSheetFragment(R.layout.bottom_sheet_task_v
     private fun getTask(): Task? {
         return TaskViewBottomSheetArgs.fromBundle(requireArguments()).task?.copy(
             title = titleTextView.text.toString(),
-            subTasks = subTasksAdapter.getItems()
+            subTasks = getSubTasks()
         )
     }
 
-    private fun initRecyclerView() {
-        subTasksRecyclerView.apply {
-            adapter = subTasksAdapter
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+    private fun getSubTasks(): List<SubTask> {
+        val list = mutableListOf<SubTask>()
+        for (i in 0 until subTasksAdapter.itemCount) {
+            val item = subTasksAdapter.getItem(i) as SubTaskPresentation
+            list.add(SubTask(item.text, item.isDone))
         }
+        return list
+    }
+
+    private fun initRecyclerView() {
+        subTasksRecyclerView.adapter = subTasksAdapter
     }
 
     private fun initTaskData() {
-        TaskViewBottomSheetArgs.fromBundle(requireArguments()).task?.let {
-            titleTextView.text = it.title
+        TaskViewBottomSheetArgs.fromBundle(requireArguments()).task?.let { task ->
+            titleTextView.text = task.title
             taskImageView.apply {
-                it.icon?.let { icon ->
+                task.icon?.let { icon ->
                     if (SelectableResources.ICONS.indexInList(icon))
                         setImageResource(SelectableResources.ICONS[icon])
                 }
-                it.color?.let { color ->
+                task.color?.let { color ->
                     if (SelectableResources.COLORS.indexInList(color)) {
                         ImageViewCompat
                             .setImageTintList(
@@ -74,7 +92,10 @@ class TaskViewBottomSheet : BaseBottomSheetFragment(R.layout.bottom_sheet_task_v
                     }
                 }
             }
-            subTasksAdapter.submitList(it.subTasks)
+            subTasksAdapter.apply {
+                clear()
+                addAll(task.subTasks.map { SubTaskPresentation(it.text, it.isDone) })
+            }
         }
     }
 

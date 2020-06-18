@@ -34,6 +34,9 @@ android {
             )
         }
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -53,4 +56,5 @@ dependencies {
     kapt(libs.dagger.compiler)
     implementation(libs.lifecycle.runtime)
     implementation(libs.lifecycle.extensions)
+    implementation(libs.groupie.core)
 }

@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
+import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-abstract class BaseBottomSheetFragment(@LayoutRes private val layout: Int) :
-    BottomSheetDialogFragment() {
+abstract class BaseBottomSheetFragment : BottomSheetDialogFragment() {
+
+    protected abstract val binding: ViewBinding
 
     abstract fun setupDependencies()
 
@@ -22,7 +23,7 @@ abstract class BaseBottomSheetFragment(@LayoutRes private val layout: Int) :
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(layout, container, false)
+        return binding.root
     }
 
 }

@@ -1,16 +1,22 @@
 package com.spaceapps.tasks.main
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.spaceapps.tasks.core_ui.BaseFragment
+import com.spaceapps.tasks.main.databinding.FragmentMainBinding
 import com.spaceapps.tasks.main.di.MainScreenComponent
-import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
-class MainFragment : BaseFragment(R.layout.fragment_main) {
+class MainFragment : BaseFragment() {
+
+    override val binding by lazy { FragmentMainBinding.inflate(layoutInflater) }
+    private val createTaskFab by lazy { binding.createTaskFab }
+    private val tasksRecyclerView by lazy { binding.tasksRecyclerView }
 
     @Inject
     lateinit var viewModel: MainScreenViewModel
@@ -20,6 +26,14 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     override fun setupDependencies() {
         MainScreenComponent.Initializer().init(this).inject(this)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return binding.root
     }
 
     override fun onResume() {

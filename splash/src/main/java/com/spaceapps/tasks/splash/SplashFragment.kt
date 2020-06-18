@@ -3,8 +3,11 @@ package com.spaceapps.tasks.splash
 import android.os.Handler
 import androidx.navigation.fragment.findNavController
 import com.spaceapps.tasks.core_ui.BaseFragment
+import com.spaceapps.tasks.splash.databinding.FragmentSplashBinding
 
-class SplashFragment : BaseFragment(R.layout.fragment_splash) {
+class SplashFragment : BaseFragment() {
+
+    override val binding by lazy { FragmentSplashBinding.inflate(layoutInflater) }
 
     companion object {
         private const val SPLASH_SCREEN_DELAY: Long = 1500

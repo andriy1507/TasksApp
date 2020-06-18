@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.spaceapps.tasks.core.extensions.indexInList
 import com.spaceapps.tasks.core.model.SubTask
@@ -13,28 +12,37 @@ import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.core_ui.SelectableResources
 import com.spaceapps.tasks.core_ui.getThemeColor
+import com.spaceapps.tasks.create.databinding.FragmentCreateTaskBinding
 import com.spaceapps.tasks.create.di.CreateScreenComponent
-import com.spaceapps.tasks.create.recycler.SubTasksAdapter
-import kotlinx.android.synthetic.main.fragment_create_task.*
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 import javax.inject.Inject
 
-class CreateTaskFragment : BaseFragment(R.layout.fragment_create_task) {
+class CreateTaskFragment : BaseFragment() {
 
-    override fun setupDependencies() {
-        CreateScreenComponent.Initializer().init(this).inject(this)
-    }
+    override val binding by lazy { FragmentCreateTaskBinding.inflate(layoutInflater) }
+
+    private val titleEditText by lazy { binding.titleEditText }
+    private val colorPickerView by lazy { binding.colorPickerView }
+    private val iconPickerView by lazy { binding.iconPickerView }
+    private val subTasksRecyclerView by lazy { binding.subTasksRecyclerView }
+    private val saveButton by lazy { binding.saveButton }
+    private val addSubTaskButton by lazy { binding.addSubTaskButton }
 
     private var task: Task? = null
 
     @Inject
     lateinit var viewModel: CreateTaskViewModel
 
-    @Inject
-    lateinit var subTasksAdapter: SubTasksAdapter
+    private val subTasksAdapter by lazy { GroupAdapter<GroupieViewHolder>() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         CreateTaskFragmentArgs.fromBundle(requireArguments()).task
+    }
+
+    override fun setupDependencies() {
+        CreateScreenComponent.Initializer().init(this).inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,49 +61,50 @@ class CreateTaskFragment : BaseFragment(R.layout.fragment_create_task) {
             if (SelectableResources.ICONS.indexInList(it.icon)) {
                 iconPickerView.selectItem(it.icon)
             }
-            subTasksAdapter.submitList(it.subTasks)
+//            subTasksAdapter.add(it.subTasks.map {  })
         }
     }
 
     private fun initRecyclerView() {
-        subTasksRecyclerView.apply {
-            adapter = subTasksAdapter
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        }
+        subTasksRecyclerView.adapter = subTasksAdapter
     }
 
-    private fun getTask(): Task {
-        return Task(
-            titleEditText.text.toString(),
-            System.currentTimeMillis(),
-            false,
-            colorPickerView.getSelected(),
-            iconPickerView.getSelected(),
-            subTasksAdapter.getItems()
-        )
-    }
+//    private fun getTask(): Task {
+//        return Task(
+//            titleEditText.text.toString(),
+//            System.currentTimeMillis(),
+//            false,
+//            colorPickerView.getSelected(),
+//            iconPickerView.getSelected(),
+//            subTasksAdapter.getAll()
+//        )
+//    }
 
     private fun initClickListeners() {
         saveButton.setOnClickListener {
-            if (fieldsNotEmpty()) {
-                if (task == null) {
-                    viewModel.saveTask(getTask())
-                    findNavController().popBackStack()
-                } else {
-                    viewModel.updateTask(getTask())
-                    findNavController().popBackStack()
-                }
-            } else {
-                context?.let { context ->
-                    Snackbar.make(root, "Please enter title and text", Snackbar.LENGTH_SHORT)
-                        .setBackgroundTint(context.getThemeColor(R.attr.colorError))
-                        .setTextColor(context.getThemeColor(R.attr.colorOnError))
-                        .show()
-                }
-            }
+//            if (fieldsNotEmpty()) {
+//                if (task == null) {
+//                    viewModel.saveTask(getTask())
+//                    findNavController().popBackStack()
+//                } else {
+//                    viewModel.updateTask(getTask())
+//                    findNavController().popBackStack()
+//                }
+//            } else {
+//                context?.let { context ->
+//                    Snackbar.make(
+//                        binding.root,
+//                        "Please enter title and text",
+//                        Snackbar.LENGTH_SHORT
+//                    )
+//                        .setBackgroundTint(context.getThemeColor(R.attr.colorError))
+//                        .setTextColor(context.getThemeColor(R.attr.colorOnError))
+//                        .show()
+//                }
+//            }
         }
         addSubTaskButton.setOnClickListener {
-            subTasksAdapter.addItem(SubTask("", false))
+//            subTasksAdapter.addItem(SubTask("", false))
         }
     }
 

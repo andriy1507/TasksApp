@@ -5,15 +5,19 @@ import android.accounts.AccountManager
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
-import androidx.annotation.ColorInt
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.core_ui.getThemeColor
-import kotlinx.android.synthetic.main.fragment_sign_in.*
+import com.spaceapps.tasks.profile.databinding.FragmentSignInBinding
 
-class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
+class SignInFragment : BaseFragment() {
+
+    override val binding by lazy { FragmentSignInBinding.inflate(layoutInflater) }
+
+    private val signInButton by lazy { binding.signInButton }
+    private val loginEditText by lazy { binding.loginEditText }
+    private val passwordEditText by lazy { binding.passwordEditText }
 
     override fun setupDependencies() = Unit
 
@@ -28,7 +32,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
                 addAccount()
             } else {
                 context?.let {
-                    Snackbar.make(root, "Enter valid credentials", Snackbar.LENGTH_SHORT)
+                    Snackbar.make(binding.root, "Enter valid credentials", Snackbar.LENGTH_SHORT)
                         .setBackgroundTint(it.getThemeColor(R.attr.colorError))
                         .setTextColor(it.getThemeColor(R.attr.colorOnError)).show()
                 }

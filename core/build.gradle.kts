@@ -36,6 +36,9 @@ android {
             buildConfigField("Boolean","RELEASE", "false")
         }
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
