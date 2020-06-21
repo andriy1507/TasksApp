@@ -8,7 +8,7 @@ import com.spaceapps.tasks.local.model.SubTaskLocal
 interface SubTasksDao : BaseDao<SubTaskLocal> {
 
     @Insert
-    override fun insert(vararg items: SubTaskLocal)
+    override fun insert(vararg items: SubTaskLocal):List<Long>
 
     @Delete
     override fun delete(vararg items: SubTaskLocal)
@@ -18,7 +18,4 @@ interface SubTasksDao : BaseDao<SubTaskLocal> {
 
     @Query("SELECT * FROM SUBTASKS")
     override fun selectAll(): DataSource.Factory<Int, SubTaskLocal>
-
-    @Query("SELECT * FROM SUBTASKS WHERE taskId = :taskId")
-    fun selectByTask(taskId: Long): DataSource.Factory<Int, SubTaskLocal>
 }

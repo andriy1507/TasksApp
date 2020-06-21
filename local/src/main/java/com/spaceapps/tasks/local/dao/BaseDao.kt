@@ -5,7 +5,7 @@ import com.spaceapps.tasks.local.model.LocalEntity
 
 interface BaseDao<L : LocalEntity> {
 
-    fun insert(vararg items: L)
+    fun insert(vararg items: L):List<Long>
 
     fun delete(vararg items: L)
 

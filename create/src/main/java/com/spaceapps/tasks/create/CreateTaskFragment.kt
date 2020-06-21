@@ -75,8 +75,8 @@ class CreateTaskFragment : BaseFragment() {
             titleEditText.text.toString(),
             System.currentTimeMillis(),
             false,
-            colorPickerView.getSelected(),
-            iconPickerView.getSelected(),
+            colorPickerView.selected,
+            iconPickerView.selected,
             getSubTasks()
         )
     }
@@ -85,7 +85,7 @@ class CreateTaskFragment : BaseFragment() {
         val list = mutableListOf<SubTask>()
         for (i in 0 until subTasksAdapter.itemCount){
             val item = subTasksAdapter.getItem(i) as SubTaskView
-            list.add(SubTask(item.text, item.isDone))
+            list.add(item.getSubTask())
         }
         return list
     }
