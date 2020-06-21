@@ -81,8 +81,12 @@ object libs {
         private const val services_version = "4.3.3"
         const val services = "com.google.gms:google-services:$services_version"
         object firebase {
-            private const val analytics_version = "17.2.2"
+            private const val analytics_version = "17.4.3"
             const val analytics = "com.google.firebase:firebase-analytics:$analytics_version"
+            private const val crashlytics_plugin_version = "2.2.0"
+            const val crashlyticsPlugin = "com.google.firebase:firebase-crashlytics-gradle:$crashlytics_plugin_version"
+            private const val crashlytics_version = "17.1.0"
+            const val crashlytics = "com.google.firebase:firebase-crashlytics:$crashlytics_version"
         }
     }
 

@@ -4,6 +4,8 @@ plugins {
     kotlin("android.extensions")
     kotlin("kapt")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 android {
     compileSdkVersion(variables.compileSdk)
@@ -63,4 +65,6 @@ dependencies {
     implementation(libs.navigation.extensions)
     implementation(libs.stetho.core)
     implementation(libs.logging.timber)
+    implementation(libs.google.firebase.analytics)
+    implementation(libs.google.firebase.crashlytics)
 }
