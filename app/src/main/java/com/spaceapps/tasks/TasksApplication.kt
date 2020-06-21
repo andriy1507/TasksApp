@@ -25,4 +25,3 @@ class TasksApplication : Application(), App {
     private fun initTimber() = debug { Timber.plant(Timber.DebugTree()) }
 
 }
-
