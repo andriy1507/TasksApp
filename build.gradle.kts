@@ -14,6 +14,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven("https://dl.bintray.com/lisawray/maven")
     }
 }
 

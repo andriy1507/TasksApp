@@ -57,4 +57,5 @@ dependencies {
     implementation(libs.lifecycle.runtime)
     implementation(libs.lifecycle.extensions)
     implementation(libs.groupie.core)
+    implementation(libs.groupie.viewBinding)
 }

@@ -14,6 +14,7 @@ import com.spaceapps.tasks.core_ui.SelectableResources
 import com.spaceapps.tasks.core_ui.getThemeColor
 import com.spaceapps.tasks.create.databinding.FragmentCreateTaskBinding
 import com.spaceapps.tasks.create.di.CreateScreenComponent
+import com.spaceapps.tasks.create.model.SubTaskView
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import javax.inject.Inject
@@ -53,15 +54,15 @@ class CreateTaskFragment : BaseFragment() {
     }
 
     private fun initTaskData() {
-        task?.let {
-            titleEditText.setText(it.title)
-            if (SelectableResources.COLORS.indexInList(it.color)) {
-                colorPickerView.selectItem(it.color)
+        task?.let { task ->
+            titleEditText.setText(task.title)
+            if (SelectableResources.COLORS.indexInList(task.color)) {
+                colorPickerView.selectItem(task.color)
             }
-            if (SelectableResources.ICONS.indexInList(it.icon)) {
-                iconPickerView.selectItem(it.icon)
+            if (SelectableResources.ICONS.indexInList(task.icon)) {
+                iconPickerView.selectItem(task.icon)
             }
-//            subTasksAdapter.add(it.subTasks.map {  })
+            subTasksAdapter.addAll(task.subTasks.map { SubTaskView(it.text, it.isDone) })
         }
     }
 
@@ -69,46 +70,56 @@ class CreateTaskFragment : BaseFragment() {
         subTasksRecyclerView.adapter = subTasksAdapter
     }
 
-//    private fun getTask(): Task {
-//        return Task(
-//            titleEditText.text.toString(),
-//            System.currentTimeMillis(),
-//            false,
-//            colorPickerView.getSelected(),
-//            iconPickerView.getSelected(),
-//            subTasksAdapter.getAll()
-//        )
-//    }
+    private fun getTask(): Task {
+        return Task(
+            titleEditText.text.toString(),
+            System.currentTimeMillis(),
+            false,
+            colorPickerView.getSelected(),
+            iconPickerView.getSelected(),
+            getSubTasks()
+        )
+    }
+
+    private fun getSubTasks():List<SubTask>{
+        val list = mutableListOf<SubTask>()
+        for (i in 0 until subTasksAdapter.itemCount){
+            val item = subTasksAdapter.getItem(i) as SubTaskView
+            list.add(SubTask(item.text, item.isDone))
+        }
+        return list
+    }
 
     private fun initClickListeners() {
         saveButton.setOnClickListener {
-//            if (fieldsNotEmpty()) {
-//                if (task == null) {
-//                    viewModel.saveTask(getTask())
-//                    findNavController().popBackStack()
-//                } else {
-//                    viewModel.updateTask(getTask())
-//                    findNavController().popBackStack()
-//                }
-//            } else {
-//                context?.let { context ->
-//                    Snackbar.make(
-//                        binding.root,
-//                        "Please enter title and text",
-//                        Snackbar.LENGTH_SHORT
-//                    )
-//                        .setBackgroundTint(context.getThemeColor(R.attr.colorError))
-//                        .setTextColor(context.getThemeColor(R.attr.colorOnError))
-//                        .show()
-//                }
-//            }
+            if (fieldsNotEmpty) {
+                if (task == null) {
+                    viewModel.saveTask(getTask())
+                    findNavController().popBackStack()
+                } else {
+                    viewModel.updateTask(getTask())
+                    findNavController().popBackStack()
+                }
+            } else {
+                context?.let { context ->
+                    Snackbar.make(
+                        binding.root,
+                        "Please enter title and text",
+                        Snackbar.LENGTH_SHORT
+                    )
+                        .setBackgroundTint(context.getThemeColor(R.attr.colorError))
+                        .setTextColor(context.getThemeColor(R.attr.colorOnError))
+                        .show()
+                }
+            }
         }
         addSubTaskButton.setOnClickListener {
-//            subTasksAdapter.addItem(SubTask("", false))
+            subTasksAdapter.add(SubTaskView())
         }
     }
 
-    private fun fieldsNotEmpty() = titleEditText.text.isNullOrBlank().not()
+    private val fieldsNotEmpty
+        get() = titleEditText.text.isNullOrBlank().not()
 
     override fun onPause() {
         super.onPause()

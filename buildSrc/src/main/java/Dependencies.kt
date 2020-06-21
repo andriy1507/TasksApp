@@ -94,6 +94,7 @@ object libs {
     object groupie {
         private const val groupie_version = "2.8.0"
         const val core = "com.xwray:groupie:$groupie_version"
+        const val viewBinding = "com.xwray:groupie-viewbinding:$groupie_version"
     }
 }
 
