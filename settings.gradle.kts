@@ -1,3 +1,12 @@
-include(":core")
+include(":account")
+include(":profile")
+include(":settings")
+include(":create")
+include(":main")
+include(":core-ui")
 include(":app")
+include(":splash")
+include(":local")
+include(":repository")
+include(":core")
 rootProject.name = "TasksApp"

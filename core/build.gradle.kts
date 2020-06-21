@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("androidx.navigation.safeargs.kotlin")
 }
 android {
     compileSdkVersion(variables.compileSdk)
@@ -24,6 +25,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("Boolean","RELEASE", "true")
         }
         getByName("debug") {
             isMinifyEnabled = false
@@ -31,7 +33,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("Boolean","RELEASE", "false")
         }
+    }
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -40,4 +46,9 @@ dependencies {
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
+    implementation(libs.paging.core)
+    compileOnly(libs.androidx.annotations)
+    implementation(libs.coroutines.core)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.extensions)
 }
