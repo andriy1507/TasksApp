@@ -4,6 +4,8 @@ import com.spaceapps.tasks.TasksApplication
 import com.spaceapps.tasks.core.App
 import com.spaceapps.tasks.core.di.ApplicationProvider
 import com.spaceapps.tasks.core.di.RepositoryProvider
+import com.spaceapps.tasks.core.di.UtilsProvider
+import com.spaceapps.tasks.core_utils.di.UtilsComponent
 import com.spaceapps.tasks.repository.di.RepositoryComponent
 import dagger.BindsInstance
 import dagger.Component
@@ -13,16 +15,20 @@ import dagger.Component
         ApplicationModule::class
     ],
     dependencies = [
-        RepositoryProvider::class
+        RepositoryProvider::class,
+        UtilsProvider::class
     ]
 )
 interface ApplicationComponent : ApplicationProvider {
 
+    fun inject(app: TasksApplication)
 
     @Component.Builder
     interface Builder {
 
         fun provider(provider: RepositoryProvider): Builder
+
+        fun provider(provider: UtilsProvider): Builder
 
         @BindsInstance
         fun application(app: App): Builder
@@ -35,6 +41,7 @@ interface ApplicationComponent : ApplicationProvider {
             return DaggerApplicationComponent.builder()
                 .application(app)
                 .provider(RepositoryComponent.Initializer().init(app))
+                .provider(UtilsComponent.Initializer().init(app))
                 .build()
         }
     }
