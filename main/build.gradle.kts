@@ -37,6 +37,13 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    compileOptions {
+        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -57,4 +64,5 @@ dependencies {
     implementation(libs.squareup.calendar)
     implementation(libs.logging.timber)
     implementation(libs.groupie.core)
+    implementation(libs.groupie.viewBinding)
 }
