@@ -14,6 +14,11 @@ android {
         versionCode = variables.version
         versionName = variables.versionCode
         testInstrumentationRunner = variables.testRunner
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments(mapOf("room.incremental" to "true"))
+            }
+        }
     }
 
     buildTypes {
