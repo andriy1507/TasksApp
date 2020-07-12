@@ -12,7 +12,7 @@ on:
       - synchronize
 
 jobs:
-  build:
+  apk:
     name: Build TaskApp debug
     runs-on: ubuntu-20.04
 
@@ -24,7 +24,7 @@ jobs:
         with:
           java-version: 1.8
       - name: Build with Gradle
-        run: ./gradlew :app:assembleDebug
+        run: ./gradlew assembleDebug
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
