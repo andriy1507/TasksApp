@@ -43,6 +43,7 @@ class TaskViewBottomSheet : BaseBottomSheetFragment() {
     private fun initOnClickListener() {
         saveButton.setOnClickListener {
             getTask()?.let { task -> viewModel.updateTask(task) }
+            dismiss()
         }
     }
 
