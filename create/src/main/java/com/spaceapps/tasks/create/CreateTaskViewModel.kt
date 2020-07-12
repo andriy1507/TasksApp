@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.spaceapps.tasks.core.extensions.asyncIO
 import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core.repository.TasksRepository
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class CreateTaskViewModel
@@ -25,6 +23,7 @@ class CreateTaskViewModel
 
     class Factory @Inject constructor(private val repository: TasksRepository) :
         ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return CreateTaskViewModel(repository) as T
         }
