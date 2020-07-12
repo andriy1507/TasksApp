@@ -11,8 +11,8 @@ on:
       - synchronize
 
 jobs:
-  build:
-    name: Build TaskApp release
+  apk:
+    name: Build TasksApp release
     runs-on: ubuntu-20.04
 
     steps:
@@ -23,7 +23,7 @@ jobs:
         with:
           java-version: 1.8
       - name: Build with Gradle
-        run: ./gradlew :app:assembleRelease
+        run: ./gradlew assembleRelease --stacktrace
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
