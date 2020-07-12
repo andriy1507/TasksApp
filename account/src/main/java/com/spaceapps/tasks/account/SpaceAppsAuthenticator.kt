@@ -7,9 +7,9 @@ import android.accounts.AccountManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.SyncStateContract
 
-class SpaceAppsAuthenticator(private val context: Context) : AbstractAccountAuthenticator(context) {
+class SpaceAppsAuthenticator(context: Context) : AbstractAccountAuthenticator(context) {
+
     override fun getAuthTokenLabel(authTokenType: String?): String {
         return ""
     }
