@@ -2,14 +2,15 @@ package com.spaceapps.tasks.local.dao
 
 import androidx.paging.DataSource
 import androidx.room.*
+import androidx.room.OnConflictStrategy.REPLACE
 import com.spaceapps.tasks.local.model.TaskLocal
 import com.spaceapps.tasks.local.model.TaskWithSubs
 
 @Dao
 interface TasksDao : BaseDao<TaskLocal> {
 
-    @Insert
-    override fun insert(vararg items: TaskLocal):List<Long>
+    @Insert(onConflict = REPLACE)
+    override fun insert(vararg items: TaskLocal): List<Long>
 
     @Delete
     override fun delete(vararg items: TaskLocal)
@@ -20,6 +21,7 @@ interface TasksDao : BaseDao<TaskLocal> {
     @Query("SELECT * FROM TASKS")
     override fun selectAll(): DataSource.Factory<Int, TaskLocal>
 
+    @Transaction
     @Query("SELECT * FROM TASKS")
-    fun selectAllWithSubTasks():DataSource.Factory<Int, TaskWithSubs>
+    fun selectAllWithSubTasks(): DataSource.Factory<Int, TaskWithSubs>
 }
