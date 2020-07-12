@@ -45,6 +45,7 @@ android {
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to arrayOf("*.jar")))
     implementation(project(":core"))
+    implementation(project(":core-utils"))
     implementation(project(":core-ui"))
     implementation(project(":repository"))
     implementation(project(":splash"))
@@ -53,6 +54,7 @@ dependencies {
     implementation(project(":profile"))
     implementation(project(":settings"))
     implementation(project(":account"))
+    implementation(project(":firebase"))
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)

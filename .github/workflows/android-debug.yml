@@ -1,0 +1,32 @@
+name: spaceApps Android CI
+
+on:
+  pull_request:
+    branches:
+      - "dev"
+      - "ag/*"
+    types:
+      - opened
+      - reopened
+      - edited
+      - synchronize
+
+jobs:
+  apk:
+    name: Build TaskApp debug
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Build with Gradle
+        run: ./gradlew assembleDebug
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: spaceTasks
+          path: app/build/outputs/apk/debug/app-debug.apk

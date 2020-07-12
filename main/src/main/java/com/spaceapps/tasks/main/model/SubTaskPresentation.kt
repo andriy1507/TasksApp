@@ -1,28 +1,35 @@
 package com.spaceapps.tasks.main.model
 
-import androidx.appcompat.widget.AppCompatCheckBox
-import androidx.appcompat.widget.AppCompatEditText
+import android.view.View
+import com.spaceapps.tasks.core.model.SubTask
 import com.spaceapps.tasks.core_ui.PresentationEntity
+import com.spaceapps.tasks.core_ui.databinding.ItemSubtaskBinding
 import com.spaceapps.tasks.main.R
-import com.xwray.groupie.GroupieViewHolder
-import com.xwray.groupie.Item
+import com.xwray.groupie.viewbinding.BindableItem
 
 data class SubTaskPresentation(
-    val text: String,
-    val isDone: Boolean
-) : Item<GroupieViewHolder>(), PresentationEntity {
+    var text: String,
+    var isDone: Boolean
+) : BindableItem<ItemSubtaskBinding>(), PresentationEntity {
 
     override fun getLayout() = R.layout.item_subtask
 
-    //  TODO(Enable view binding)
-    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.apply {
-            val checkBox = findViewById<AppCompatCheckBox>(R.id.subTaskCheckBox)
-            val editText = findViewById<AppCompatEditText>(R.id.subTaskEditText)
-            checkBox.isChecked = isDone
-            editText.setText(text)
-        }
+    private lateinit var binding: ItemSubtaskBinding
 
-
+    override fun initializeViewBinding(view: View): ItemSubtaskBinding {
+        binding = ItemSubtaskBinding.bind(view)
+        return binding
     }
+
+    override fun bind(binding: ItemSubtaskBinding, position: Int) {
+        binding.apply {
+            subTaskCheckBox.isChecked = isDone
+            subTaskEditText.setText(text)
+        }
+    }
+
+    fun getSubTask() = SubTask(
+        binding.subTaskEditText.text.toString(),
+        binding.subTaskCheckBox.isChecked
+    )
 }

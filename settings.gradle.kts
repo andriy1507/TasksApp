@@ -1,3 +1,5 @@
+include(":core-utils")
+include(":firebase")
 include(":account")
 include(":profile")
 include(":settings")

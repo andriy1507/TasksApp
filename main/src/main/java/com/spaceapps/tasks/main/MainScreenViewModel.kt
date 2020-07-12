@@ -25,6 +25,7 @@ class MainScreenViewModel @Inject constructor(private val tasksRepository: Tasks
 
     class Factory @Inject constructor(private val repository: TasksRepository) :
         ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return MainScreenViewModel(repository) as T
         }

@@ -1,18 +1,13 @@
 package com.spaceapps.tasks.main
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.core.widget.ImageViewCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.spaceapps.tasks.core.extensions.indexInList
 import com.spaceapps.tasks.core.model.SubTask
 import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core_ui.BaseBottomSheetFragment
 import com.spaceapps.tasks.core_ui.SelectableResources
+import com.spaceapps.tasks.core_ui.setIconColor
 import com.spaceapps.tasks.main.databinding.BottomSheetTaskViewBinding
 import com.spaceapps.tasks.main.di.TaskViewScreenComponent
 import com.spaceapps.tasks.main.model.SubTaskPresentation
@@ -48,6 +43,7 @@ class TaskViewBottomSheet : BaseBottomSheetFragment() {
     private fun initOnClickListener() {
         saveButton.setOnClickListener {
             getTask()?.let { task -> viewModel.updateTask(task) }
+            dismiss()
         }
     }
 
@@ -62,7 +58,7 @@ class TaskViewBottomSheet : BaseBottomSheetFragment() {
         val list = mutableListOf<SubTask>()
         for (i in 0 until subTasksAdapter.itemCount) {
             val item = subTasksAdapter.getItem(i) as SubTaskPresentation
-            list.add(SubTask(item.text, item.isDone))
+            list.add(item.getSubTask())
         }
         return list
     }
@@ -81,14 +77,7 @@ class TaskViewBottomSheet : BaseBottomSheetFragment() {
                 }
                 task.color?.let { color ->
                     if (SelectableResources.COLORS.indexInList(color)) {
-                        ImageViewCompat
-                            .setImageTintList(
-                                taskImageView,
-                                ContextCompat.getColorStateList(
-                                    context,
-                                    SelectableResources.COLORS[color]
-                                )
-                            )
+                        setIconColor(SelectableResources.COLORS[color])
                     }
                 }
             }
