@@ -12,7 +12,7 @@ on:
 
 jobs:
   apk:
-    name: Build TasksApp release *.aab
+    name: Build TasksApp release
     runs-on: ubuntu-latest
 
     steps:
@@ -24,14 +24,6 @@ jobs:
           java-version: 1.11
       - name: Build with Gradle
         run: ./gradlew bundleRelease --stacktrace
-      - name: Signing Android App Bundle
-        uses: r0adkll/sign-android-release@v1.0.1
-        with:
-          releaseDirectory: /app/build/outputs/bundle/release
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-          alias: ${{ secrets.ALIAS }}
-          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
