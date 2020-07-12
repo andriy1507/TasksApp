@@ -108,9 +108,9 @@ object libs {
 @Suppress("CLASSNAME")
 object variables {
     const val minSdk = 24
-    const val compileSdk = 29
+    const val compileSdk = 30
     const val version = 1
     const val versionCode = "1.0"
     const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
-    const val buildTools = "29.0.3"
+    const val buildTools = "30.0.1"
 }
