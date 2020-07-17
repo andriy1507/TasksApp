@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.main.databinding.FragmentMainBinding
 import com.spaceapps.tasks.main.di.MainScreenComponent
@@ -64,11 +65,15 @@ class MainFragment : BaseFragment() {
         tasksRecyclerView.apply {
             adapter = recyclerViewAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            recyclerViewAdapter.setOnTaskClickAction {
-                findNavController().navigate(MainFragmentDirections.navigationView(it?.id?:-1L))
-            }
+            recyclerViewAdapter.setOnTaskClickAction(::onTaskClick)
         }
 
+    }
+
+    private fun onTaskClick(it: Task?) {
+        it?.let { task ->
+            findNavController().navigate(MainFragmentDirections.navigationView(task.id))
+        }
     }
 
 }
