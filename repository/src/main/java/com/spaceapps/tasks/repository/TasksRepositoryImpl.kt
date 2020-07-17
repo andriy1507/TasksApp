@@ -3,11 +3,13 @@ package com.spaceapps.tasks.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.DataSource
+import com.spaceapps.tasks.core.model.SubTask
 import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core.repository.TasksRepository
 import com.spaceapps.tasks.local.model.SubTaskLocal
 import com.spaceapps.tasks.local.source.SubTasksLocalDataSource
 import com.spaceapps.tasks.local.source.TasksLocalDataSource
+import com.spaceapps.tasks.repository.mapper.toSubTask
 import com.spaceapps.tasks.repository.mapper.toTask
 import com.spaceapps.tasks.repository.mapper.toTaskLocal
 import javax.inject.Inject
@@ -33,7 +35,14 @@ class TasksRepositoryImpl
     override fun changeTasks(vararg tasks: Task) {
         tasksDataSource.changeTasks(*tasks.map { it.toTaskLocal() }.toTypedArray())
         tasks.forEach { task ->
-            subTasksDataSource.updateSubTasks(*task.subTasks.map { SubTaskLocal(it.id, it.text,it.isDone, task.id) }.toTypedArray())
+            subTasksDataSource.updateSubTasks(*task.subTasks.map {
+                SubTaskLocal(
+                    it.id,
+                    it.text,
+                    it.isDone,
+                    task.id
+                )
+            }.toTypedArray())
         }
     }
 
@@ -49,5 +58,9 @@ class TasksRepositoryImpl
                 )
             }.toTypedArray())
         }
+    }
+
+    override fun getSubTasks(): LiveData<List<SubTask>> {
+        return Transformations.map(subTasksDataSource.getSubTasks()) { list -> list.map { it.toSubTask() } }
     }
 }

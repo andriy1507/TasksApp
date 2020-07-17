@@ -2,6 +2,7 @@ package com.spaceapps.tasks.core.repository
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
+import com.spaceapps.tasks.core.model.SubTask
 import com.spaceapps.tasks.core.model.Task
 
 interface TasksRepository {
@@ -15,4 +16,6 @@ interface TasksRepository {
     fun changeTasks(vararg tasks: Task)
 
     fun addTasks(vararg tasks: Task)
+
+    fun getSubTasks():LiveData<List<SubTask>>
 }
