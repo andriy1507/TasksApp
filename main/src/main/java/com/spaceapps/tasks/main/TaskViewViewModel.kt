@@ -12,16 +12,14 @@ import javax.inject.Inject
 class TaskViewViewModel @Inject constructor(private val tasksRepository: TasksRepository) :
     ViewModel() {
 
-    private val _task: MutableLiveData<Task> = MutableLiveData()
-    val task: LiveData<Task>
-        get() = _task
+    var task: LiveData<Task?> = MutableLiveData()
 
     fun updateTask(task: Task) = asyncIO {
         tasksRepository.changeTasks(task)
     }
 
-    fun getTask(id:Long){
-        TODO()
+    fun getTask(id: Long) {
+        task = tasksRepository.getTaskById(id)
     }
 
     class Factory @Inject constructor(private val tasksRepository: TasksRepository) :

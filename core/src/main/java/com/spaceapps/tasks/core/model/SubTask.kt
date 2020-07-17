@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class SubTask(
-    val text: String,
-    val isDone: Boolean
+    val id:Long = 0,
+    val text: String = "",
+    val isDone: Boolean = false
 ) : DomainEntity, Parcelable

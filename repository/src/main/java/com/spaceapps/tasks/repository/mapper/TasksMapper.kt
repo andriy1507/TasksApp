@@ -15,7 +15,7 @@ fun TaskWithSubs.toTask(): Task {
 }
 
 fun SubTaskLocal.toSubTask(): SubTask {
-    return SubTask(text, done)
+    return SubTask(id, text, done)
 }
 
 fun Task.toTaskLocal(): TaskLocal {
