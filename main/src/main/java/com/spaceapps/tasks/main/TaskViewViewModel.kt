@@ -1,5 +1,7 @@
 package com.spaceapps.tasks.main
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.spaceapps.tasks.core.extensions.asyncIO
@@ -10,8 +12,16 @@ import javax.inject.Inject
 class TaskViewViewModel @Inject constructor(private val tasksRepository: TasksRepository) :
     ViewModel() {
 
+    private val _task: MutableLiveData<Task> = MutableLiveData()
+    val task: LiveData<Task>
+        get() = _task
+
     fun updateTask(task: Task) = asyncIO {
         tasksRepository.changeTasks(task)
+    }
+
+    fun getTask(id:Long){
+        TODO()
     }
 
     class Factory @Inject constructor(private val tasksRepository: TasksRepository) :

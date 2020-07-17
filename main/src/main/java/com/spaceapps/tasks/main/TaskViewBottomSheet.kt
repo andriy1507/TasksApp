@@ -2,6 +2,7 @@ package com.spaceapps.tasks.main
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import com.spaceapps.tasks.core.extensions.indexInList
 import com.spaceapps.tasks.core.model.SubTask
 import com.spaceapps.tasks.core.model.Task
@@ -48,7 +49,7 @@ class TaskViewBottomSheet : BaseBottomSheetFragment() {
     }
 
     private fun getTask(): Task? {
-        return TaskViewBottomSheetArgs.fromBundle(requireArguments()).task?.copy(
+        return viewModel.task.value?.copy(
             title = titleTextView.text.toString(),
             subTasks = getSubTasks()
         )
@@ -68,7 +69,8 @@ class TaskViewBottomSheet : BaseBottomSheetFragment() {
     }
 
     private fun initTaskData() {
-        TaskViewBottomSheetArgs.fromBundle(requireArguments()).task?.let { task ->
+        viewModel.getTask(TaskViewBottomSheetArgs.fromBundle(requireArguments()).taskId)
+        viewModel.task.observe(viewLifecycleOwner, Observer { task ->
             titleTextView.text = task.title
             taskImageView.apply {
                 task.icon?.let { icon ->
@@ -85,7 +87,7 @@ class TaskViewBottomSheet : BaseBottomSheetFragment() {
                 clear()
                 addAll(task.subTasks.map { SubTaskPresentation(it.text, it.isDone) })
             }
-        }
+        })
     }
 
 }

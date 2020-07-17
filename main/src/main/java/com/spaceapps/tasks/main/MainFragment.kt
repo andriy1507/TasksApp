@@ -65,7 +65,7 @@ class MainFragment : BaseFragment() {
             adapter = recyclerViewAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             recyclerViewAdapter.setOnTaskClickAction {
-                findNavController().navigate(MainFragmentDirections.navigationView(it))
+                findNavController().navigate(MainFragmentDirections.navigationView(it?.id?:-1L))
             }
         }
 
