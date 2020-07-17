@@ -7,10 +7,7 @@ import com.spaceapps.tasks.core_ui.databinding.ItemSubtaskBinding
 import com.spaceapps.tasks.main.R
 import com.xwray.groupie.viewbinding.BindableItem
 
-data class SubTaskPresentation(
-    var text: String,
-    var isDone: Boolean
-) : BindableItem<ItemSubtaskBinding>(), PresentationEntity {
+data class SubTaskPresentation(val item: SubTask) : BindableItem<ItemSubtaskBinding>(), PresentationEntity {
 
     override fun getLayout() = R.layout.item_subtask
 
@@ -23,12 +20,13 @@ data class SubTaskPresentation(
 
     override fun bind(binding: ItemSubtaskBinding, position: Int) {
         binding.apply {
-            subTaskCheckBox.isChecked = isDone
-            subTaskEditText.setText(text)
+            subTaskCheckBox.isChecked = item.isDone
+            subTaskEditText.setText(item.text)
         }
     }
 
     fun getSubTask() = SubTask(
+        item.id,
         binding.subTaskEditText.text.toString(),
         binding.subTaskCheckBox.isChecked
     )

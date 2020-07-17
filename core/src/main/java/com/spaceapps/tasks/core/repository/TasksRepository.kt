@@ -1,9 +1,12 @@
 package com.spaceapps.tasks.core.repository
 
+import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import com.spaceapps.tasks.core.model.Task
 
 interface TasksRepository {
+
+    fun getTaskById(id: Long): LiveData<Task?>
 
     fun getAllTasks(): DataSource.Factory<Int, Task>
 

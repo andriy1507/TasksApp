@@ -29,10 +29,9 @@
             android:id="@+id/navigation_view"
             app:destination="@id/navigation_view">
             <argument
-                android:name="task"
-                android:defaultValue="@null"
-                app:argType="com.spaceapps.tasks.core.model.Task"
-                app:nullable="true" />
+                android:name="taskId"
+                android:defaultValue="-1L"
+                app:argType="long" />
         </action>
     </fragment>
     <dialog
@@ -40,15 +39,14 @@
         android:name="com.spaceapps.tasks.main.TaskViewBottomSheet"
         android:label="TaskViewBottomSheet">
         <argument
-            android:name="task"
-            android:defaultValue="@null"
-            app:argType="com.spaceapps.tasks.core.model.Task"
-            app:nullable="true" />
+            android:name="taskId"
+            android:defaultValue="-1L"
+            app:argType="long" />
     </dialog>
     <fragment
         android:id="@+id/navigation_create"
         android:name="com.spaceapps.tasks.create.CreateTaskFragment"
-        android:label="CreateTaskFragment" >
+        android:label="CreateTaskFragment">
         <argument
             android:name="task"
             android:defaultValue="@null"

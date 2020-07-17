@@ -1,5 +1,6 @@
 package com.spaceapps.tasks.local.source.impl
 
+import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import com.spaceapps.tasks.local.dao.TasksDao
 import com.spaceapps.tasks.local.model.TaskLocal
@@ -10,7 +11,11 @@ import javax.inject.Inject
 class TasksLocalDataSourceImpl
 @Inject constructor(private val tasksDao: TasksDao) : TasksLocalDataSource {
 
-    override fun addTasks(vararg tasks: TaskLocal):List<Long> {
+    override fun getTaskById(id: Long): LiveData<TaskWithSubs?> {
+        return tasksDao.selectTaskWithSubTasksById(id)
+    }
+
+    override fun addTasks(vararg tasks: TaskLocal): List<Long> {
         return tasksDao.insert(*tasks)
     }
 
