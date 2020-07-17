@@ -1,5 +1,6 @@
 package com.spaceapps.tasks.local.dao
 
+import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
@@ -24,4 +25,8 @@ interface TasksDao : BaseDao<TaskLocal> {
     @Transaction
     @Query("SELECT * FROM TASKS")
     fun selectAllWithSubTasks(): DataSource.Factory<Int, TaskWithSubs>
+
+    @Transaction
+    @Query("SELECT * FROM TASKS WHERE id = :id LIMIT 1")
+    fun selectTaskWithSubTasksById(id: Long): LiveData<TaskWithSubs?>
 }

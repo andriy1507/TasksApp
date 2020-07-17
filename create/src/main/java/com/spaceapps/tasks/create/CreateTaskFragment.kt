@@ -62,7 +62,7 @@ class CreateTaskFragment : BaseFragment() {
             if (SelectableResources.ICONS.indexInList(task.icon)) {
                 iconPickerView.selectItem(task.icon)
             }
-            subTasksAdapter.addAll(task.subTasks.map { SubTaskView(it.text, it.isDone) })
+            subTasksAdapter.addAll(task.subTasks.map { SubTaskView(it) })
         }
     }
 
@@ -72,12 +72,12 @@ class CreateTaskFragment : BaseFragment() {
 
     private fun getTask(): Task {
         return Task(
-            titleEditText.text.toString(),
-            System.currentTimeMillis(),
-            false,
-            colorPickerView.selected,
-            iconPickerView.selected,
-            getSubTasks()
+            title = titleEditText.text.toString(),
+            timestamp = System.currentTimeMillis(),
+            isDone = false,
+            color = colorPickerView.selected,
+            icon = iconPickerView.selected,
+            subTasks = getSubTasks()
         )
     }
 
@@ -114,7 +114,7 @@ class CreateTaskFragment : BaseFragment() {
             }
         }
         addSubTaskButton.setOnClickListener {
-            subTasksAdapter.add(SubTaskView())
+            subTasksAdapter.add(SubTaskView(SubTask()))
         }
     }
 

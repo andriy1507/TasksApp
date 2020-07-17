@@ -2,6 +2,7 @@ package com.spaceapps.tasks.main
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import com.spaceapps.tasks.core.extensions.indexInList
 import com.spaceapps.tasks.core.model.SubTask
 import com.spaceapps.tasks.core.model.Task
@@ -47,20 +48,16 @@ class TaskViewBottomSheet : BaseBottomSheetFragment() {
         }
     }
 
-    private fun getTask(): Task? {
-        return TaskViewBottomSheetArgs.fromBundle(requireArguments()).task?.copy(
-            title = titleTextView.text.toString(),
-            subTasks = getSubTasks()
-        )
-    }
+    private fun getTask() = viewModel.task.value?.copy(
+        title = titleTextView.text.toString(),
+        subTasks = getSubTasks()
+    )
 
-    private fun getSubTasks(): List<SubTask> {
-        val list = mutableListOf<SubTask>()
+    private fun getSubTasks(): List<SubTask> = mutableListOf<SubTask>().apply {
         for (i in 0 until subTasksAdapter.itemCount) {
             val item = subTasksAdapter.getItem(i) as SubTaskPresentation
-            list.add(item.getSubTask())
+            add(item.getSubTask())
         }
-        return list
     }
 
     private fun initRecyclerView() {
@@ -68,24 +65,28 @@ class TaskViewBottomSheet : BaseBottomSheetFragment() {
     }
 
     private fun initTaskData() {
-        TaskViewBottomSheetArgs.fromBundle(requireArguments()).task?.let { task ->
-            titleTextView.text = task.title
-            taskImageView.apply {
-                task.icon?.let { icon ->
-                    if (SelectableResources.ICONS.indexInList(icon))
-                        setImageResource(SelectableResources.ICONS[icon])
-                }
-                task.color?.let { color ->
-                    if (SelectableResources.COLORS.indexInList(color)) {
-                        setIconColor(SelectableResources.COLORS[color])
+        viewModel.getTask(TaskViewBottomSheetArgs.fromBundle(requireArguments()).taskId)
+        viewModel.task.observe(viewLifecycleOwner, Observer { task ->
+            task?.let {
+                titleTextView.text = task.title
+                taskImageView.apply {
+                    task.icon?.let { icon ->
+                        if (SelectableResources.ICONS.indexInList(icon))
+                            setImageResource(SelectableResources.ICONS[icon])
+                    }
+                    task.color?.let { color ->
+                        if (SelectableResources.COLORS.indexInList(color)) {
+                            setIconColor(SelectableResources.COLORS[color])
+                        }
                     }
                 }
+                subTasksAdapter.apply {
+                    clear()
+                    addAll(task.subTasks.map { SubTaskPresentation(it) })
+                }
             }
-            subTasksAdapter.apply {
-                clear()
-                addAll(task.subTasks.map { SubTaskPresentation(it.text, it.isDone) })
-            }
-        }
+        })
     }
 
 }
+

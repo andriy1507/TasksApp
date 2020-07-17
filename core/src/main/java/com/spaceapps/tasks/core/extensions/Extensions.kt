@@ -4,4 +4,4 @@ fun Any?.isNull() = this == null
 
 fun Any?.notNull() = this != null
 
-fun <E> List<E>.indexInList(index: Int?) = index in 1 until size
+fun <E> List<E>.indexInList(index: Int?) = index in 0 until size

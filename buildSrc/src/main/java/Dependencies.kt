@@ -94,7 +94,7 @@ object libs {
     }
 
     object android {
-        private const val tools_version = "4.0.0"
+        private const val tools_version = "4.0.1"
         const val tools = "com.android.tools.build:gradle:$tools_version"
     }
 
