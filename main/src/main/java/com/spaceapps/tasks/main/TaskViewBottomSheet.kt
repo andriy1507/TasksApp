@@ -30,7 +30,7 @@ class TaskViewBottomSheet : BaseBottomSheetFragment() {
     private val subTasksAdapter by lazy { GroupAdapter<GroupieViewHolder>() }
 
     override fun setupDependencies() {
-        TaskViewScreenComponent.Initializer().init(this).inject(this)
+        TaskViewScreenComponent.init(this).inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

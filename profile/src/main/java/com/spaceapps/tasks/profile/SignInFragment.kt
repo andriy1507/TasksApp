@@ -10,8 +10,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.core_ui.getThemeColor
 import com.spaceapps.tasks.profile.databinding.FragmentSignInBinding
+import com.spaceapps.tasks.profile.di.SignInScreenComponent
+import javax.inject.Inject
 
 class SignInFragment : BaseFragment() {
+
+    @Inject
+    lateinit var viewModel: SignInViewModel
 
     override val binding by lazy { FragmentSignInBinding.inflate(layoutInflater) }
 
@@ -19,7 +24,9 @@ class SignInFragment : BaseFragment() {
     private val loginEditText by lazy { binding.loginEditText }
     private val passwordEditText by lazy { binding.passwordEditText }
 
-    override fun setupDependencies() = Unit
+    override fun setupDependencies() {
+        SignInScreenComponent.init(this).inject(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,6 +35,10 @@ class SignInFragment : BaseFragment() {
 
     private fun initClickListener() {
         signInButton.setOnClickListener {
+            viewModel.requestLogin(
+                loginEditText.text.toString(),
+                passwordEditText.text.toString()
+            )
             if (areCredentialsValid()) {
                 addAccount()
             } else {

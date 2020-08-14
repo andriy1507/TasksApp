@@ -20,7 +20,7 @@ class FirebaseCloudMessagingService : FirebaseMessagingService() {
 
     override fun onCreate() {
         super.onCreate()
-        FirebaseCloudMessagingServiceComponent.Initializer().init(this).inject(this)
+        FirebaseCloudMessagingServiceComponent.init(this).inject(this)
     }
 
     override fun onMessageReceived(message: RemoteMessage) {

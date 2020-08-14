@@ -24,7 +24,7 @@ class MainFragment : BaseFragment() {
     lateinit var recyclerViewAdapter: TasksAdapter
 
     override fun setupDependencies() {
-        MainScreenComponent.Initializer().init(this).inject(this)
+        MainScreenComponent.init(this).inject(this)
     }
 
     override fun onResume() {

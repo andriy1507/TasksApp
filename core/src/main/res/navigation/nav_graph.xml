@@ -59,7 +59,7 @@
         android:label="ProfileFragment">
         <action
             android:id="@+id/navigation_login"
-            app:destination="@id/navigation_login" />
+            app:destination="@id/navigation_sign_in" />
     </fragment>
     <fragment
         android:id="@+id/navigation_sign_in"

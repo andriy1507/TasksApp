@@ -22,7 +22,8 @@ interface ProfileScreenComponent {
         fun build(): ProfileScreenComponent
     }
 
-    class Initializer {
+    companion object {
+        @JvmStatic
         fun init(fragment: ProfileFragment): ProfileScreenComponent {
             return DaggerProfileScreenComponent.builder()
                 .fragment(fragment)

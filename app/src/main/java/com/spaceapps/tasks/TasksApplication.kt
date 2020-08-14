@@ -15,7 +15,7 @@ class TasksApplication : Application(), App {
     @Inject
     lateinit var notificationManager: NotificationManagerCompat
 
-    private val component by lazy { ApplicationComponent.Initializer().init(this) }
+    private val component by lazy { ApplicationComponent.init(this) }
 
     override fun getProvider() = component
 

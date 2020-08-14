@@ -38,7 +38,7 @@ class CreateTaskFragment : BaseFragment() {
     private val subTasksAdapter by lazy { GroupAdapter<GroupieViewHolder>() }
 
     override fun setupDependencies() {
-        CreateScreenComponent.Initializer().init(this).inject(this)
+        CreateScreenComponent.init(this).inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

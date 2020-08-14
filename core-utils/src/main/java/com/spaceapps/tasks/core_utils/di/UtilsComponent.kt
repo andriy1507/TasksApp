@@ -17,7 +17,8 @@ interface UtilsComponent : UtilsProvider {
         fun build(): UtilsComponent
     }
 
-    class Initializer {
+    companion object {
+        @JvmStatic
         fun init(context: Context): UtilsComponent {
             return DaggerUtilsComponent.builder()
                 .context(context)

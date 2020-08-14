@@ -80,6 +80,8 @@ object libs {
     object google {
         private const val services_version = "4.3.3"
         const val services = "com.google.gms:google-services:$services_version"
+        private const val gson_version = "2.8.6"
+        const val gson = "com.google.code.gson:gson:$gson_version"
         object firebase {
             private const val analytics_version = "17.4.3"
             const val analytics = "com.google.firebase:firebase-analytics:$analytics_version"
@@ -102,6 +104,18 @@ object libs {
         private const val groupie_version = "2.8.0"
         const val core = "com.xwray:groupie:$groupie_version"
         const val viewBinding = "com.xwray:groupie-viewbinding:$groupie_version"
+    }
+
+    object retrofit {
+        private const val retrofit_version = "2.9.0"
+        const val core = "com.squareup.retrofit2:retrofit:$retrofit_version"
+        private const val gson_converter_version = "2.9.0"
+        const val gsonConverter = "com.squareup.retrofit2:converter-gson:$gson_converter_version"
+    }
+
+    object okhttp {
+        private const val okhttp_version = "4.8.1"
+        const val core = "com.squareup.okhttp3:okhttp:$okhttp_version"
     }
 }
 
