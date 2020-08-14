@@ -10,14 +10,13 @@ plugins {
 android {
     compileSdkVersion(variables.compileSdk)
     buildToolsVersion = variables.buildTools
-
     defaultConfig {
         applicationId = "com.spaceapps.tasks"
         minSdkVersion(variables.minSdk)
         targetSdkVersion(variables.compileSdk)
         versionCode = variables.version
         versionName = variables.versionCode
-
+        multiDexEnabled = true
         testInstrumentationRunner = variables.testRunner
     }
 
@@ -65,6 +64,7 @@ dependencies {
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.multidex)
     implementation(libs.dagger.core)
     kapt(libs.dagger.compiler)
     compileOnly(libs.androidx.annotations)

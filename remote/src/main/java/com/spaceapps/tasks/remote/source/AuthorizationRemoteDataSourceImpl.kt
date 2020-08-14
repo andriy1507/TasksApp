@@ -8,7 +8,7 @@ class AuthorizationRemoteDataSourceImpl @Inject constructor(
     private val authApi: AuthorizationApi
 ) : AuthorizationRemoteDataSource {
     override suspend fun login(username: String, password: String): String {
-        return authApi.login(UsernamePasswordRemote(username, password))
+        return authApi.login(username, password)
     }
 
     override suspend fun register(username: String, password: String): String {

@@ -11,7 +11,9 @@ class SignInViewModel @Inject constructor(private val authRepository: Authorizat
     ViewModel() {
 
     fun requestLogin(username: String, password: String) = asyncIO {
-        Log.d(this::class.java.simpleName, authRepository.login(username, password))
+        val token = authRepository.login(username, password)
+        authRepository.storeAuthorizationToken(token)
+        Log.d(this::class.java.simpleName, token)
     }
 
     class Factory @Inject constructor(private val authRepository: AuthorizationRepository) : ViewModelProvider.Factory {

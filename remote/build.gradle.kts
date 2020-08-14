@@ -30,6 +30,11 @@ android {
                 "SERVER_API_URL",
                 "\"http://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/\""
             )
+            buildConfigField(
+                "String",
+                "SERVER_WS_URL",
+                "\"http://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/web-socket/\""
+            )
         }
         getByName("debug") {
             isMinifyEnabled = false
@@ -42,6 +47,11 @@ android {
                 "String",
                 "SERVER_API_URL",
                 "\"http://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/\""
+            )
+            buildConfigField(
+                "String",
+                "SERVER_WS_URL",
+                "\"http://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/web-socket/\""
             )
         }
     }
@@ -57,10 +67,19 @@ android {
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to arrayOf("*.jar")))
     implementation(libs.kotlin.std)
+    implementation(libs.coroutines.core)
     implementation(libs.androidx.core)
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.gsonConverter)
     implementation(libs.okhttp.core)
+    implementation(libs.okhttp.loggingInterceptor)
+    implementation(libs.logging.timber)
+    implementation(libs.stetho.okhttp)
+    implementation(libs.tinder.scarlet)
+    implementation(libs.tinder.okHttpWebSocket)
+    implementation(libs.tinder.coroutinesStreamAdapter)
+    implementation(libs.tinder.gsonMessageAdapter)
+    implementation(libs.tinder.lifecycleAndroid)
     implementation(libs.dagger.core)
     kapt(libs.dagger.compiler)
     compileOnly(libs.androidx.annotations)

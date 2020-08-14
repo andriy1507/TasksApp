@@ -14,6 +14,8 @@ object libs {
         const val appcompat = "androidx.appcompat:appcompat:$appcompat_version"
         private const val annotations_version = "1.1.0"
         const val annotations = "androidx.annotation:annotation:$annotations_version"
+        private const val multidex_version = "2.0.1"
+        const val multidex = "androidx.multidex:multidex:$multidex_version"
     }
 
     object dagger {
@@ -59,6 +61,7 @@ object libs {
     object stetho{
         private const val stetho_version = "1.5.1"
         const val core ="com.facebook.stetho:stetho:$stetho_version"
+        const val okhttp = "com.facebook.stetho:stetho-okhttp3:$stetho_version"
     }
 
     object squareup {
@@ -116,6 +119,16 @@ object libs {
     object okhttp {
         private const val okhttp_version = "4.8.1"
         const val core = "com.squareup.okhttp3:okhttp:$okhttp_version"
+        const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    }
+
+    object tinder {
+        private const val scarlet_version = "0.1.10"
+        const val scarlet = "com.tinder.scarlet:scarlet:$scarlet_version"
+        const val okHttpWebSocket = "com.tinder.scarlet:websocket-okhttp:$scarlet_version"
+        const val coroutinesStreamAdapter = "com.tinder.scarlet:stream-adapter-coroutines:$scarlet_version"
+        const val gsonMessageAdapter = "com.tinder.scarlet:message-adapter-gson:$scarlet_version"
+        const val lifecycleAndroid = "com.tinder.scarlet:lifecycle-android:$scarlet_version"
     }
 }
 
