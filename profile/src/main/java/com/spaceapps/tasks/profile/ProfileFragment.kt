@@ -64,7 +64,7 @@ class ProfileFragment : BaseFragment() {
                     }
                     is Status.Success<*> -> {
                         (it.data as? UserProfileModel)?.let {profile ->
-                            picasso.load("http://192.168.1.148:5000/storage/download/image/${profile.profileImage}").into(profileImageView)
+                            picasso.loadFromBackend(profile.profileImage).into(profileImageView)
                         }
                     }
                     is Status.Error<*> -> {
