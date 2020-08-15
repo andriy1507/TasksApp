@@ -145,4 +145,6 @@ object variables {
     const val versionCode = "1.0"
     const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
     const val buildTools = "29.0.3"
+    const val serverApiUrl = "http://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/"
+    const val serverWsUrl = "ws://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/web-socket"
 }

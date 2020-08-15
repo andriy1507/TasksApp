@@ -59,4 +59,6 @@ dependencies {
     implementation(libs.constraint.layout)
     implementation(libs.dagger.core)
     kapt(libs.dagger.compiler)
+    implementation(libs.picasso.core)
+    implementation(libs.logging.timber)
 }

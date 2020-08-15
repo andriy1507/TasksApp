@@ -28,12 +28,12 @@ android {
             buildConfigField(
                 "String",
                 "SERVER_API_URL",
-                "\"http://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/\""
+                "\"${variables.serverApiUrl}\""
             )
             buildConfigField(
                 "String",
                 "SERVER_WS_URL",
-                "\"ws://192.168.1.148:5000/web-socket/\""
+                "\"${variables.serverWsUrl}\""
             )
         }
         getByName("debug") {
@@ -46,12 +46,12 @@ android {
             buildConfigField(
                 "String",
                 "SERVER_API_URL",
-                "\"http://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/\""
+                "\"${variables.serverApiUrl}\""
             )
             buildConfigField(
                 "String",
                 "SERVER_WS_URL",
-                "\"ws://192.168.1.148:5000/web-socket/\""
+                "\"${variables.serverWsUrl}\""
             )
         }
     }

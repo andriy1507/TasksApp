@@ -17,5 +17,5 @@ interface TasksRepository {
 
     fun addTasks(vararg tasks: Task)
 
-    fun getSubTasks():LiveData<List<SubTask>>
+    fun getSubTasks(): List<SubTask>
 }

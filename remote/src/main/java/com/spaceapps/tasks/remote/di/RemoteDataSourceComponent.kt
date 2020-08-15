@@ -16,7 +16,7 @@ import dagger.Component
         WebSocketServiceModule::class
     ]
 )
-interface RemoteDataSourceComponent : RemoteDataSourceProvider {
+interface RemoteDataSourceComponent : RemoteDataSourceProvider, OkHttpClientProvider {
 
     @Component.Builder
     interface Builder {

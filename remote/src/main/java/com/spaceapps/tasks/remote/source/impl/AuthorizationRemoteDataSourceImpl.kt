@@ -1,7 +1,8 @@
-package com.spaceapps.tasks.remote.source
+package com.spaceapps.tasks.remote.source.impl
 
 import com.spaceapps.tasks.remote.api.AuthorizationApi
 import com.spaceapps.tasks.remote.model.UsernamePasswordRemote
+import com.spaceapps.tasks.remote.source.AuthorizationRemoteDataSource
 import com.spaceapps.tasks.remote.ws.ChatSocketService
 import javax.inject.Inject
 

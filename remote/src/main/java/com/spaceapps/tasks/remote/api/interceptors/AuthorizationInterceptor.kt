@@ -11,7 +11,7 @@ class AuthorizationInterceptor(private val authTokenStorage: AuthTokenStorage) :
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val newRequest = chain.request().newBuilder()
-            .addHeader(AUTH_HEADER_NAME, "Bearer ${authTokenStorage.getAuthToken().orEmpty()}")
+            .addHeader(AUTH_HEADER_NAME, authTokenStorage.getAuthToken().orEmpty())
             .build()
         return chain.proceed(newRequest)
     }

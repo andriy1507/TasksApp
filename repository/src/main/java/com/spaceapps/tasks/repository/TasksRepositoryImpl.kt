@@ -60,7 +60,7 @@ class TasksRepositoryImpl
         }
     }
 
-    override fun getSubTasks(): LiveData<List<SubTask>> {
-        return Transformations.map(subTasksDataSource.getSubTasks()) { list -> list.map { it.toSubTask() } }
+    override fun getSubTasks(): List<SubTask> {
+        return subTasksDataSource.getSubTasks().map { it.toSubTask() }
     }
 }

@@ -76,4 +76,5 @@ dependencies {
     implementation(libs.logging.timber)
     implementation(libs.google.firebase.analytics)
     implementation(libs.google.firebase.crashlytics)
+    implementation(libs.picasso.core)
 }

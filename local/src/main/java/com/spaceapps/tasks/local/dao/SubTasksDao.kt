@@ -19,5 +19,5 @@ interface SubTasksDao {
     fun update(vararg items: SubTaskLocal)
 
     @Query("SELECT * FROM SUBTASKS")
-    fun selectAll(): LiveData<List<SubTaskLocal>>
+    fun selectAll(): List<SubTaskLocal>
 }

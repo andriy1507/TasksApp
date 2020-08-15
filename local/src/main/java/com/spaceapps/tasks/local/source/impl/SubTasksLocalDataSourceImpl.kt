@@ -22,7 +22,7 @@ class SubTasksLocalDataSourceImpl @Inject constructor(
         subTasksDao.update(*subTasks)
     }
 
-    override fun getSubTasks(): LiveData<List<SubTaskLocal>> {
+    override fun getSubTasks(): List<SubTaskLocal> {
         return subTasksDao.selectAll()
     }
 }

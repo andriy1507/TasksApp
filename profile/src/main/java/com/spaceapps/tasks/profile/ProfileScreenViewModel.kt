@@ -5,24 +5,49 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.spaceapps.tasks.core.extensions.async
+import com.spaceapps.tasks.core.extensions.safeAsyncNullable
+import com.spaceapps.tasks.core.model.Status
 import com.spaceapps.tasks.core.model.SubTask
 import com.spaceapps.tasks.core.repository.TasksRepository
+import com.spaceapps.tasks.core.repository.UserProfileRepository
 import javax.inject.Inject
 
-class ProfileScreenViewModel @Inject constructor(private val repository: TasksRepository) :
-    ViewModel() {
+class ProfileScreenViewModel
+@Inject constructor(
+    private val tasksRepository: TasksRepository,
+    private val userProfileRepository: UserProfileRepository
+) : ViewModel() {
 
-    var subTasks:LiveData<List<SubTask>> = MutableLiveData()
+    private val _userProfile = MutableLiveData<Status>()
+    val userProfile:LiveData<Status>
+        get() = _userProfile
 
-    fun getSubTasks() = async {
-        subTasks = repository.getSubTasks()
+    private val _subTasks = MutableLiveData<List<SubTask>>()
+    val subTasks: LiveData<List<SubTask>>
+        get() = _subTasks
+
+    fun getUserProfile() = async {
+        _userProfile.postValue(Status.Loading)
+        val result = safeAsyncNullable {
+            userProfileRepository.getUserProfile()
+        }
+        _userProfile.postValue(result)
     }
 
-    class Factory @Inject constructor(private val repository: TasksRepository) :
-        ViewModelProvider.Factory {
+    fun getSubTasks() = async {
+        _subTasks.postValue(tasksRepository.getSubTasks())
+    }
+
+    class Factory @Inject constructor(
+        private val tasksRepository: TasksRepository,
+        private val userProfileRepository: UserProfileRepository
+    ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return ProfileScreenViewModel(repository) as T
+            return ProfileScreenViewModel(
+                tasksRepository,
+                userProfileRepository
+            ) as T
         }
     }
 }

@@ -14,6 +14,14 @@ suspend fun safeAsync(async: suspend () -> Any): Status {
     }
 }
 
+suspend fun safeAsyncNullable(async: suspend () -> Any?): Status {
+    return try {
+        Status.Success(async())
+    } catch (e: Exception) {
+        Status.Error(e)
+    }
+}
+
 fun ViewModel.async(async: suspend () -> Unit) {
     viewModelScope.async(IO) {
         async()

@@ -26,6 +26,11 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("Boolean","RELEASE", "true")
+            buildConfigField(
+                "String",
+                "SERVER_API_URL",
+                "\"${variables.serverApiUrl}\""
+            )
         }
         getByName("debug") {
             isMinifyEnabled = false
@@ -34,6 +39,11 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("Boolean","RELEASE", "false")
+            buildConfigField(
+                "String",
+                "SERVER_API_URL",
+                "\"${variables.serverApiUrl}\""
+            )
         }
     }
     buildFeatures {

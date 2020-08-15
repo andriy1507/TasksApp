@@ -12,5 +12,5 @@ interface SubTasksLocalDataSource {
 
     fun updateSubTasks(vararg subTasks: SubTaskLocal)
 
-    fun getSubTasks():LiveData<List<SubTaskLocal>>
+    fun getSubTasks():List<SubTaskLocal>
 }
