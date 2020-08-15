@@ -63,8 +63,9 @@ class ProfileFragment : BaseFragment() {
                         Toast.makeText(context, "Loading ...", Toast.LENGTH_SHORT).show()
                     }
                     is Status.Success<*> -> {
-                        val profile = it.data as UserProfileModel
-                        picasso.load("http://192.168.1.148:5000/storage/download/image/${profile.profileImage}").into(profileImageView)
+                        (it.data as? UserProfileModel)?.let {profile ->
+                            picasso.load("http://192.168.1.148:5000/storage/download/image/${profile.profileImage}").into(profileImageView)
+                        }
                     }
                     is Status.Error<*> -> {
                         Toast.makeText(context, it.error.localizedMessage, Toast.LENGTH_SHORT).show()
