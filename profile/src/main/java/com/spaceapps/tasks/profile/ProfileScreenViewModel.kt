@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.spaceapps.tasks.core.extensions.asyncIO
+import com.spaceapps.tasks.core.extensions.async
 import com.spaceapps.tasks.core.model.SubTask
 import com.spaceapps.tasks.core.repository.TasksRepository
 import javax.inject.Inject
@@ -14,7 +14,7 @@ class ProfileScreenViewModel @Inject constructor(private val repository: TasksRe
 
     var subTasks:LiveData<List<SubTask>> = MutableLiveData()
 
-    fun getSubTasks() = asyncIO {
+    fun getSubTasks() = async {
         subTasks = repository.getSubTasks()
     }
 

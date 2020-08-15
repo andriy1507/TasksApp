@@ -64,7 +64,11 @@
     <fragment
         android:id="@+id/navigation_sign_in"
         android:name="com.spaceapps.tasks.profile.SignInFragment"
-        android:label="ProfileFragment" />
+        android:label="SignInFragment">
+        <action
+            android:id="@+id/navigation_user_profile"
+            app:destination="@id/navigation_profile" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.spaceapps.tasks.settings.SettingsFragment"

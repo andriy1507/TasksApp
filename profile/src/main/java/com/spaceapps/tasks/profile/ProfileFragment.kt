@@ -27,7 +27,6 @@ class ProfileFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         viewModel.getSubTasks()
-        findNavController().navigate(ProfileFragmentDirections.navigationLogin())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.spaceapps.tasks.core.model.Status
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.async
 
 suspend fun safeAsync(async: suspend () -> Any): Status {
     return try {
@@ -14,8 +14,8 @@ suspend fun safeAsync(async: suspend () -> Any): Status {
     }
 }
 
-fun ViewModel.asyncIO(async: suspend () -> Unit) {
-    viewModelScope.launch(IO) {
+fun ViewModel.async(async: suspend () -> Unit) {
+    viewModelScope.async(IO) {
         async()
     }
 }

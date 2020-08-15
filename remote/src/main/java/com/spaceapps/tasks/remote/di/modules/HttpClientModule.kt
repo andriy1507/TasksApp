@@ -40,7 +40,7 @@ class HttpClientModule {
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor(object : Logger {
             override fun log(message: String) {
-                Timber.d("OkHttp: $message")
+                Timber.tag("OkHttp").d(message)
             }
         }).apply { level = HttpLoggingInterceptor.Level.BODY }
     }
