@@ -58,4 +58,5 @@ dependencies {
     implementation(libs.coroutines.core)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.extensions)
+    implementation(libs.picasso.core)
 }

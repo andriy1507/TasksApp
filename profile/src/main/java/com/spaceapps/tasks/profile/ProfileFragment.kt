@@ -4,7 +4,6 @@ import android.accounts.Account
 import android.accounts.AccountManager
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import com.spaceapps.tasks.core.extensions.observe
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.profile.databinding.FragmentProfileBinding
@@ -17,6 +16,7 @@ class ProfileFragment : BaseFragment() {
     lateinit var viewModel: ProfileScreenViewModel
 
     override val binding by lazy { FragmentProfileBinding.inflate(layoutInflater) }
+    private val profileImageImageView by lazy { binding.profileImageImageView }
 
     private val progressBar by lazy { binding.completedTasksMeasure }
 

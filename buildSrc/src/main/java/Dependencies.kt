@@ -130,6 +130,11 @@ object libs {
         const val gsonMessageAdapter = "com.tinder.scarlet:message-adapter-gson:$scarlet_version"
         const val lifecycleAndroid = "com.tinder.scarlet:lifecycle-android:$scarlet_version"
     }
+
+    object picasso {
+        private const val picasso_version = "2.71828"
+        const val core = "com.squareup.picasso:picasso:$picasso_version"
+    }
 }
 
 @Suppress("CLASSNAME")
