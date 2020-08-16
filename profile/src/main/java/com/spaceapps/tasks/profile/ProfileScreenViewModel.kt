@@ -5,11 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.spaceapps.tasks.core.extensions.async
+import com.spaceapps.tasks.core.extensions.safeAsync
 import com.spaceapps.tasks.core.extensions.safeAsyncNullable
 import com.spaceapps.tasks.core.model.Status
 import com.spaceapps.tasks.core.model.SubTask
+import com.spaceapps.tasks.core.model.UserProfileModel
 import com.spaceapps.tasks.core.repository.TasksRepository
 import com.spaceapps.tasks.core.repository.UserProfileRepository
+import java.io.File
 import javax.inject.Inject
 
 class ProfileScreenViewModel
@@ -18,8 +21,12 @@ class ProfileScreenViewModel
     private val userProfileRepository: UserProfileRepository
 ) : ViewModel() {
 
+    private val _profileImageUrl = MutableLiveData<Status>()
+    val profileImageUrl:LiveData<Status>
+        get() = _profileImageUrl
+
     private val _userProfile = MutableLiveData<Status>()
-    val userProfile:LiveData<Status>
+    val userProfile: LiveData<Status>
         get() = _userProfile
 
     private val _subTasks = MutableLiveData<List<SubTask>>()
@@ -36,6 +43,15 @@ class ProfileScreenViewModel
 
     fun getSubTasks() = async {
         _subTasks.postValue(tasksRepository.getSubTasks())
+    }
+
+    fun setProfileImage(file: File) {
+        _userProfile.postValue(Status.Loading)
+        async {
+            _profileImageUrl.postValue(
+                safeAsyncNullable { userProfileRepository.setProfileImage(file) }
+            )
+        }
     }
 
     class Factory @Inject constructor(

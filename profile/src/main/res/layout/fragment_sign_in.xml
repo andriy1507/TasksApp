@@ -75,10 +75,11 @@
         app:layout_constraintStart_toEndOf="@id/noteTextView"
         app:layout_constraintTop_toTopOf="@id/noteTextView" />
 
-    <androidx.core.widget.ContentLoadingProgressBar
+    <ProgressBar
         android:id="@+id/loadingProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:progressTint="@color/colorSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

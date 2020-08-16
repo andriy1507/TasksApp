@@ -1,5 +1,7 @@
 package com.spaceapps.tasks.remote.di.modules
 
+import android.content.Context
+import android.os.FileUtils
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -8,25 +10,48 @@ import com.spaceapps.tasks.remote.api.interceptors.AuthorizationInterceptor
 import com.spaceapps.tasks.remote.source.AuthTokenStorage
 import dagger.Module
 import dagger.Provides
-import okhttp3.OkHttpClient
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Logger
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
+import java.security.cert.Certificate
+import java.security.cert.CertificateFactory
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.TimeUnit
+import javax.net.ssl.HostnameVerifier
 
 @Module
 class HttpClientModule {
+
+    companion object {
+        private const val CACHE_MAX_SIZE: Long = 10 * 1024 * 1024
+    }
+
+    @Provides
+    fun provideCache(context: Context): Cache {
+        val cacheDir = context.cacheDir
+        return Cache(cacheDir, CACHE_MAX_SIZE)
+    }
 
     @Provides
     fun provideOkHttpClient(
         authInterceptor: AuthorizationInterceptor,
         loggingInterceptor: HttpLoggingInterceptor,
-        networkInterceptor: StethoInterceptor
+        networkInterceptor: StethoInterceptor,
+        cache: Cache
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
             .addInterceptor(loggingInterceptor)
+            .retryOnConnectionFailure(true)
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .callTimeout(60, TimeUnit.SECONDS)
+            .connectionPool(ConnectionPool(5, 60, TimeUnit.SECONDS))
+            .cookieJar(CookieJar.NO_COOKIES)
+            .writeTimeout(60, TimeUnit.SECONDS)
+            .cache(cache)
             .addNetworkInterceptor(networkInterceptor)
             .build()
     }

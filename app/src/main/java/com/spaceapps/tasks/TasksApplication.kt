@@ -6,7 +6,10 @@ import android.app.NotificationManager
 import androidx.core.app.NotificationManagerCompat
 import com.facebook.stetho.Stetho
 import com.spaceapps.tasks.core.App
+import com.spaceapps.tasks.core.extensions.release
 import com.spaceapps.tasks.di.ApplicationComponent
+import com.spaceapps.tasks.logging.DebugTree
+import com.spaceapps.tasks.logging.ReleaseTree
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -31,7 +34,10 @@ class TasksApplication : Application(), App {
 
     private fun initStetho() = debug { Stetho.initializeWithDefaults(this) }
 
-    private fun initTimber() = debug { Timber.plant(Timber.DebugTree()) }
+    private fun initTimber() {
+        debug { Timber.plant(DebugTree()) }
+        release { Timber.plant(ReleaseTree()) }
+    }
 
     private fun initFirebaseNotificationsChannel() = oreo {
         val channel = NotificationChannel(

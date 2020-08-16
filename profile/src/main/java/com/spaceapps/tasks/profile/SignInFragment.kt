@@ -4,11 +4,14 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.spaceapps.tasks.core.extensions.navigate
 import com.spaceapps.tasks.core.extensions.observe
 import com.spaceapps.tasks.core.model.Status
 import com.spaceapps.tasks.core_ui.BaseFragment
+import com.spaceapps.tasks.core_ui.gone
+import com.spaceapps.tasks.core_ui.visible
 import com.spaceapps.tasks.profile.SignInFragmentDirections.Companion.navigationUserProfile
 import com.spaceapps.tasks.profile.databinding.FragmentSignInBinding
 import com.spaceapps.tasks.profile.di.SignInScreenComponent
@@ -63,20 +66,18 @@ class SignInFragment : BaseFragment() {
             observe(authorized) {
                 when (it) {
                     is Status.Success<*> -> {
-                        loadingProgressBar.hide()
-                        Snackbar.make(binding.root, "Successfully logged in", Snackbar.LENGTH_SHORT)
-                            .setBackgroundTint(Color.GREEN).show()
+                        loadingProgressBar.gone()
+                        Toast.makeText(context, "Successfully logged in", Toast.LENGTH_SHORT).show()
                         Handler().postDelayed({
                             navigate(navigationUserProfile())
                         }, LOG_IN_THRESHOLD)
                     }
                     is Status.Error<out Throwable> -> {
-                        loadingProgressBar.hide()
-                        Snackbar.make(binding.root, "Error occurred", Snackbar.LENGTH_SHORT)
-                            .setBackgroundTint(Color.RED).show()
+                        loadingProgressBar.gone()
+                        Toast.makeText(context, "Error occurred", Toast.LENGTH_SHORT).show()
                     }
                     is Status.Loading -> {
-                        loadingProgressBar.show()
+                        loadingProgressBar.visible()
                     }
                 }
             }
@@ -93,6 +94,7 @@ class SignInFragment : BaseFragment() {
         }
         noteTextView.setText(R.string.dont_have_an_account)
         buttonTextView.setText(R.string.sign_up)
+        signInButton.setText(R.string.sign_in)
     }
 
     private fun setSignUpState() {
@@ -105,6 +107,7 @@ class SignInFragment : BaseFragment() {
         }
         noteTextView.setText(R.string.already_have_an_account)
         buttonTextView.setText(R.string.sign_in)
+        signInButton.setText(R.string.sign_up)
     }
 
     companion object {

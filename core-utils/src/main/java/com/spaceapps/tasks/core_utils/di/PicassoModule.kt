@@ -9,9 +9,9 @@ import okhttp3.OkHttpClient
 
 @Module
 class PicassoModule {
-
     @Provides
     fun providePicasso(context: Context, client: OkHttpClient): Picasso {
+
         return Picasso.Builder(context)
             .downloader(OkHttp3Downloader(client))
             .loggingEnabled(true)
