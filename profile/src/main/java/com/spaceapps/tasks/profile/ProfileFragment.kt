@@ -1,22 +1,11 @@
 package com.spaceapps.tasks.profile
 
 import android.Manifest
-import android.accounts.Account
-import android.accounts.AccountManager
 import android.app.Activity.RESULT_OK
-import android.content.ContentResolver
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.os.FileUtils
 import android.view.View
-import android.widget.Toast
-import androidx.core.content.ContentResolverCompat
-import androidx.core.content.FileProvider
-import androidx.core.net.toFile
-import androidx.lifecycle.Observer
 import com.spaceapps.tasks.core.extensions.*
 import com.spaceapps.tasks.core.model.Status
 import com.spaceapps.tasks.core.model.UserProfileModel
@@ -27,8 +16,9 @@ import com.spaceapps.tasks.profile.databinding.FragmentProfileBinding
 import com.spaceapps.tasks.profile.di.ProfileScreenComponent
 import com.squareup.picasso.Picasso
 import timber.log.Timber
-import java.io.*
-import java.net.URI
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 import javax.inject.Inject
 
 class ProfileFragment : BaseFragment() {
@@ -103,8 +93,7 @@ class ProfileFragment : BaseFragment() {
                     }
                     is Status.Error<*> -> {
                         loadingProgressBar.gone()
-                        Toast.makeText(context, it.error.localizedMessage, Toast.LENGTH_SHORT)
-                            .show()
+                        binding.root.showErrorSnackBar(R.string.some_error_occurred)
                         Timber.e(it.error)
                     }
                 }
@@ -113,25 +102,18 @@ class ProfileFragment : BaseFragment() {
                 when (it) {
                     Status.Loading -> loadingProgressBar.visible()
                     is Status.Success<*> -> {
+                        binding.root.showSuccessSnackBar(R.string.uploaded_successfully)
                         picasso.loadFromBackend((it.data as String))
                             .onCompleted { loadingProgressBar.gone() }.into(profileImageView)
                     }
                     is Status.Error<*> -> {
-                        Toast.makeText(context, it.error.localizedMessage, Toast.LENGTH_SHORT)
-                            .show()
+                        binding.root.showErrorSnackBar(R.string.some_error_occurred)
                         Timber.e(it.error)
                     }
                 }
             }
         }
 
-    }
-
-    private fun ifAccountExists(block: (Account) -> Unit) {
-        AccountManager.get(context).getAccountsByType(getString(R.string.account_type))
-            .firstOrNull()?.let { block(it) } ?: run {
-            ProfileFragmentDirections.navigationLogin()
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -170,11 +152,13 @@ class ProfileFragment : BaseFragment() {
         try {
             uri?.let {
                 val fileDescriptor = context?.contentResolver?.openFileDescriptor(uri, "r")
-                val file = File(context?.cacheDir, context?.contentResolver?.getFileName(uri).orEmpty())
-                val inputStream = FileInputStream(fileDescriptor?.fileDescriptor)
-                val outputStream = FileOutputStream(file)
-                inputStream.copyTo(outputStream)
-                viewModel.setProfileImage(file)
+                context?.contentResolver?.getFileName(uri)?.let { fileName ->
+                    val file = File(context?.cacheDir, fileName)
+                    val inputStream = FileInputStream(fileDescriptor?.fileDescriptor)
+                    val outputStream = FileOutputStream(file)
+                    inputStream.copyTo(outputStream)
+                    viewModel.setProfileImage(file)
+                }
             }
         } catch (e: Exception) {
             Timber.e(e)

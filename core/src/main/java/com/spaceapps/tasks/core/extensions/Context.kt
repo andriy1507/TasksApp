@@ -25,12 +25,10 @@ fun Context.checkPermissions(
     }
 }
 
-fun ContentResolver.getFileName(uri: Uri): String {
-    var name = ""
-    val cursor = query(uri,null, null, null, null)
-    cursor?.use {
+fun ContentResolver.getFileName(uri: Uri): String? {
+    val cursor = query(uri, null, null, null, null)
+    return cursor?.use {
         it.moveToFirst()
-        name = cursor.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+        cursor.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME))
     }
-    return name
 }
