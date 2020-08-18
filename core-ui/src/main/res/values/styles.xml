@@ -16,4 +16,10 @@
     <style name="Theme.AppTheme.BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bg_bottom_sheet</item>
     </style>
+
+    <style name="Theme.AppTheme.DialogStyle" parent="Theme.AppCompat.Dialog">
+        <item name="android:background">@drawable/bg_dialog</item>
+        <item name="background">@drawable/bg_dialog</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 </resources>

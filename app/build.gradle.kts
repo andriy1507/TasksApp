@@ -10,14 +10,13 @@ plugins {
 android {
     compileSdkVersion(variables.compileSdk)
     buildToolsVersion = variables.buildTools
-
     defaultConfig {
         applicationId = "com.spaceapps.tasks"
         minSdkVersion(variables.minSdk)
         targetSdkVersion(variables.compileSdk)
         versionCode = variables.version
         versionName = variables.versionCode
-
+        multiDexEnabled = true
         testInstrumentationRunner = variables.testRunner
     }
 
@@ -40,6 +39,13 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    compileOptions {
+        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -58,6 +64,7 @@ dependencies {
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.multidex)
     implementation(libs.dagger.core)
     kapt(libs.dagger.compiler)
     compileOnly(libs.androidx.annotations)
@@ -69,4 +76,5 @@ dependencies {
     implementation(libs.logging.timber)
     implementation(libs.google.firebase.analytics)
     implementation(libs.google.firebase.crashlytics)
+    implementation(libs.picasso.core)
 }

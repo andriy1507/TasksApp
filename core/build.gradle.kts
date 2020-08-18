@@ -26,6 +26,11 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("Boolean","RELEASE", "true")
+            buildConfigField(
+                "String",
+                "SERVER_API_URL",
+                "\"${variables.serverApiUrl}\""
+            )
         }
         getByName("debug") {
             isMinifyEnabled = false
@@ -34,10 +39,22 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("Boolean","RELEASE", "false")
+            buildConfigField(
+                "String",
+                "SERVER_API_URL",
+                "\"${variables.serverApiUrl}\""
+            )
         }
     }
     buildFeatures {
         viewBinding = true
+    }
+    compileOptions {
+        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
@@ -51,4 +68,5 @@ dependencies {
     implementation(libs.coroutines.core)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.extensions)
+    implementation(libs.picasso.core)
 }

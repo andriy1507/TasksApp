@@ -35,13 +35,13 @@ interface ApplicationComponent : ApplicationProvider {
 
         fun build(): ApplicationComponent
     }
-
-    class Initializer {
+    companion object {
+        @JvmStatic
         fun init(app: TasksApplication): ApplicationComponent {
             return DaggerApplicationComponent.builder()
                 .application(app)
-                .provider(RepositoryComponent.Initializer().init(app))
-                .provider(UtilsComponent.Initializer().init(app))
+                .provider(RepositoryComponent.init(app))
+                .provider(UtilsComponent.init(app))
                 .build()
         }
     }

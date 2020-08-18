@@ -2,18 +2,20 @@
 object libs {
 
     object kotlin {
-        private const val version = "1.3.72"
+        private const val version = "1.4.0"
         const val std = "org.jetbrains.kotlin:kotlin-stdlib:$version"
         const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
     }
 
     object androidx {
-        private const val core_version = "1.2.0"
+        private const val core_version = "1.3.1"
         const val core = "androidx.core:core-ktx:$core_version"
         private const val appcompat_version = "1.1.0"
         const val appcompat = "androidx.appcompat:appcompat:$appcompat_version"
         private const val annotations_version = "1.1.0"
         const val annotations = "androidx.annotation:annotation:$annotations_version"
+        private const val multidex_version = "2.0.1"
+        const val multidex = "androidx.multidex:multidex:$multidex_version"
     }
 
     object dagger {
@@ -35,7 +37,7 @@ object libs {
     }
 
     object coroutines {
-        private const val coroutines_version = "1.3.5"
+        private const val coroutines_version = "1.3.9"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     }
 
@@ -59,6 +61,7 @@ object libs {
     object stetho{
         private const val stetho_version = "1.5.1"
         const val core ="com.facebook.stetho:stetho:$stetho_version"
+        const val okhttp = "com.facebook.stetho:stetho-okhttp3:$stetho_version"
     }
 
     object squareup {
@@ -80,6 +83,8 @@ object libs {
     object google {
         private const val services_version = "4.3.3"
         const val services = "com.google.gms:google-services:$services_version"
+        private const val gson_version = "2.8.6"
+        const val gson = "com.google.code.gson:gson:$gson_version"
         object firebase {
             private const val analytics_version = "17.4.3"
             const val analytics = "com.google.firebase:firebase-analytics:$analytics_version"
@@ -103,14 +108,44 @@ object libs {
         const val core = "com.xwray:groupie:$groupie_version"
         const val viewBinding = "com.xwray:groupie-viewbinding:$groupie_version"
     }
+
+    object retrofit {
+        private const val retrofit_version = "2.9.0"
+        const val core = "com.squareup.retrofit2:retrofit:$retrofit_version"
+        private const val gson_converter_version = "2.9.0"
+        const val gsonConverter = "com.squareup.retrofit2:converter-gson:$gson_converter_version"
+    }
+
+    object okhttp {
+        private const val okhttp_version = "4.8.1"
+        const val core = "com.squareup.okhttp3:okhttp:$okhttp_version"
+        const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    }
+
+    object tinder {
+        private const val scarlet_version = "0.1.10"
+        const val scarlet = "com.tinder.scarlet:scarlet:$scarlet_version"
+        const val okHttpWebSocket = "com.tinder.scarlet:websocket-okhttp:$scarlet_version"
+        const val coroutinesStreamAdapter = "com.tinder.scarlet:stream-adapter-coroutines:$scarlet_version"
+        const val gsonMessageAdapter = "com.tinder.scarlet:message-adapter-gson:$scarlet_version"
+        const val lifecycleAndroid = "com.tinder.scarlet:lifecycle-android:$scarlet_version"
+    }
+
+    object picasso {
+        private const val picasso_version = "2.71828"
+        const val core = "com.squareup.picasso:picasso:$picasso_version"
+        const val url = "https://dl.bintray.com/lisawray/maven"
+    }
 }
 
 @Suppress("CLASSNAME")
 object variables {
     const val minSdk = 24
-    const val compileSdk = 29
+    const val compileSdk = 30
     const val version = 1
     const val versionCode = "1.0"
     const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
-    const val buildTools = "29.0.3"
+    const val buildTools = "30.0.0"
+    const val serverApiUrl = "http://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/"
+    const val serverWsUrl = "ws://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/web-socket"
 }

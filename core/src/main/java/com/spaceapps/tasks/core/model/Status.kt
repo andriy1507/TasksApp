@@ -1,7 +1,7 @@
 package com.spaceapps.tasks.core.model
 
-sealed class Status {
-    object Loading : Status()
-    class Success(val data: Any? = null) : Status()
-    class Error(val error: Exception) : Status()
+sealed class Status<out T> {
+    object Loading : Status<Nothing>()
+    class Success<out T>(val data: T) : Status<T>()
+    class Error(val error: Exception) : Status<Nothing>()
 }

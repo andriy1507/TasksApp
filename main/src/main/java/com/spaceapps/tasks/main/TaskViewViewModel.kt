@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.spaceapps.tasks.core.extensions.asyncIO
+import com.spaceapps.tasks.core.extensions.async
 import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core.repository.TasksRepository
 import javax.inject.Inject
@@ -14,7 +14,7 @@ class TaskViewViewModel @Inject constructor(private val tasksRepository: TasksRe
 
     var task: LiveData<Task?> = MutableLiveData()
 
-    fun updateTask(task: Task) = asyncIO {
+    fun updateTask(task: Task) = async {
         tasksRepository.changeTasks(task)
     }
 

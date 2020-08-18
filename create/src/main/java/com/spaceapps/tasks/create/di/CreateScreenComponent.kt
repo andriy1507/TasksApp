@@ -25,7 +25,8 @@ interface CreateScreenComponent {
         fun build():CreateScreenComponent
     }
 
-    class Initializer {
+    companion object {
+        @JvmStatic
         fun init(fragment: CreateTaskFragment):CreateScreenComponent{
             return DaggerCreateScreenComponent.builder()
                 .fragment(fragment)

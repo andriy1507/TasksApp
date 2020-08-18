@@ -1,5 +1,7 @@
 package com.spaceapps.tasks.local.source.impl
 
+import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import com.spaceapps.tasks.local.dao.SubTasksDao
 import com.spaceapps.tasks.local.model.SubTaskLocal
 import com.spaceapps.tasks.local.source.SubTasksLocalDataSource
@@ -18,5 +20,9 @@ class SubTasksLocalDataSourceImpl @Inject constructor(
 
     override fun updateSubTasks(vararg subTasks: SubTaskLocal) {
         subTasksDao.update(*subTasks)
+    }
+
+    override fun getSubTasks(): List<SubTaskLocal> {
+        return subTasksDao.selectAll()
     }
 }

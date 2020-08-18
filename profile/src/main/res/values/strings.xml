@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="sign_in">Sign In</string>
+    <string name="completed_tasks">Completed tasks</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="dont_have_an_account">Don\'t have an account?\u0020</string>
+    <string name="already_have_an_account">Already have an account?\u0020</string>
+    <string name="some_error_occurred">Some error occurred</string>
+    <string name="uploaded_successfully">Uploaded successfully</string>
+    <string name="successfully_logged_in">Successfully logged in</string>
 </resources>

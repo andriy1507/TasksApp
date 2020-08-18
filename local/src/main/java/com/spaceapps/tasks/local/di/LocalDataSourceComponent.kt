@@ -25,7 +25,8 @@ interface LocalDataSourceComponent : LocalDataSourceProvider {
         fun build(): LocalDataSourceComponent
     }
 
-    class Initializer {
+    companion object {
+        @JvmStatic
         fun init(context: Context): LocalDataSourceComponent {
             return DaggerLocalDataSourceComponent.builder()
                 .context(context)

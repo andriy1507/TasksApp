@@ -9,4 +9,6 @@
     <dimen name="big">24dp</dimen>
     <dimen name="huge">48dp</dimen>
     <dimen name="giant">64dp</dimen>
+    
+    <dimen name="font_normal">16sp</dimen>
 </resources>

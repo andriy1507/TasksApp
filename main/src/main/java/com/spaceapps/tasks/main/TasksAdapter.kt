@@ -45,10 +45,10 @@ class TasksAdapter @Inject constructor() : PagedListAdapter<Task, TasksAdapter.T
             itemView.apply {
                 titleTextView.text = task?.title
             }
-            task?.let { task ->
-                setIcon(task)
-                itemView.setOnClickListener {
-                    action?.invoke(task)
+            task?.let {
+                setIcon(it)
+                itemView.setOnClickListener { _ ->
+                    action?.invoke(it)
                 }
             }
         }

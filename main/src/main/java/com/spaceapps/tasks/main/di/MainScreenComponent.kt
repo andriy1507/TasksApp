@@ -24,8 +24,8 @@ interface MainScreenComponent {
 
         fun build(): MainScreenComponent
     }
-
-    class Initializer {
+    companion object {
+        @JvmStatic
         fun init(fragment: MainFragment): MainScreenComponent {
             return DaggerMainScreenComponent.builder()
                 .fragment(fragment)

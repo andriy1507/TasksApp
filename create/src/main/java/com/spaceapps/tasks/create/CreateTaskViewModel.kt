@@ -2,7 +2,7 @@ package com.spaceapps.tasks.create
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.spaceapps.tasks.core.extensions.asyncIO
+import com.spaceapps.tasks.core.extensions.async
 import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core.repository.TasksRepository
 import javax.inject.Inject
@@ -13,11 +13,11 @@ class CreateTaskViewModel
 ) : ViewModel() {
 
 
-    fun saveTask(task: Task) = asyncIO {
+    fun saveTask(task: Task) = async {
         tasksRepository.addTasks(task)
     }
 
-    fun updateTask(task: Task) = asyncIO {
+    fun updateTask(task: Task) = async {
         tasksRepository.changeTasks(task)
     }
 
