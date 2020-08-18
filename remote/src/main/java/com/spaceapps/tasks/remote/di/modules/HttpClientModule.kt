@@ -1,12 +1,12 @@
 package com.spaceapps.tasks.remote.di.modules
 
 import android.content.Context
-import android.os.FileUtils
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.spaceapps.tasks.remote.BuildConfig
 import com.spaceapps.tasks.remote.api.interceptors.AuthorizationInterceptor
+import com.spaceapps.tasks.remote.di.annotation.RetrofitScope
 import com.spaceapps.tasks.remote.source.AuthTokenStorage
 import dagger.Module
 import dagger.Provides
@@ -16,11 +16,7 @@ import okhttp3.logging.HttpLoggingInterceptor.Logger
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
-import java.security.cert.Certificate
-import java.security.cert.CertificateFactory
-import java.util.concurrent.ExecutorService
 import java.util.concurrent.TimeUnit
-import javax.net.ssl.HostnameVerifier
 
 @Module
 class HttpClientModule {
@@ -36,14 +32,16 @@ class HttpClientModule {
     }
 
     @Provides
+    @RetrofitScope
     fun provideOkHttpClient(
-        authInterceptor: AuthorizationInterceptor,
+        authenticator: AuthorizationInterceptor,
+        @RetrofitScope
         loggingInterceptor: HttpLoggingInterceptor,
         networkInterceptor: StethoInterceptor,
         cache: Cache
     ): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(authInterceptor)
+            .addInterceptor(authenticator)
             .addInterceptor(loggingInterceptor)
             .retryOnConnectionFailure(true)
             .connectTimeout(60, TimeUnit.SECONDS)
@@ -62,6 +60,7 @@ class HttpClientModule {
     }
 
     @Provides
+    @RetrofitScope
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor(object : Logger {
             override fun log(message: String) {
@@ -81,7 +80,11 @@ class HttpClientModule {
     }
 
     @Provides
-    fun provideRetrofit(client: OkHttpClient, gson: Gson): Retrofit {
+    fun provideRetrofit(
+        @RetrofitScope
+        client: OkHttpClient,
+        gson: Gson
+    ): Retrofit {
         return Retrofit.Builder().client(client)
             .baseUrl(BuildConfig.SERVER_API_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))

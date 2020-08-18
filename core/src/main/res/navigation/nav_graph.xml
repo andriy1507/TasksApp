@@ -60,6 +60,9 @@
         <action
             android:id="@+id/navigation_login"
             app:destination="@id/navigation_sign_in" />
+        <action
+            android:id="@+id/navigation_progress"
+            app:destination="@id/navigation_progress" />
     </fragment>
     <fragment
         android:id="@+id/navigation_sign_in"
@@ -73,4 +76,9 @@
         android:id="@+id/navigation_settings"
         android:name="com.spaceapps.tasks.settings.SettingsFragment"
         android:label="SettingsFragment" />
+
+    <dialog
+        android:id="@+id/navigation_progress"
+        android:name="com.spaceapps.tasks.core_ui.ProgressDialog"
+        android:label="ProgressDialog" />
 </navigation>

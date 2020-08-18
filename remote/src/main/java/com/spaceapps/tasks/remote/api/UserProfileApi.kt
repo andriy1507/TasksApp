@@ -1,8 +1,11 @@
 package com.spaceapps.tasks.remote.api
 
 import com.spaceapps.tasks.remote.model.UserProfileModelRemote
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import retrofit2.http.*
+import java.util.*
 
 interface UserProfileApi {
 

@@ -1,8 +1,7 @@
 package com.spaceapps.tasks.remote.api.interceptors
 
 import com.spaceapps.tasks.remote.source.AuthTokenStorage
-import okhttp3.Interceptor
-import okhttp3.Response
+import okhttp3.*
 
 class AuthorizationInterceptor(private val authTokenStorage: AuthTokenStorage) : Interceptor {
     companion object {

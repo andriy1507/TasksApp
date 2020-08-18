@@ -10,8 +10,6 @@ import com.spaceapps.tasks.core.extensions.*
 import com.spaceapps.tasks.core.model.Status
 import com.spaceapps.tasks.core.model.UserProfileModel
 import com.spaceapps.tasks.core_ui.BaseFragment
-import com.spaceapps.tasks.core_ui.gone
-import com.spaceapps.tasks.core_ui.visible
 import com.spaceapps.tasks.profile.databinding.FragmentProfileBinding
 import com.spaceapps.tasks.profile.di.ProfileScreenComponent
 import com.squareup.picasso.Picasso
@@ -60,7 +58,8 @@ class ProfileFragment : BaseFragment() {
 
     private fun initClickListeners() {
         profileImageView.setOnClickListener {
-            context?.checkPermissions(Manifest.permission.READ_EXTERNAL_STORAGE,
+            context?.checkPermissions(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
                 onGranted = { goToGallery() },
                 onDenied = {
                     requestPermissions(
@@ -83,16 +82,16 @@ class ProfileFragment : BaseFragment() {
             observe(userProfile) {
                 when (it) {
                     Status.Loading -> {
-                        loadingProgressBar.visible()
+                        loadingProgressBar.show()
                     }
                     is Status.Success<*> -> {
                         (it.data as? UserProfileModel)?.let { profile ->
                             picasso.loadFromBackend(profile.profileImage)
-                                .onCompleted { loadingProgressBar.gone() }.into(profileImageView)
+                                .onCompleted { loadingProgressBar.hide() }.into(profileImageView)
                         }
                     }
                     is Status.Error<*> -> {
-                        loadingProgressBar.gone()
+                        loadingProgressBar.hide()
                         binding.root.showErrorSnackBar(R.string.some_error_occurred)
                         Timber.e(it.error)
                     }
@@ -100,11 +99,11 @@ class ProfileFragment : BaseFragment() {
             }
             observe(profileImageUrl) {
                 when (it) {
-                    Status.Loading -> loadingProgressBar.visible()
+                    Status.Loading -> loadingProgressBar.show()
                     is Status.Success<*> -> {
                         binding.root.showSuccessSnackBar(R.string.uploaded_successfully)
                         picasso.loadFromBackend((it.data as String))
-                            .onCompleted { loadingProgressBar.gone() }.into(profileImageView)
+                            .onCompleted { loadingProgressBar.hide() }.into(profileImageView)
                     }
                     is Status.Error<*> -> {
                         binding.root.showErrorSnackBar(R.string.some_error_occurred)
