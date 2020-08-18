@@ -26,8 +26,8 @@ class SignInViewModel @Inject constructor(private val authRepository: Authorizat
     val exists: LiveData<Boolean>
         get() = _exists
 
-    private val _authorized = MutableLiveData<Status>()
-    val authorized: LiveData<Status>
+    private val _authorized = MutableLiveData<Status<Boolean>>()
+    val authorized: LiveData<Status<Boolean>>
         get() = _authorized
 
     init {
@@ -47,7 +47,7 @@ class SignInViewModel @Inject constructor(private val authRepository: Authorizat
         _authorized.postValue(safeAsync {
             val token = authRepository.login(username, password)
             authRepository.storeAuthorizationToken(token)
-            token.isBlank()
+            token.isNotBlank()
         })
     }
 

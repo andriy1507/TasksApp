@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.spaceapps.tasks.core.extensions.async
 import com.spaceapps.tasks.core.extensions.safeAsync
-import com.spaceapps.tasks.core.extensions.safeAsyncNullable
 import com.spaceapps.tasks.core.model.Status
 import com.spaceapps.tasks.core.model.SubTask
 import com.spaceapps.tasks.core.model.UserProfileModel
@@ -21,12 +20,12 @@ class ProfileScreenViewModel
     private val userProfileRepository: UserProfileRepository
 ) : ViewModel() {
 
-    private val _profileImageUrl = MutableLiveData<Status>()
-    val profileImageUrl:LiveData<Status>
+    private val _profileImageUrl = MutableLiveData<Status<String?>>()
+    val profileImageUrl:LiveData<Status<String?>>
         get() = _profileImageUrl
 
-    private val _userProfile = MutableLiveData<Status>()
-    val userProfile: LiveData<Status>
+    private val _userProfile = MutableLiveData<Status<UserProfileModel?>>()
+    val userProfile: LiveData<Status<UserProfileModel?>>
         get() = _userProfile
 
     private val _subTasks = MutableLiveData<List<SubTask>>()
@@ -35,7 +34,7 @@ class ProfileScreenViewModel
 
     fun getUserProfile() = async {
         _userProfile.postValue(Status.Loading)
-        val result = safeAsyncNullable {
+        val result = safeAsync {
             userProfileRepository.getUserProfile()
         }
         _userProfile.postValue(result)
@@ -49,7 +48,7 @@ class ProfileScreenViewModel
         _userProfile.postValue(Status.Loading)
         async {
             _profileImageUrl.postValue(
-                safeAsyncNullable { userProfileRepository.setProfileImage(file) }
+                safeAsync { userProfileRepository.setProfileImage(file) }
             )
         }
     }

@@ -3,11 +3,7 @@ package com.spaceapps.tasks.profile
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import com.spaceapps.tasks.core.extensions.navigate
-import com.spaceapps.tasks.core.extensions.observe
-import com.spaceapps.tasks.core.extensions.showErrorSnackBar
-import com.spaceapps.tasks.core.extensions.showSuccessSnackBar
-import com.spaceapps.tasks.core.model.Status
+import com.spaceapps.tasks.core.extensions.*
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.core_ui.gone
 import com.spaceapps.tasks.core_ui.visible
@@ -42,9 +38,7 @@ class SignInFragment : BaseFragment() {
     }
 
     private fun initClickListeners() {
-        buttonTextView.setOnClickListener {
-            viewModel.toggleState()
-        }
+        buttonTextView.setOnClickListener { viewModel.toggleState() }
     }
 
     private fun initObservers() {
@@ -62,22 +56,20 @@ class SignInFragment : BaseFragment() {
                     }
                 }
             }
-            observe(authorized) {
-                when (it) {
-                    is Status.Success<*> -> {
-                        loadingProgressBar.gone()
+            observe(authorized) { status ->
+                status.onSuccess {
+                    loadingProgressBar.gone()
+                    if (it) {
                         binding.root.showSuccessSnackBar(R.string.successfully_logged_in)
                         Handler().postDelayed({
                             navigate(navigationUserProfile())
                         }, LOG_IN_THRESHOLD)
                     }
-                    is Status.Error<out Throwable> -> {
-                        loadingProgressBar.gone()
-                        binding.root.showErrorSnackBar(R.string.some_error_occurred)
-                    }
-                    is Status.Loading -> {
-                        loadingProgressBar.visible()
-                    }
+                }.onError {
+                    loadingProgressBar.gone()
+                    binding.root.showErrorSnackBar(R.string.some_error_occurred)
+                }.onLoading {
+                    loadingProgressBar.visible()
                 }
             }
         }

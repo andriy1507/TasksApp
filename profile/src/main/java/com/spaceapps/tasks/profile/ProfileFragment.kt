@@ -79,36 +79,28 @@ class ProfileFragment : BaseFragment() {
                     progressBar.progress = progress
                 }
             }
-            observe(userProfile) {
-                when (it) {
-                    Status.Loading -> {
-                        loadingProgressBar.show()
-                    }
-                    is Status.Success<*> -> {
-                        (it.data as? UserProfileModel)?.let { profile ->
-                            picasso.loadFromBackend(profile.profileImage)
-                                .onCompleted { loadingProgressBar.hide() }.into(profileImageView)
-                        }
-                    }
-                    is Status.Error<*> -> {
-                        loadingProgressBar.hide()
-                        binding.root.showErrorSnackBar(R.string.some_error_occurred)
-                        Timber.e(it.error)
-                    }
+            observe(userProfile) {status ->
+                status.onSuccess {
+                    it?.let { picasso.loadFromBackend(it.profileImage)
+                        .onCompleted { loadingProgressBar.hide() }.into(profileImageView) }
+                }.onError {
+                    loadingProgressBar.hide()
+                    binding.root.showErrorSnackBar(R.string.some_error_occurred)
+                    Timber.e(it)
+                }.onLoading {
+                    loadingProgressBar.show()
                 }
             }
-            observe(profileImageUrl) {
-                when (it) {
-                    Status.Loading -> loadingProgressBar.show()
-                    is Status.Success<*> -> {
-                        binding.root.showSuccessSnackBar(R.string.uploaded_successfully)
-                        picasso.loadFromBackend((it.data as String))
-                            .onCompleted { loadingProgressBar.hide() }.into(profileImageView)
-                    }
-                    is Status.Error<*> -> {
-                        binding.root.showErrorSnackBar(R.string.some_error_occurred)
-                        Timber.e(it.error)
-                    }
+            observe(profileImageUrl) { status ->
+                status.onSuccess {
+                    binding.root.showSuccessSnackBar(R.string.uploaded_successfully)
+                    picasso.loadFromBackend(it)
+                        .onCompleted { loadingProgressBar.hide() }.into(profileImageView)
+                }.onError {
+                    binding.root.showErrorSnackBar(R.string.some_error_occurred)
+                    Timber.e(it)
+                }.onLoading {
+                    loadingProgressBar.show()
                 }
             }
         }
