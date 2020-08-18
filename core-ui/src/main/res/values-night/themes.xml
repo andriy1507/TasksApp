@@ -11,5 +11,7 @@
         <item name="backgroundColor">@color/colorBackground</item>
         <item name="android:windowBackground">@color/colorBackground</item>
         <item name="bottomSheetDialogTheme">@style/Theme.AppTheme.BottomSheetTheme</item>
+        <item name="dialogTheme">@style/Theme.AppTheme.DialogStyle</item>
+        <item name="android:dialogTheme">@style/Theme.AppTheme.DialogStyle</item>
     </style>
 </resources>

@@ -21,7 +21,8 @@ interface FirebaseCloudMessagingServiceComponent {
         fun build(): FirebaseCloudMessagingServiceComponent
     }
 
-    class Initializer {
+    companion object {
+        @JvmStatic
         fun init(service: FirebaseCloudMessagingService): FirebaseCloudMessagingServiceComponent {
             return DaggerFirebaseCloudMessagingServiceComponent.builder()
                 .service(service)

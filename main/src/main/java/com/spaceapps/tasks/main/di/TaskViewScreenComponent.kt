@@ -25,7 +25,8 @@ interface TaskViewScreenComponent {
         fun build(): TaskViewScreenComponent
     }
 
-    class Initializer {
+    companion object {
+        @JvmStatic
         fun init(fragment: TaskViewBottomSheet): TaskViewScreenComponent {
             return DaggerTaskViewScreenComponent.builder()
                 .provider((fragment.context?.applicationContext as App).getProvider())

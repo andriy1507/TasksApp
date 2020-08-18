@@ -1,12 +1,10 @@
 package com.spaceapps.tasks.main
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.spaceapps.tasks.core.extensions.observeNullable
 import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.main.databinding.FragmentMainBinding
@@ -26,15 +24,7 @@ class MainFragment : BaseFragment() {
     lateinit var recyclerViewAdapter: TasksAdapter
 
     override fun setupDependencies() {
-        MainScreenComponent.Initializer().init(this).inject(this)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return binding.root
+        MainScreenComponent.init(this).inject(this)
     }
 
     override fun onResume() {
@@ -56,9 +46,9 @@ class MainFragment : BaseFragment() {
     }
 
     private fun initObserver() {
-        viewModel.tasks.observe(viewLifecycleOwner, Observer {
+        observeNullable(viewModel.tasks) {
             recyclerViewAdapter.submitList(it)
-        })
+        }
     }
 
     private fun initRecyclerView() {

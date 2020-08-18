@@ -3,12 +3,19 @@ package com.spaceapps.tasks.account
 import android.accounts.AbstractAccountAuthenticator
 import android.accounts.Account
 import android.accounts.AccountAuthenticatorResponse
+import android.accounts.AccountManager.*
 import android.accounts.AccountManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.os.bundleOf
+import com.spaceapps.tasks.core.repository.AuthorizationRepository
+import javax.inject.Inject
 
-class SpaceAppsAuthenticator(context: Context) : AbstractAccountAuthenticator(context) {
+class SpaceAppsAuthenticator @Inject constructor(
+    context: Context,
+    private val authRepository: AuthorizationRepository
+) : AbstractAccountAuthenticator(context) {
 
     override fun getAuthTokenLabel(authTokenType: String?): String {
         return ""
@@ -32,7 +39,10 @@ class SpaceAppsAuthenticator(context: Context) : AbstractAccountAuthenticator(co
         account: Account?,
         authTokenType: String?,
         options: Bundle?
-    ): Bundle = Bundle.EMPTY
+    ): Bundle{
+        val authToken = authRepository.getAuthToken()
+        return bundleOf(KEY_ACCOUNT_NAME to account?.name, KEY_ACCOUNT_TYPE to account?.type, KEY_AUTHTOKEN to authToken)
+    }
 
     override fun hasFeatures(
         response: AccountAuthenticatorResponse?,
@@ -53,10 +63,10 @@ class SpaceAppsAuthenticator(context: Context) : AbstractAccountAuthenticator(co
         options: Bundle?
     ): Bundle {
         val intent = Intent().apply {
-            putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE,response)
+            putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response)
         }
         return Bundle().apply {
-            putParcelable(AccountManager.KEY_INTENT,intent)
+            putParcelable(AccountManager.KEY_INTENT, intent)
             options?.let {
                 putAll(it)
             }
