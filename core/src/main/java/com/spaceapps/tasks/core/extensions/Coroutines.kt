@@ -15,14 +15,14 @@ suspend fun <T> safeAsync(async: suspend () -> T): Status<T> {
     }
 }
 
-fun <T> Status<T>.onSuccess(block: (T) -> Unit): Status<T> {
+fun <T> Status<T>.onSuccess(block: (data: T) -> Unit): Status<T> {
     if (this is Success) {
         block(this.data)
     }
     return this
 }
 
-fun <T> Status<T>.onError(block: (Exception) -> Unit): Status<T> {
+fun <T> Status<T>.onError(block: (error: Exception) -> Unit): Status<T> {
     if (this is Error) {
         block(this.error)
     }

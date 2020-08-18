@@ -2,13 +2,13 @@
 object libs {
 
     object kotlin {
-        private const val version = "1.3.72"
+        private const val version = "1.4.0"
         const val std = "org.jetbrains.kotlin:kotlin-stdlib:$version"
         const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
     }
 
     object androidx {
-        private const val core_version = "1.2.0"
+        private const val core_version = "1.3.1"
         const val core = "androidx.core:core-ktx:$core_version"
         private const val appcompat_version = "1.1.0"
         const val appcompat = "androidx.appcompat:appcompat:$appcompat_version"
@@ -37,7 +37,7 @@ object libs {
     }
 
     object coroutines {
-        private const val coroutines_version = "1.3.5"
+        private const val coroutines_version = "1.3.9"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     }
 
@@ -134,17 +134,18 @@ object libs {
     object picasso {
         private const val picasso_version = "2.71828"
         const val core = "com.squareup.picasso:picasso:$picasso_version"
+        const val url = "https://dl.bintray.com/lisawray/maven"
     }
 }
 
 @Suppress("CLASSNAME")
 object variables {
     const val minSdk = 24
-    const val compileSdk = 29
+    const val compileSdk = 30
     const val version = 1
     const val versionCode = "1.0"
     const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
-    const val buildTools = "29.0.3"
+    const val buildTools = "30.0.0"
     const val serverApiUrl = "http://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/"
     const val serverWsUrl = "ws://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/web-socket"
 }

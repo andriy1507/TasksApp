@@ -2,6 +2,7 @@ package com.spaceapps.tasks.profile
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import com.spaceapps.tasks.core.extensions.*
 import com.spaceapps.tasks.core_ui.BaseFragment
@@ -61,7 +62,7 @@ class SignInFragment : BaseFragment() {
                     loadingProgressBar.gone()
                     if (it) {
                         binding.root.showSuccessSnackBar(R.string.successfully_logged_in)
-                        Handler().postDelayed({
+                        Handler(Looper.getMainLooper()).postDelayed({
                             navigate(navigationUserProfile())
                         }, LOG_IN_THRESHOLD)
                     }
