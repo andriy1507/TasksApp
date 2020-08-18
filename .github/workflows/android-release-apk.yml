@@ -33,12 +33,7 @@ jobs:
       - name: Build apk with Gradle
         run: ./gradlew assembleRelease --stacktrace
       - name: Signing apk
-        run: jarsigner -verbose -sigalg SHA256withRSA \
-          -digestalg SHA-256 -storepass ${{ secrets.KEYSTORE_PASSWORD }} \
-          -keypass ${{ secrets.KEY_PASSWORD }} \
-          -keystore release-keystore.jks \
-          ./app/build/outputs/apk/release/app-release.aab \
-          ${{ secrets.KEYSTORE_ALIAS }}
+        run: jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -storepass ${{ secrets.KEYSTORE_PASSWORD }} -keypass ${{ secrets.KEY_PASSWORD }} -keystore release-keystore.jks ./app/build/outputs/apk/release/app-release.aab ${{ secrets.KEYSTORE_ALIAS }}
       - name: Renaming artifact
         run: mv ./app/build/outputs/apk/release/app-release-unsigned.apk ./app/build/outputs/apk/release/app-release.apk
       - name: Upload artifact
