@@ -22,8 +22,19 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.11
+      - name: Downloading release sign key
+        uses: prewk/s3-cp-action@v0.1.1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          SOURCE: ${{ secrets.AWS_KEYSTORE_SOURCE }}
+          DEST: './release-keystore.jks'
       - name: Build with Gradle
         run: ./gradlew bundleRelease --stacktrace
+      - name: Signing bundle
+        run: jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -storepass ${{ secrets.KEYSTORE_PASSWORD }} -keypass ${{ secrets.KEY_PASSWORD }} -keystore release-keystore.jks ./app/bu
+          ild/outputs/bundle/release/app-debug.aab ${{ secrets.KEYSTORE_ALIAS }}
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
