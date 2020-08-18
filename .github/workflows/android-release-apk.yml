@@ -30,15 +30,6 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           SOURCE: ${{ secrets.AWS_KEYSTORE_SOURCE }}
           DEST: './release-keystore.jks'
-      - name: Build bundle with Gradle
-        run: ./gradlew bundleRelease --stacktrace
-      - name: Signing bundle
-        run: jarsigner -verbose -sigalg SHA256withRSA \
-          -digestalg SHA-256 -storepass ${{ secrets.KEYSTORE_PASSWORD }} \
-          -keypass ${{ secrets.KEY_PASSWORD }} \
-          -keystore release-keystore.jks \
-          ./app/build/outputs/bundle/release/app-release.aab \
-          ${{ secrets.KEYSTORE_ALIAS }}
       - name: Build apk with Gradle
         run: ./gradlew assembleRelease --stacktrace
       - name: Signing apk
@@ -53,7 +44,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
-          name: spaceTasksBundle
-          path: |
-            app/build/outputs/bundle/release/
-            app/build/outputs/apk/release/app-release.apk
+          name: spaceTasksApk
+          path: app/build/outputs/apk/release/app-release.apk
