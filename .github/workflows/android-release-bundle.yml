@@ -1,4 +1,4 @@
-name: spaceApps Android CI
+name: spaceApps Android CI build-bundle
 
 on:
   pull_request:
