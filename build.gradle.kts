@@ -9,6 +9,7 @@ buildscript {
         classpath(libs.navigation.safe_args)
         classpath(libs.google.services)
         classpath(libs.google.firebase.crashlyticsPlugin)
+        classpath(libs.hilt.plugin)
     }
 }
 

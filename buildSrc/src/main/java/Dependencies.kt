@@ -136,6 +136,13 @@ object libs {
         const val core = "com.squareup.picasso:picasso:$picasso_version"
         const val url = "https://dl.bintray.com/lisawray/maven"
     }
+
+    object hilt {
+        private const val hilt_version = "2.28-alpha"
+        const val plugin = "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        const val core = "com.google.dagger:hilt-android:$hilt_version"
+        const val compiler = "com.google.dagger:hilt-android-compiler:$hilt_version"
+    }
 }
 
 @Suppress("CLASSNAME")

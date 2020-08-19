@@ -37,8 +37,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
         sourceCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions.jvmTarget = "1.8"
-}
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }}
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to arrayOf("*.jar")))

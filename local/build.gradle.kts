@@ -16,7 +16,13 @@ android {
         testInstrumentationRunner = variables.testRunner
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments(mapOf("room.incremental" to "true"))
+                arguments(
+                    mapOf(
+                        "room.schemaLocation" to "$projectDir/schemas",
+                        "room.incremental" to "true",
+                        "room.expandProjection" to "true"
+                    )
+                )
             }
         }
     }
@@ -42,7 +48,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 dependencies {
