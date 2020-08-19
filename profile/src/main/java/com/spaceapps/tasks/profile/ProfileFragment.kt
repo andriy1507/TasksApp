@@ -97,6 +97,7 @@ class ProfileFragment : BaseFragment() {
                     picasso.loadFromBackend(it)
                         .onCompleted { loadingProgressBar.hide() }.into(profileImageView)
                 }.onError {
+                    loadingProgressBar.hide()
                     binding.root.showErrorSnackBar(R.string.some_error_occurred)
                     Timber.e(it)
                 }.onLoading {
@@ -138,12 +139,10 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun parseImageFromIntent(data: Intent?) {
-        val uri = data?.data
-        profileImageView.setImageURI(uri)
         try {
-            uri?.let {
-                val fileDescriptor = context?.contentResolver?.openFileDescriptor(uri, "r")
-                context?.contentResolver?.getFileName(uri)?.let { fileName ->
+            data?.data?.let {
+                val fileDescriptor = context?.contentResolver?.openFileDescriptor(it, "r")
+                context?.contentResolver?.getFileName(it)?.let { fileName ->
                     val file = File(context?.cacheDir, fileName)
                     val inputStream = FileInputStream(fileDescriptor?.fileDescriptor)
                     val outputStream = FileOutputStream(file)
