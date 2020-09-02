@@ -2,12 +2,17 @@
 object libs {
 
     object kotlin {
-        private const val version = "1.4.0"
+        const val version = "1.4.0"
         const val std = "org.jetbrains.kotlin:kotlin-stdlib:$version"
         const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
+        const val reflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
     }
 
     object androidx {
+        private const val lifecycle_version = "2.2.0"
+        const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+        const val extensions = "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+        const val compiler = "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
         private const val core_version = "1.3.1"
         const val core = "androidx.core:core-ktx:$core_version"
         private const val appcompat_version = "1.1.0"
@@ -42,7 +47,7 @@ object libs {
     }
 
     object constraint {
-        private const val constraint_version = "2.0.0-beta4"
+        private const val constraint_version = "2.0.1"
         const val layout = "com.android.support.constraint:constraint-layout:$constraint_version"
     }
 
@@ -55,12 +60,13 @@ object libs {
         private const val navigation_version = "2.3.0-alpha06"
         const val fragment = "androidx.navigation:navigation-fragment-ktx:$navigation_version"
         const val extensions = "androidx.navigation:navigation-ui-ktx:$navigation_version"
-        const val safe_args = "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
+        const val safe_args =
+            "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
     }
 
-    object stetho{
+    object stetho {
         private const val stetho_version = "1.5.1"
-        const val core ="com.facebook.stetho:stetho:$stetho_version"
+        const val core = "com.facebook.stetho:stetho:$stetho_version"
         const val okhttp = "com.facebook.stetho:stetho-okhttp3:$stetho_version"
     }
 
@@ -85,6 +91,7 @@ object libs {
         const val services = "com.google.gms:google-services:$services_version"
         private const val gson_version = "2.8.6"
         const val gson = "com.google.code.gson:gson:$gson_version"
+
         object firebase {
             private const val analytics_version = "17.4.3"
             const val analytics = "com.google.firebase:firebase-analytics:$analytics_version"
@@ -126,7 +133,8 @@ object libs {
         private const val scarlet_version = "0.1.10"
         const val scarlet = "com.tinder.scarlet:scarlet:$scarlet_version"
         const val okHttpWebSocket = "com.tinder.scarlet:websocket-okhttp:$scarlet_version"
-        const val coroutinesStreamAdapter = "com.tinder.scarlet:stream-adapter-coroutines:$scarlet_version"
+        const val coroutinesStreamAdapter =
+            "com.tinder.scarlet:stream-adapter-coroutines:$scarlet_version"
         const val gsonMessageAdapter = "com.tinder.scarlet:message-adapter-gson:$scarlet_version"
         const val lifecycleAndroid = "com.tinder.scarlet:lifecycle-android:$scarlet_version"
     }
@@ -143,6 +151,18 @@ object libs {
         const val core = "com.google.dagger:hilt-android:$hilt_version"
         const val compiler = "com.google.dagger:hilt-android-compiler:$hilt_version"
     }
+
+    object compose {
+        const val version = "1.0.0-alpha01"
+        const val ui = "androidx.compose.ui:ui:$version"
+        const val material = "androidx.compose.material:material:$version"
+        const val tooling = "androidx.ui:ui-tooling:$version"
+        const val runtime = "androidx.compose.runtime:runtime:1.0.0-alpha01"
+        const val livedata = "androidx.compose.runtime:runtime-livedata:1.0.0-alpha01"
+        const val layout = "androidx.compose.foundation:foundation-layout:$version"
+        const val text = "androidx.compose.foundation:foundation-text:$version"
+        const val foundation = "androidx.compose.foundation:foundation:$version"
+    }
 }
 
 @Suppress("CLASSNAME")
@@ -154,5 +174,6 @@ object variables {
     const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
     const val buildTools = "30.0.0"
     const val serverApiUrl = "http://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/"
-    const val serverWsUrl = "ws://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/web-socket"
+    const val serverWsUrl =
+        "ws://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/web-socket"
 }

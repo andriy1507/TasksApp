@@ -10,9 +10,11 @@ import com.spaceapps.tasks.core.extensions.release
 import com.spaceapps.tasks.di.ApplicationComponent
 import com.spaceapps.tasks.logging.DebugTree
 import com.spaceapps.tasks.logging.ReleaseTree
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import javax.inject.Inject
 
+@HiltAndroidApp
 class TasksApplication : Application(), App {
 
     @Inject

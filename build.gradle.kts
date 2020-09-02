@@ -18,6 +18,7 @@ allprojects {
         google()
         jcenter()
         maven(libs.picasso.url)
+        mavenCentral()
     }
 }
 

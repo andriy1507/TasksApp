@@ -7,8 +7,8 @@ import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
 import com.spaceapps.tasks.core_ui.R
 import com.spaceapps.tasks.core_ui.SelectableResources
+import com.spaceapps.tasks.core_ui.databinding.ItemIconBinding
 import com.spaceapps.tasks.core_ui.getThemeColor
-import kotlinx.android.synthetic.main.item_icon.view.*
 
 class IconPickerAdapter : RecyclerView.Adapter<IconPickerAdapter.IconPickerViewHolder>() {
 
@@ -22,11 +22,12 @@ class IconPickerAdapter : RecyclerView.Adapter<IconPickerAdapter.IconPickerViewH
 
     class IconPickerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        private val binding by lazy { ItemIconBinding.bind(itemView) }
         private val selectedColor = itemView.context.getThemeColor(R.attr.colorSecondaryDark)
         private val unSelectedColor = itemView.context.getThemeColor(R.attr.colorPrimaryDark)
 
         fun bind(item: IconItem) {
-            itemView.iconImageView.apply {
+            binding.iconImageView.apply {
                 val drawable = context.getDrawable(item.icon)?.apply {
                     setTint(if (item.selected) selectedColor else unSelectedColor)
                 }
@@ -35,7 +36,7 @@ class IconPickerAdapter : RecyclerView.Adapter<IconPickerAdapter.IconPickerViewH
         }
 
         fun setOnClickListener(listener: () -> Unit) {
-            itemView.setOnClickListener {
+            binding.root.setOnClickListener {
                 listener()
             }
         }

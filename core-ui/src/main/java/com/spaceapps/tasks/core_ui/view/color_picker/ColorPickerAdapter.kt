@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.spaceapps.tasks.core_ui.visibleIf
-import com.spaceapps.tasks.core_ui.SelectableResources
 import com.spaceapps.tasks.core_ui.R
-import kotlinx.android.synthetic.main.item_color.view.*
+import com.spaceapps.tasks.core_ui.SelectableResources
+import com.spaceapps.tasks.core_ui.databinding.ItemColorBinding
+import com.spaceapps.tasks.core_ui.visibleIf
 
 class ColorPickerAdapter : RecyclerView.Adapter<ColorPickerAdapter.ColorPickerViewHolder>() {
 
@@ -26,10 +26,13 @@ class ColorPickerAdapter : RecyclerView.Adapter<ColorPickerAdapter.ColorPickerVi
     private val colors: List<ColorItem> = SelectableResources.COLORS.map { ColorItem(it) }
 
     class ColorPickerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        private val binding by lazy { ItemColorBinding.bind(itemView) }
+
         fun bind(item: ColorItem) {
             itemView.apply {
-                colorCircleView.setCardBackgroundColor(ContextCompat.getColor(context, item.color))
-                checkImageView.visibleIf(item.selected)
+                binding.colorCircleView.setCardBackgroundColor(ContextCompat.getColor(context, item.color))
+                binding.checkImageView.visibleIf(item.selected)
             }
         }
 

@@ -6,6 +6,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    id("dagger.hilt.android.plugin")
 }
 android {
     compileSdkVersion(variables.compileSdk)
@@ -45,12 +46,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+        useIR = true
     }
-    kapt {
-        correctErrorTypes = true
-        generateStubs = true
-        useBuildCache = true
-        includeCompileClasspath = true
+    composeOptions {
+        kotlinCompilerVersion = libs.kotlin.version
+        kotlinCompilerExtensionVersion = libs.compose.version
     }
 }
 
@@ -71,8 +71,8 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.multidex)
-    implementation(libs.dagger.core)
-    kapt(libs.dagger.compiler)
+    implementation(libs.hilt.core)
+    kapt(libs.hilt.compiler)
     compileOnly(libs.androidx.annotations)
     implementation(libs.constraint.layout)
     implementation(libs.material.design)
