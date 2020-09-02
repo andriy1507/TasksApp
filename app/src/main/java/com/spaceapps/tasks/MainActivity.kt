@@ -7,7 +7,9 @@ import androidx.navigation.ui.NavigationUI
 import com.spaceapps.tasks.core_ui.gone
 import com.spaceapps.tasks.core_ui.visible
 import com.spaceapps.tasks.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }

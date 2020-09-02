@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 android {
     compileSdkVersion(variables.compileSdk)
@@ -80,7 +81,7 @@ dependencies {
     implementation(libs.tinder.coroutinesStreamAdapter)
     implementation(libs.tinder.gsonMessageAdapter)
     implementation(libs.tinder.lifecycleAndroid)
-    implementation(libs.dagger.core)
-    kapt(libs.dagger.compiler)
+    implementation(libs.hilt.core)
+    kapt(libs.hilt.compiler)
     compileOnly(libs.androidx.annotations)
 }

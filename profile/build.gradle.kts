@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 android {
     compileSdkVersion(variables.compileSdk)
@@ -58,8 +59,9 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.extensions)
     implementation(libs.constraint.layout)
-    implementation(libs.dagger.core)
-    kapt(libs.dagger.compiler)
+    implementation(libs.hilt.core)
+    implementation(libs.hilt.viewmodel)
+    kapt(libs.hilt.compiler)
     implementation(libs.picasso.core)
     implementation(libs.logging.timber)
 }

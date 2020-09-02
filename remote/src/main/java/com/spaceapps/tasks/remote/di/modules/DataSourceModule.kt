@@ -6,8 +6,11 @@ import com.spaceapps.tasks.remote.source.impl.AuthorizationRemoteDataSourceImpl
 import com.spaceapps.tasks.remote.source.impl.UserProfileRemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 
 @Module
+@InstallIn(ApplicationComponent::class)
 interface DataSourceModule {
 
     @Binds

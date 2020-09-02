@@ -10,6 +10,8 @@ import com.spaceapps.tasks.remote.di.annotation.RetrofitScope
 import com.spaceapps.tasks.remote.source.AuthTokenStorage
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Logger
@@ -19,6 +21,7 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class HttpClientModule {
 
     companion object {

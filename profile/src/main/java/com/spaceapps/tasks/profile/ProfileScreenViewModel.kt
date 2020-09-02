@@ -1,5 +1,6 @@
 package com.spaceapps.tasks.profile
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +16,7 @@ import java.io.File
 import javax.inject.Inject
 
 class ProfileScreenViewModel
-@Inject constructor(
+@ViewModelInject constructor(
     private val tasksRepository: TasksRepository,
     private val userProfileRepository: UserProfileRepository
 ) : ViewModel() {

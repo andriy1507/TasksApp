@@ -6,19 +6,19 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.spaceapps.tasks.core.extensions.*
-import com.spaceapps.tasks.core.model.Status
-import com.spaceapps.tasks.core.model.UserProfileModel
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.profile.databinding.FragmentProfileBinding
-import com.spaceapps.tasks.profile.di.ProfileScreenComponent
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class ProfileFragment : BaseFragment() {
 
     companion object {
@@ -26,8 +26,7 @@ class ProfileFragment : BaseFragment() {
         private const val PERMISSION_REQUEST_CODE = 0x1254
     }
 
-    @Inject
-    lateinit var viewModel: ProfileScreenViewModel
+    private val viewModel: ProfileScreenViewModel by viewModels()
 
     @Inject
     lateinit var picasso: Picasso
@@ -39,7 +38,6 @@ class ProfileFragment : BaseFragment() {
     private val loadingProgressBar by lazy { binding.loadingProgressBar }
 
     override fun setupDependencies() {
-        ProfileScreenComponent.init(this).inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

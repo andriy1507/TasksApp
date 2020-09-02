@@ -1,5 +1,6 @@
 package com.spaceapps.tasks.create
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.spaceapps.tasks.core.extensions.async
@@ -8,7 +9,7 @@ import com.spaceapps.tasks.core.repository.TasksRepository
 import javax.inject.Inject
 
 class CreateTaskViewModel
-@Inject constructor(
+@ViewModelInject constructor(
     private val tasksRepository: TasksRepository
 ) : ViewModel() {
 

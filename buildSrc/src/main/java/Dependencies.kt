@@ -147,9 +147,11 @@ object libs {
 
     object hilt {
         private const val hilt_version = "2.28-alpha"
+        private const val hilt_viewmodel_version = "1.0.0-alpha02"
         const val plugin = "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         const val core = "com.google.dagger:hilt-android:$hilt_version"
         const val compiler = "com.google.dagger:hilt-android-compiler:$hilt_version"
+        const val viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_viewmodel_version"
     }
 
     object compose {
