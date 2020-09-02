@@ -69,4 +69,6 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.extensions)
     implementation(libs.picasso.core)
+    testImplementation(libs.testing.junit)
+    testImplementation(libs.coroutines.testing)
 }

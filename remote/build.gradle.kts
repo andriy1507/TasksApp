@@ -82,6 +82,9 @@ dependencies {
     implementation(libs.tinder.gsonMessageAdapter)
     implementation(libs.tinder.lifecycleAndroid)
     implementation(libs.hilt.core)
-    kapt(libs.hilt.compiler)
+    kapt(libs.hilt.androidCompiler)
     compileOnly(libs.androidx.annotations)
+    testImplementation(libs.retrofit.testing)
+    testImplementation(libs.okhttp.testing)
+    testImplementation(libs.testing.junit)
 }

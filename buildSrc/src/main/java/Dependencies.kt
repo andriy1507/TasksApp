@@ -21,6 +21,8 @@ object libs {
         const val annotations = "androidx.annotation:annotation:$annotations_version"
         private const val multidex_version = "2.0.1"
         const val multidex = "androidx.multidex:multidex:$multidex_version"
+        private const val insetter_version = "0.3.0"
+        const val insetter = "dev.chrisbanes:insetter-ktx:$insetter_version"
     }
 
     object dagger {
@@ -34,6 +36,7 @@ object libs {
         const val core = "androidx.room:room-runtime:$room_version"
         const val compiler = "androidx.room:room-compiler:$room_version"
         const val extensions = "androidx.room:room-ktx:$room_version"
+        const val testing = "androidx.room:room-testing:$room_version"
     }
 
     object paging {
@@ -44,6 +47,7 @@ object libs {
     object coroutines {
         private const val coroutines_version = "1.3.9"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+        const val testing = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     }
 
     object constraint {
@@ -121,12 +125,15 @@ object libs {
         const val core = "com.squareup.retrofit2:retrofit:$retrofit_version"
         private const val gson_converter_version = "2.9.0"
         const val gsonConverter = "com.squareup.retrofit2:converter-gson:$gson_converter_version"
+        private const val testing_version = "2.3.0"
+        const val testing = "com.squareup.retrofit2:retrofit-mock:$testing_version"
     }
 
     object okhttp {
         private const val okhttp_version = "4.8.1"
         const val core = "com.squareup.okhttp3:okhttp:$okhttp_version"
         const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+        const val testing = "com.squareup.okhttp3:mockwebserver:$okhttp_version"
     }
 
     object tinder {
@@ -150,8 +157,11 @@ object libs {
         private const val hilt_viewmodel_version = "1.0.0-alpha02"
         const val plugin = "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         const val core = "com.google.dagger:hilt-android:$hilt_version"
-        const val compiler = "com.google.dagger:hilt-android-compiler:$hilt_version"
+        const val androidCompiler = "com.google.dagger:hilt-android-compiler:$hilt_version"
+        private const val compiler_version = "1.0.0-alpha02"
+        const val compiler = "androidx.hilt:hilt-compiler:$compiler_version"
         const val viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_viewmodel_version"
+        const val testing = "com.google.dagger:hilt-android-testing:$hilt_version"
     }
 
     object compose {
@@ -164,6 +174,22 @@ object libs {
         const val layout = "androidx.compose.foundation:foundation-layout:$version"
         const val text = "androidx.compose.foundation:foundation-text:$version"
         const val foundation = "androidx.compose.foundation:foundation:$version"
+    }
+
+    object testing {
+        private const val junit_version = "4.12"
+        const val junit = "junit:junit:$junit_version"
+        private const val androidx_version = "1.3.0"
+        const val androidx = "androidx.test:core:$androidx_version"
+        const val androidRunner = "androidx.test:runner:$androidx_version"
+        private const val mockito_version = "1.10.19"
+        const val mockito = "org.mockito:mockito-core:$mockito_version"
+        private const val espresso_version = "3.3.0"
+        const val espresso = "androidx.test.espresso:espresso-core:$espresso_version"
+        private const val robolectric_version = "4.4"
+        const val robolectric = "org.robolectric:robolectric:$robolectric_version"
+        private const val android_junit_version = "1.1.2"
+        const val androidJunit = "androidx.test.ext:junit:$android_junit_version"
     }
 }
 

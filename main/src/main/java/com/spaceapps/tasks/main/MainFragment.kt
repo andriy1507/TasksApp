@@ -10,6 +10,7 @@ import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.main.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.chrisbanes.insetter.applySystemWindowInsetsToPadding
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -37,6 +38,11 @@ class MainFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         initClickListener()
+        applyInsets()
+    }
+
+    private fun applyInsets() {
+        tasksRecyclerView.applySystemWindowInsetsToPadding(top = true)
     }
 
     private fun initClickListener() {

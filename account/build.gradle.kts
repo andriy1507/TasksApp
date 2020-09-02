@@ -53,6 +53,6 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.hilt.core)
-    kapt(libs.hilt.compiler)
+    kapt(libs.hilt.androidCompiler)
     implementation(libs.androidx.annotations)
 }

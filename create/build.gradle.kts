@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.constraint.layout)
     implementation(libs.hilt.core)
     implementation(libs.hilt.viewmodel)
+    kapt(libs.hilt.androidCompiler)
     kapt(libs.hilt.compiler)
     implementation(libs.lifecycle.runtime)
     implementation(libs.lifecycle.extensions)

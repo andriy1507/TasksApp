@@ -1,6 +1,7 @@
 package com.spaceapps.tasks
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        applyEdgeToEdge()
     }
 
     override fun onResume() {
@@ -44,5 +46,15 @@ class MainActivity : AppCompatActivity() {
             bottomNavigationView,
             navHostFragment.findNavController()
         )
+    }
+
+    @Suppress("DEPRECATION")
+    private fun applyEdgeToEdge() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false)
+        } else {
+            window.decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        }
     }
 }

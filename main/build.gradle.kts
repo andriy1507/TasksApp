@@ -63,9 +63,11 @@ dependencies {
     implementation(libs.constraint.layout)
     implementation(libs.hilt.core)
     implementation(libs.hilt.viewmodel)
+    kapt(libs.hilt.androidCompiler)
     kapt(libs.hilt.compiler)
     implementation(libs.squareup.calendar)
     implementation(libs.logging.timber)
     implementation(libs.groupie.core)
     implementation(libs.groupie.viewBinding)
+    implementation(libs.androidx.insetter)
 }

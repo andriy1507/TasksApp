@@ -61,4 +61,5 @@ dependencies {
     implementation(libs.dagger.core)
     kapt(libs.dagger.compiler)
     implementation(libs.paging.core)
+    implementation(libs.androidx.insetter)
 }

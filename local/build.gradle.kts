@@ -51,6 +51,9 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
 }
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to arrayOf("*.jar")))
@@ -58,10 +61,17 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.hilt.core)
-    kapt(libs.hilt.compiler)
+    kapt(libs.hilt.androidCompiler)
     implementation(libs.room.core)
     implementation(libs.room.extensions)
     kapt(libs.room.compiler)
     compileOnly(libs.androidx.annotations)
     implementation(libs.paging.core)
+    testImplementation(libs.room.testing)
+    testImplementation(libs.testing.androidx)
+    testImplementation(libs.testing.androidRunner)
+    testImplementation(libs.testing.junit)
+    testImplementation(libs.testing.androidJunit)
+    testImplementation(libs.testing.robolectric)
+    testImplementation(libs.coroutines.testing)
 }
