@@ -5,6 +5,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.spaceapps.tasks.core.extensions.navigate
+import com.spaceapps.tasks.core.extensions.observe
 import com.spaceapps.tasks.core.extensions.observeNullable
 import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core_ui.BaseFragment
@@ -47,12 +49,12 @@ class MainFragment : BaseFragment() {
 
     private fun initClickListener() {
         createTaskFab.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.navigationCreate(null))
+            navigate(MainFragmentDirections.navigationCreate(null))
         }
     }
 
     private fun initObserver() {
-        observeNullable(viewModel.tasks) {
+        observe(viewModel.tasks) {
             recyclerViewAdapter.submitList(it)
         }
     }
