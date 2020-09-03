@@ -51,9 +51,9 @@ dependencies {
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
-    implementation(libs.constraint.layout)
-    implementation(libs.material.design)
-    implementation(libs.navigation.fragment)
-    implementation(libs.navigation.extensions)
+    implementation(libs.androidx.constraint.layout)
+    implementation(libs.google.material.design)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.extensions)
     implementation(libs.groupie.core)
 }

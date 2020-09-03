@@ -6,7 +6,7 @@ buildscript {
     dependencies {
         classpath(libs.android.tools)
         classpath(libs.kotlin.plugin)
-        classpath(libs.navigation.safe_args)
+        classpath(libs.androidx.navigation.safe_args)
         classpath(libs.google.services)
         classpath(libs.google.firebase.crashlyticsPlugin)
         classpath(libs.hilt.plugin)

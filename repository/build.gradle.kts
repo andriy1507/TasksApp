@@ -53,5 +53,5 @@ dependencies {
     implementation(libs.hilt.core)
     kapt(libs.hilt.androidCompiler)
     compileOnly(libs.androidx.annotations)
-    implementation(libs.paging.core)
+    implementation(libs.androidx.paging.core)
 }
