@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.spaceapps.tasks.core.extensions.indexInList
+import com.spaceapps.tasks.core.extensions.observe
 import com.spaceapps.tasks.core.extensions.observeNullable
+import com.spaceapps.tasks.core.extensions.onSuccess
 import com.spaceapps.tasks.core.model.SubTask
 import com.spaceapps.tasks.core_ui.BaseBottomSheetFragment
 import com.spaceapps.tasks.core_ui.SelectableResources
@@ -65,23 +67,26 @@ class TaskViewBottomSheet : BaseBottomSheetFragment() {
 
     private fun initTaskData() {
         viewModel.getTask(TaskViewBottomSheetArgs.fromBundle(requireArguments()).taskId)
-        observeNullable(viewModel.task){ task ->
-            titleTextView.text = task.title
-            taskImageView.apply {
-                task.icon?.let { icon ->
-                    if (SelectableResources.ICONS.indexInList(icon))
-                        setImageResource(SelectableResources.ICONS[icon])
-                }
-                task.color?.let { color ->
-                    if (SelectableResources.COLORS.indexInList(color)) {
-                        setIconColor(SelectableResources.COLORS[color])
+        observeNullable(viewModel.task) {task ->
+
+                titleTextView.text = task.title
+                taskImageView.apply {
+                    task.icon?.let { icon ->
+                        if (SelectableResources.ICONS.indexInList(icon))
+                            setImageResource(SelectableResources.ICONS[icon])
                     }
+                    task.color?.let { color ->
+                        if (SelectableResources.COLORS.indexInList(color)) {
+                            setIconColor(SelectableResources.COLORS[color])
+                        }
+                    }
+
+                subTasksAdapter.apply {
+                    clear()
+                    addAll(task.subTasks.map { subTask ->  SubTaskPresentation(subTask) }.orEmpty())
                 }
             }
-            subTasksAdapter.apply {
-                clear()
-                addAll(task.subTasks.map { SubTaskPresentation(it) })
-            }
+
         }
     }
 

@@ -3,16 +3,15 @@ package com.spaceapps.tasks.main
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.spaceapps.tasks.core.extensions.navigate
 import com.spaceapps.tasks.core.extensions.observe
-import com.spaceapps.tasks.core.extensions.observeNullable
 import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.main.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applySystemWindowInsetsToPadding
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -30,17 +29,12 @@ class MainFragment : BaseFragment() {
     override fun setupDependencies() {
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.invalidateDataSource()
-        initObserver()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         initClickListener()
         applyInsets()
+        initObserver()
     }
 
     private fun applyInsets() {
@@ -54,8 +48,8 @@ class MainFragment : BaseFragment() {
     }
 
     private fun initObserver() {
-        observe(viewModel.tasks) {
-            recyclerViewAdapter.submitList(it)
+        observe(viewModel.taskList) {
+            Timber.d(it.toString())
         }
     }
 
@@ -65,12 +59,11 @@ class MainFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             recyclerViewAdapter.setOnTaskClickAction(::onTaskClick)
         }
-
     }
 
     private fun onTaskClick(it: Task?) {
         it?.let { task ->
-            findNavController().navigate(MainFragmentDirections.navigationView(task.id))
+            navigate(MainFragmentDirections.navigationView(task.id))
         }
     }
 

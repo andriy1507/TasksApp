@@ -74,7 +74,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.multidex)
     implementation(libs.hilt.core)
-    implementation(libs.hilt.viewmodel)
+    implementation(libs.hilt.viewModel)
     kapt(libs.hilt.androidCompiler)
     kapt(libs.hilt.compiler)
     compileOnly(libs.androidx.annotations)

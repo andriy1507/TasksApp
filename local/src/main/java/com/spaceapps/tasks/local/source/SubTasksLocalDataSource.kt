@@ -1,16 +1,15 @@
 package com.spaceapps.tasks.local.source
 
-import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
 import com.spaceapps.tasks.local.model.SubTaskLocal
+import kotlinx.coroutines.flow.Flow
 
 interface SubTasksLocalDataSource {
 
-    fun addTasks(vararg subTasks: SubTaskLocal)
+    suspend fun addTasks(vararg subTasks: SubTaskLocal)
 
-    fun deleteSubTasks(vararg subTasks: SubTaskLocal)
+    suspend fun deleteSubTasks(vararg subTasks: SubTaskLocal)
 
-    fun updateSubTasks(vararg subTasks: SubTaskLocal)
+    suspend fun updateSubTasks(vararg subTasks: SubTaskLocal)
 
-    fun getSubTasks():List<SubTaskLocal>
+    suspend fun getSubTasks(): Flow<List<SubTaskLocal>>
 }
