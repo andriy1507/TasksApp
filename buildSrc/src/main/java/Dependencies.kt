@@ -23,6 +23,12 @@ object libs {
         const val multidex = "androidx.multidex:multidex:$multidex_version"
         private const val insetter_version = "0.3.0"
         const val insetter = "dev.chrisbanes:insetter-ktx:$insetter_version"
+        object workManager {
+            private const val work_manager_version = "2.5.0-alpha01"
+            const val core = "androidx.work:work-runtime:$work_manager_version"
+            const val ktx = "androidx.work:work-runtime-ktx:$work_manager_version"
+            const val testing = "androidx.work:work-testing:$work_manager_version"
+        }
     }
 
     object dagger {
