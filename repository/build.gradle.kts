@@ -48,6 +48,7 @@ dependencies {
     implementation(project(":local"))
     implementation(project(":remote"))
     implementation(libs.kotlin.std)
+    implementation(libs.coroutines.core)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.hilt.core)

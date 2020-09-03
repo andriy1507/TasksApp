@@ -66,7 +66,6 @@ dependencies {
     implementation(libs.androidx.room.extensions)
     kapt(libs.androidx.room.compiler)
     compileOnly(libs.androidx.annotations)
-    implementation(libs.androidx.paging.core)
     testImplementation(libs.androidx.room.testing)
     testImplementation(libs.testing.androidx)
     testImplementation(libs.testing.androidRunner)

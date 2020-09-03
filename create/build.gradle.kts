@@ -62,7 +62,7 @@ dependencies {
     implementation(libs.androidx.navigation.extensions)
     implementation(libs.androidx.constraint.layout)
     implementation(libs.hilt.core)
-    implementation(libs.hilt.viewmodel)
+    implementation(libs.hilt.viewModel)
     kapt(libs.hilt.androidCompiler)
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.lifecycle.runtime)

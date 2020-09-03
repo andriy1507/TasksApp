@@ -170,7 +170,8 @@ object libs {
         const val androidCompiler = "com.google.dagger:hilt-android-compiler:$hilt_version"
         private const val compiler_version = "1.0.0-alpha02"
         const val compiler = "androidx.hilt:hilt-compiler:$compiler_version"
-        const val viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_viewmodel_version"
+        const val viewModel = "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_viewmodel_version"
+        const val workManager = "androidx.hilt:hilt-work:$hilt_viewmodel_version"
         const val testing = "com.google.dagger:hilt-android-testing:$hilt_version"
     }
 

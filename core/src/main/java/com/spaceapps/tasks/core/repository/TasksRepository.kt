@@ -1,21 +1,21 @@
 package com.spaceapps.tasks.core.repository
 
-import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
+import com.spaceapps.tasks.core.model.Status
 import com.spaceapps.tasks.core.model.SubTask
 import com.spaceapps.tasks.core.model.Task
+import kotlinx.coroutines.flow.Flow
 
 interface TasksRepository {
 
-    fun getTaskById(id: Long): LiveData<Task?>
+    suspend fun getTaskById(id: Long): Task?
 
-    fun getAllTasks(): DataSource.Factory<Int, Task>
+    suspend fun getAllTasks(): Flow<List<Task>>
 
-    fun deleteTasks(vararg tasks: Task)
+    suspend fun deleteTasks(vararg tasks: Task)
 
-    fun changeTasks(vararg tasks: Task)
+    suspend fun changeTasks(vararg tasks: Task)
 
-    fun addTasks(vararg tasks: Task)
+    suspend fun addTasks(vararg tasks: Task)
 
-    fun getSubTasks(): List<SubTask>
+    suspend fun getSubTasks(): Flow<List<SubTask>>
 }

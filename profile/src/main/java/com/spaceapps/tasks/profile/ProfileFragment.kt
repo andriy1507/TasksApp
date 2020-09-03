@@ -42,10 +42,7 @@ class ProfileFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.apply {
-            getUserProfile()
-            getSubTasks()
-        }
+        viewModel.getUserProfile()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,12 +72,15 @@ class ProfileFragment : BaseFragment() {
                 if (!list.isNullOrEmpty()) {
                     val progress = list.count { it.isDone } / list.size * 100
                     progressBar.progress = progress
+
                 }
             }
-            observe(userProfile) {status ->
+            observe(userProfile) { status ->
                 status.onSuccess {
-                    it?.let { picasso.loadFromBackend(it.profileImage)
-                        .onCompleted { loadingProgressBar.hide() }.into(profileImageView) }
+                    it?.let {
+                        picasso.loadFromBackend(it.profileImage)
+                            .onCompleted { loadingProgressBar.hide() }.into(profileImageView)
+                    }
                 }.onError {
                     loadingProgressBar.hide()
                     binding.root.showErrorSnackBar(R.string.some_error_occurred)
