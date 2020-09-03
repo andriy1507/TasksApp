@@ -4,11 +4,12 @@ import android.annotation.SuppressLint
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.spaceapps.tasks.firebase.di.FirebaseCloudMessagingServiceComponent
 import com.spaceapps.tasks.firebase.notification.FirebaseNotificationsBuilder
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
 
+@AndroidEntryPoint
 @SuppressLint("MissingFirebaseInstanceTokenRefresh")
 class FirebaseCloudMessagingService : FirebaseMessagingService() {
 
@@ -17,11 +18,6 @@ class FirebaseCloudMessagingService : FirebaseMessagingService() {
 
     @Inject
     lateinit var notificationsBuilder: FirebaseNotificationsBuilder
-
-    override fun onCreate() {
-        super.onCreate()
-        FirebaseCloudMessagingServiceComponent.init(this).inject(this)
-    }
 
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)

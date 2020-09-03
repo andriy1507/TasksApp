@@ -6,6 +6,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    id("dagger.hilt.android.plugin")
 }
 android {
     compileSdkVersion(variables.compileSdk)
@@ -44,7 +45,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        useIR = true
+    }
+    composeOptions {
+        kotlinCompilerVersion = libs.kotlin.version
+        kotlinCompilerExtensionVersion = libs.androidx.compose.version
     }
 }
 
@@ -54,6 +60,8 @@ dependencies {
     implementation(project(":core-utils"))
     implementation(project(":core-ui"))
     implementation(project(":repository"))
+    implementation(project(":remote"))
+    implementation(project(":local"))
     implementation(project(":splash"))
     implementation(project(":main"))
     implementation(project(":create"))
@@ -65,16 +73,27 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.multidex)
-    implementation(libs.dagger.core)
-    kapt(libs.dagger.compiler)
+    implementation(libs.hilt.core)
+    implementation(libs.hilt.viewmodel)
+    kapt(libs.hilt.androidCompiler)
+    kapt(libs.hilt.compiler)
     compileOnly(libs.androidx.annotations)
-    implementation(libs.constraint.layout)
-    implementation(libs.material.design)
-    implementation(libs.navigation.fragment)
-    implementation(libs.navigation.extensions)
+    implementation(libs.androidx.constraint.layout)
+    implementation(libs.google.material.design)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.extensions)
     implementation(libs.stetho.core)
     implementation(libs.logging.timber)
     implementation(libs.google.firebase.analytics)
     implementation(libs.google.firebase.crashlytics)
     implementation(libs.picasso.core)
+    implementation(libs.retrofit.core)
+    implementation(libs.androidx.room.core)
+    implementation(libs.okhttp.loggingInterceptor)
+    implementation(libs.stetho.okhttp)
+    implementation(libs.google.gson)
+    implementation(libs.tinder.scarlet)
+    implementation(libs.groupie.core)
+    implementation(libs.androidx.paging.core)
+    implementation(libs.google.firebase.messaging)
 }

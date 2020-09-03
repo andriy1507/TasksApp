@@ -6,8 +6,11 @@ import com.spaceapps.tasks.local.source.impl.SubTasksLocalDataSourceImpl
 import com.spaceapps.tasks.local.source.impl.TasksLocalDataSourceImpl
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 
 @Module
+@InstallIn(ApplicationComponent::class)
 interface DataSourceModule {
 
     @Binds

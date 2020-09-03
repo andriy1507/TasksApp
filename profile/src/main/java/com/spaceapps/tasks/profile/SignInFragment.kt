@@ -4,19 +4,20 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.spaceapps.tasks.core.extensions.*
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.core_ui.gone
 import com.spaceapps.tasks.core_ui.visible
 import com.spaceapps.tasks.profile.SignInFragmentDirections.Companion.navigationUserProfile
 import com.spaceapps.tasks.profile.databinding.FragmentSignInBinding
-import com.spaceapps.tasks.profile.di.SignInScreenComponent
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class SignInFragment : BaseFragment() {
 
-    @Inject
-    lateinit var viewModel: SignInViewModel
+    private val viewModel: SignInViewModel by viewModels()
 
     override val binding by lazy { FragmentSignInBinding.inflate(layoutInflater) }
 
@@ -29,7 +30,6 @@ class SignInFragment : BaseFragment() {
     private val buttonTextView by lazy { binding.buttonTextView }
 
     override fun setupDependencies() {
-        SignInScreenComponent.init(this).inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

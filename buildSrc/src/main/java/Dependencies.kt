@@ -2,9 +2,10 @@
 object libs {
 
     object kotlin {
-        private const val version = "1.4.0"
+        const val version = "1.4.0"
         const val std = "org.jetbrains.kotlin:kotlin-stdlib:$version"
         const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
+        const val reflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
     }
 
     object androidx {
@@ -16,51 +17,71 @@ object libs {
         const val annotations = "androidx.annotation:annotation:$annotations_version"
         private const val multidex_version = "2.0.1"
         const val multidex = "androidx.multidex:multidex:$multidex_version"
-    }
+        private const val insetter_version = "0.3.0"
+        const val insetter = "dev.chrisbanes:insetter-ktx:$insetter_version"
 
-    object dagger {
-        private const val dagger_version = "2.27"
-        const val core = "com.google.dagger:dagger:$dagger_version"
-        const val compiler = "com.google.dagger:dagger-compiler:$dagger_version"
-    }
+        object lifecycle {
+            private const val lifecycle_version = "2.2.0"
+            const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+            const val extensions = "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+            const val compiler = "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+            const val runtime = "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+        }
 
-    object room {
-        private const val room_version = "2.2.5"
-        const val core = "androidx.room:room-runtime:$room_version"
-        const val compiler = "androidx.room:room-compiler:$room_version"
-        const val extensions = "androidx.room:room-ktx:$room_version"
-    }
+        object room {
+            private const val room_version = "2.2.5"
+            const val core = "androidx.room:room-runtime:$room_version"
+            const val compiler = "androidx.room:room-compiler:$room_version"
+            const val extensions = "androidx.room:room-ktx:$room_version"
+            const val testing = "androidx.room:room-testing:$room_version"
+        }
 
-    object paging {
-        private const val paging_version = "2.1.2"
-        const val core = "androidx.paging:paging-runtime:$paging_version"
+        object paging {
+            private const val paging_version = "2.1.2"
+            const val core = "androidx.paging:paging-runtime:$paging_version"
+        }
+
+        object navigation {
+            private const val navigation_version = "2.3.0-alpha06"
+            const val fragment = "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+            const val extensions = "androidx.navigation:navigation-ui-ktx:$navigation_version"
+            const val safe_args =
+                "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
+        }
+
+        object compose {
+            const val version = "1.0.0-alpha01"
+            const val ui = "androidx.compose.ui:ui:$version"
+            const val material = "androidx.compose.material:material:$version"
+            const val tooling = "androidx.ui:ui-tooling:$version"
+            const val runtime = "androidx.compose.runtime:runtime:1.0.0-alpha01"
+            const val livedata = "androidx.compose.runtime:runtime-livedata:1.0.0-alpha01"
+            const val layout = "androidx.compose.foundation:foundation-layout:$version"
+            const val text = "androidx.compose.foundation:foundation-text:$version"
+            const val foundation = "androidx.compose.foundation:foundation:$version"
+        }
+
+        object constraint {
+            private const val constraint_version = "2.0.1"
+            const val layout = "androidx.constraintlayout:constraintlayout:$constraint_version"
+        }
+        object workManager {
+            private const val work_manager_version = "2.5.0-alpha01"
+            const val core = "androidx.work:work-runtime:$work_manager_version"
+            const val ktx = "androidx.work:work-runtime-ktx:$work_manager_version"
+            const val testing = "androidx.work:work-testing:$work_manager_version"
+        }
     }
 
     object coroutines {
         private const val coroutines_version = "1.3.9"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+        const val testing = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     }
 
-    object constraint {
-        private const val constraint_version = "2.0.0-beta4"
-        const val layout = "com.android.support.constraint:constraint-layout:$constraint_version"
-    }
-
-    object material {
-        private const val material_version = "1.1.0-alpha10"
-        const val design = "com.google.android.material:material:$material_version"
-    }
-
-    object navigation {
-        private const val navigation_version = "2.3.0-alpha06"
-        const val fragment = "androidx.navigation:navigation-fragment-ktx:$navigation_version"
-        const val extensions = "androidx.navigation:navigation-ui-ktx:$navigation_version"
-        const val safe_args = "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
-    }
-
-    object stetho{
+    object stetho {
         private const val stetho_version = "1.5.1"
-        const val core ="com.facebook.stetho:stetho:$stetho_version"
+        const val core = "com.facebook.stetho:stetho:$stetho_version"
         const val okhttp = "com.facebook.stetho:stetho-okhttp3:$stetho_version"
     }
 
@@ -74,17 +95,17 @@ object libs {
         const val timber = "com.jakewharton.timber:timber:$timber_version"
     }
 
-    object lifecycle {
-        private const val lifecycle_version = "2.0.0"
-        const val runtime = "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-        const val extensions = "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
-    }
-
     object google {
         private const val services_version = "4.3.3"
         const val services = "com.google.gms:google-services:$services_version"
         private const val gson_version = "2.8.6"
         const val gson = "com.google.code.gson:gson:$gson_version"
+
+        object material {
+            private const val material_version = "1.1.0-alpha10"
+            const val design = "com.google.android.material:material:$material_version"
+        }
+
         object firebase {
             private const val analytics_version = "17.4.3"
             const val analytics = "com.google.firebase:firebase-analytics:$analytics_version"
@@ -114,19 +135,23 @@ object libs {
         const val core = "com.squareup.retrofit2:retrofit:$retrofit_version"
         private const val gson_converter_version = "2.9.0"
         const val gsonConverter = "com.squareup.retrofit2:converter-gson:$gson_converter_version"
+        private const val testing_version = "2.3.0"
+        const val testing = "com.squareup.retrofit2:retrofit-mock:$testing_version"
     }
 
     object okhttp {
         private const val okhttp_version = "4.8.1"
         const val core = "com.squareup.okhttp3:okhttp:$okhttp_version"
         const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+        const val testing = "com.squareup.okhttp3:mockwebserver:$okhttp_version"
     }
 
     object tinder {
         private const val scarlet_version = "0.1.10"
         const val scarlet = "com.tinder.scarlet:scarlet:$scarlet_version"
         const val okHttpWebSocket = "com.tinder.scarlet:websocket-okhttp:$scarlet_version"
-        const val coroutinesStreamAdapter = "com.tinder.scarlet:stream-adapter-coroutines:$scarlet_version"
+        const val coroutinesStreamAdapter =
+            "com.tinder.scarlet:stream-adapter-coroutines:$scarlet_version"
         const val gsonMessageAdapter = "com.tinder.scarlet:message-adapter-gson:$scarlet_version"
         const val lifecycleAndroid = "com.tinder.scarlet:lifecycle-android:$scarlet_version"
     }
@@ -135,6 +160,34 @@ object libs {
         private const val picasso_version = "2.71828"
         const val core = "com.squareup.picasso:picasso:$picasso_version"
         const val url = "https://dl.bintray.com/lisawray/maven"
+    }
+
+    object hilt {
+        private const val hilt_version = "2.28-alpha"
+        private const val hilt_viewmodel_version = "1.0.0-alpha02"
+        const val plugin = "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        const val core = "com.google.dagger:hilt-android:$hilt_version"
+        const val androidCompiler = "com.google.dagger:hilt-android-compiler:$hilt_version"
+        private const val compiler_version = "1.0.0-alpha02"
+        const val compiler = "androidx.hilt:hilt-compiler:$compiler_version"
+        const val viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_viewmodel_version"
+        const val testing = "com.google.dagger:hilt-android-testing:$hilt_version"
+    }
+
+    object testing {
+        private const val junit_version = "4.12"
+        const val junit = "junit:junit:$junit_version"
+        private const val androidx_version = "1.3.0"
+        const val androidx = "androidx.test:core:$androidx_version"
+        const val androidRunner = "androidx.test:runner:$androidx_version"
+        private const val mockito_version = "1.10.19"
+        const val mockito = "org.mockito:mockito-core:$mockito_version"
+        private const val espresso_version = "3.3.0"
+        const val espresso = "androidx.test.espresso:espresso-core:$espresso_version"
+        private const val robolectric_version = "4.4"
+        const val robolectric = "org.robolectric:robolectric:$robolectric_version"
+        private const val android_junit_version = "1.1.2"
+        const val androidJunit = "androidx.test.ext:junit:$android_junit_version"
     }
 }
 
@@ -147,5 +200,6 @@ object variables {
     const val testRunner = "androidx.test.runner.AndroidJUnitRunner"
     const val buildTools = "30.0.0"
     const val serverApiUrl = "http://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/"
-    const val serverWsUrl = "ws://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/web-socket"
+    const val serverWsUrl =
+        "ws://springdemo-env.eba-ytdvgmiq.eu-west-2.elasticbeanstalk.com/web-socket"
 }

@@ -41,7 +41,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        useIR = true
     }
 }
 
@@ -54,10 +55,13 @@ dependencies {
     implementation(libs.androidx.appcompat)
     compileOnly(libs.androidx.annotations)
     implementation(libs.coroutines.core)
-    implementation(libs.navigation.fragment)
-    implementation(libs.navigation.extensions)
-    implementation(libs.constraint.layout)
-    implementation(libs.dagger.core)
-    kapt(libs.dagger.compiler)
-    implementation(libs.paging.core)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.extensions)
+    implementation(libs.androidx.constraint.layout)
+    implementation(libs.hilt.core)
+    implementation(libs.hilt.viewmodel)
+    kapt(libs.hilt.compiler)
+    kapt(libs.hilt.androidCompiler)
+    implementation(libs.androidx.paging.core)
+    implementation(libs.androidx.insetter)
 }

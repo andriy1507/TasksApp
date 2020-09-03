@@ -7,9 +7,12 @@ import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class PicassoModule {
 
     @Provides

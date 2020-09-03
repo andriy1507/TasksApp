@@ -7,6 +7,7 @@ import com.spaceapps.tasks.core.extensions.isNull
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.core_ui.visibleIf
 import com.spaceapps.tasks.settings.databinding.FragmentSettingsBinding
+import dev.chrisbanes.insetter.applySystemWindowInsetsToPadding
 
 class SettingsFragment : BaseFragment() {
 
@@ -24,6 +25,11 @@ class SettingsFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         initListeners()
         initData()
+        applyInsets()
+    }
+
+    private fun applyInsets() {
+        binding.root.applySystemWindowInsetsToPadding(top = true)
     }
 
     private fun initData() {

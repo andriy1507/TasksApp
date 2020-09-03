@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.spaceapps.tasks.core.extensions.indexInList
 import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core_ui.SelectableResources
-import kotlinx.android.synthetic.main.item_task.view.*
+import com.spaceapps.tasks.main.databinding.ItemTaskBinding
 import javax.inject.Inject
 
 class TasksAdapter @Inject constructor() : PagedListAdapter<Task, TasksAdapter.TaskViewHolder>(
@@ -41,9 +41,12 @@ class TasksAdapter @Inject constructor() : PagedListAdapter<Task, TasksAdapter.T
     }
 
     class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        private val binding by lazy { ItemTaskBinding.bind(itemView) }
+
         fun bind(task: Task?, action: ((Task?) -> Unit)?) {
             itemView.apply {
-                titleTextView.text = task?.title
+                binding.titleTextView.text = task?.title
             }
             task?.let {
                 setIcon(it)
@@ -54,7 +57,7 @@ class TasksAdapter @Inject constructor() : PagedListAdapter<Task, TasksAdapter.T
         }
 
         private fun setIcon(task: Task) {
-            itemView.iconImageView.apply {
+            binding.iconImageView.apply {
                 task.icon?.let {
                     if (SelectableResources.ICONS.indexInList(it))
                         setImageResource(SelectableResources.ICONS[it])
@@ -63,7 +66,7 @@ class TasksAdapter @Inject constructor() : PagedListAdapter<Task, TasksAdapter.T
                     if (SelectableResources.COLORS.indexInList(it)) {
                         ImageViewCompat
                             .setImageTintList(
-                                itemView.iconImageView,
+                                binding.iconImageView,
                                 ContextCompat.getColorStateList(
                                     context,
                                     SelectableResources.COLORS[it]

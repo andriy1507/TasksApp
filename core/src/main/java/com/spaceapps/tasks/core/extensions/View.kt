@@ -1,13 +1,11 @@
 package com.spaceapps.tasks.core.extensions
 
-import android.annotation.SuppressLint
 import android.view.View
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 import com.spaceapps.tasks.core.R
 
 @JvmOverloads
-@SuppressLint("WrongConstant")
 fun View.showSuccessSnackBar(
     @StringRes text: Int, duration: Int = Snackbar.LENGTH_SHORT
 ) {
@@ -17,9 +15,7 @@ fun View.showSuccessSnackBar(
     }.show()
 }
 
-
 @JvmOverloads
-@SuppressLint("WrongConstant")
 fun View.showErrorSnackBar(
     @StringRes text: Int, duration: Int = Snackbar.LENGTH_SHORT
 ) {

@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 android {
     compileSdkVersion(variables.compileSdk)
@@ -37,8 +38,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
         sourceCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions.jvmTarget = "1.8"
-}
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }}
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to arrayOf("*.jar")))
@@ -48,8 +50,8 @@ dependencies {
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
-    implementation(libs.dagger.core)
-    kapt(libs.dagger.compiler)
+    implementation(libs.hilt.core)
+    kapt(libs.hilt.androidCompiler)
     compileOnly(libs.androidx.annotations)
-    implementation(libs.paging.core)
+    implementation(libs.androidx.paging.core)
 }

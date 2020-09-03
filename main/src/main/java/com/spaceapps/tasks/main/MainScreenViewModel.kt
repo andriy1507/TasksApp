@@ -1,14 +1,18 @@
 package com.spaceapps.tasks.main
 
+import androidx.hilt.Assisted
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.spaceapps.tasks.core.repository.TasksRepository
-import javax.inject.Inject
 
-class MainScreenViewModel @Inject constructor(private val tasksRepository: TasksRepository) :
-    ViewModel() {
+class MainScreenViewModel
+@ViewModelInject constructor(
+    @Assisted private val savedStateHandle: SavedStateHandle,
+    private val tasksRepository: TasksRepository
+) : ViewModel() {
 
     private val config = PagedList.Config.Builder()
         .setInitialLoadSizeHint(20)
@@ -21,14 +25,5 @@ class MainScreenViewModel @Inject constructor(private val tasksRepository: Tasks
 
     fun invalidateDataSource() {
         tasks = LivePagedListBuilder(tasksRepository.getAllTasks(), config).build()
-    }
-
-    class Factory @Inject constructor(private val repository: TasksRepository) :
-        ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return MainScreenViewModel(repository) as T
-        }
-
     }
 }

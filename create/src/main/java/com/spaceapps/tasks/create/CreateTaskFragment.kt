@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.spaceapps.tasks.core.extensions.indexInList
@@ -13,12 +14,13 @@ import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.core_ui.SelectableResources
 import com.spaceapps.tasks.core_ui.getThemeColor
 import com.spaceapps.tasks.create.databinding.FragmentCreateTaskBinding
-import com.spaceapps.tasks.create.di.CreateScreenComponent
 import com.spaceapps.tasks.create.model.SubTaskView
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class CreateTaskFragment : BaseFragment() {
 
     override val binding by lazy { FragmentCreateTaskBinding.inflate(layoutInflater) }
@@ -32,13 +34,11 @@ class CreateTaskFragment : BaseFragment() {
 
     private var task: Task? = null
 
-    @Inject
-    lateinit var viewModel: CreateTaskViewModel
+    private val viewModel: CreateTaskViewModel by viewModels()
 
     private val subTasksAdapter by lazy { GroupAdapter<GroupieViewHolder>() }
 
     override fun setupDependencies() {
-        CreateScreenComponent.init(this).inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

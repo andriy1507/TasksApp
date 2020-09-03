@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 android {
     compileSdkVersion(variables.compileSdk)
@@ -60,7 +61,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
@@ -80,7 +81,10 @@ dependencies {
     implementation(libs.tinder.coroutinesStreamAdapter)
     implementation(libs.tinder.gsonMessageAdapter)
     implementation(libs.tinder.lifecycleAndroid)
-    implementation(libs.dagger.core)
-    kapt(libs.dagger.compiler)
+    implementation(libs.hilt.core)
+    kapt(libs.hilt.androidCompiler)
     compileOnly(libs.androidx.annotations)
+    testImplementation(libs.retrofit.testing)
+    testImplementation(libs.okhttp.testing)
+    testImplementation(libs.testing.junit)
 }

@@ -13,6 +13,8 @@ import com.tinder.scarlet.websocket.okhttp.newWebSocketFactory
 import com.tinder.streamadapter.coroutines.CoroutinesStreamAdapterFactory
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.Authenticator
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -22,12 +24,8 @@ import okhttp3.logging.HttpLoggingInterceptor.Logger
 import timber.log.Timber
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class WebSocketClientModule {
-
-    @Provides
-    fun providesApplication(context: Context): Application {
-        return context.applicationContext as Application
-    }
 
     @Provides
     @ScarletScope

@@ -2,15 +2,20 @@ package com.spaceapps.tasks.main
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.spaceapps.tasks.core.extensions.navigate
+import com.spaceapps.tasks.core.extensions.observe
 import com.spaceapps.tasks.core.extensions.observeNullable
 import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.main.databinding.FragmentMainBinding
-import com.spaceapps.tasks.main.di.MainScreenComponent
+import dagger.hilt.android.AndroidEntryPoint
+import dev.chrisbanes.insetter.applySystemWindowInsetsToPadding
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainFragment : BaseFragment() {
 
     override val binding by lazy { FragmentMainBinding.inflate(layoutInflater) }
@@ -18,13 +23,11 @@ class MainFragment : BaseFragment() {
     private val tasksRecyclerView by lazy { binding.tasksRecyclerView }
 
     @Inject
-    lateinit var viewModel: MainScreenViewModel
-
-    @Inject
     lateinit var recyclerViewAdapter: TasksAdapter
 
+    private val viewModel: MainScreenViewModel by viewModels()
+
     override fun setupDependencies() {
-        MainScreenComponent.init(this).inject(this)
     }
 
     override fun onResume() {
@@ -37,16 +40,21 @@ class MainFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         initClickListener()
+        applyInsets()
+    }
+
+    private fun applyInsets() {
+        tasksRecyclerView.applySystemWindowInsetsToPadding(top = true)
     }
 
     private fun initClickListener() {
         createTaskFab.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.navigationCreate(null))
+            navigate(MainFragmentDirections.navigationCreate(null))
         }
     }
 
     private fun initObserver() {
-        observeNullable(viewModel.tasks) {
+        observe(viewModel.tasks) {
             recyclerViewAdapter.submitList(it)
         }
     }
