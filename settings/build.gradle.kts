@@ -64,4 +64,5 @@ dependencies {
     kapt(libs.hilt.androidCompiler)
     implementation(libs.androidx.paging.core)
     implementation(libs.androidx.insetter)
+    implementation(libs.google.auth)
 }

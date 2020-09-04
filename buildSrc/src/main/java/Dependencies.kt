@@ -98,6 +98,8 @@ object libs {
     object google {
         private const val services_version = "4.3.3"
         const val services = "com.google.gms:google-services:$services_version"
+        private const val auth_version = "18.1.0"
+        const val auth = "com.google.android.gms:play-services-auth:$auth_version"
         private const val gson_version = "2.8.6"
         const val gson = "com.google.code.gson:gson:$gson_version"
         private const val location_version = "17.0.0"

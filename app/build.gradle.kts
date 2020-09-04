@@ -72,6 +72,7 @@ dependencies {
     implementation(project(":location"))
     implementation(project(":exoplayer"))
     implementation(project(":maps"))
+    implementation(libs.google.auth)
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
