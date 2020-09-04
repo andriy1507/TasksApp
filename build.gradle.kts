@@ -1,4 +1,5 @@
 buildscript {
+    val kotlin_version by extra("1.4.0")
     repositories {
         google()
         jcenter()
@@ -10,6 +11,7 @@ buildscript {
         classpath(libs.google.services)
         classpath(libs.google.firebase.crashlyticsPlugin)
         classpath(libs.hilt.plugin)
+        "classpath"("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
 

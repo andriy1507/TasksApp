@@ -106,6 +106,11 @@ object libs {
             const val design = "com.google.android.material:material:$material_version"
         }
 
+        object exoplayer {
+            private const val exoplayer_version = "2.11.8"
+            const val core = "com.google.android.exoplayer:exoplayer:$exoplayer_version"
+        }
+
         object firebase {
             private const val analytics_version = "17.4.3"
             const val analytics = "com.google.firebase:firebase-analytics:$analytics_version"

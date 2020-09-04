@@ -12,7 +12,6 @@ import com.spaceapps.tasks.core_ui.visible
 import com.spaceapps.tasks.profile.SignInFragmentDirections.Companion.navigationUserProfile
 import com.spaceapps.tasks.profile.databinding.FragmentSignInBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignInFragment : BaseFragment() {
@@ -28,9 +27,6 @@ class SignInFragment : BaseFragment() {
     private val loadingProgressBar by lazy { binding.loadingProgressBar }
     private val noteTextView by lazy { binding.noteTextView }
     private val buttonTextView by lazy { binding.buttonTextView }
-
-    override fun setupDependencies() {
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

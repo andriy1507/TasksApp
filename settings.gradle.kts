@@ -1,3 +1,4 @@
+include(":exoplayer")
 include(":remote")
 include(":core-utils")
 include(":firebase")

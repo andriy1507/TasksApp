@@ -26,8 +26,6 @@ class MainFragment : BaseFragment() {
 
     private val viewModel: MainScreenViewModel by viewModels()
 
-    override fun setupDependencies() {
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="stroke">1dp</dimen>
-    <dimen name="tiny">2dp</dimen>
-    <dimen name="small">4dp</dimen>
-    <dimen name="normal">8dp</dimen>
-    <dimen name="medium">12dp</dimen>
-    <dimen name="large">16dp</dimen>
-    <dimen name="big">24dp</dimen>
-    <dimen name="huge">48dp</dimen>
-    <dimen name="giant">64dp</dimen>
-    
-    <dimen name="font_normal">16sp</dimen>
+    <dimen name="spacing_1dp">1dp</dimen>
+    <dimen name="spacing_2dp">2dp</dimen>
+    <dimen name="spacing_4dp">4dp</dimen>
+    <dimen name="spacing_8dp">8dp</dimen>
+    <dimen name="spacing_12dp">12dp</dimen>
+    <dimen name="spacing_16dp">16dp</dimen>
+    <dimen name="spacing_24dp">24dp</dimen>
+    <dimen name="spacing_48dp">48dp</dimen>
+    <dimen name="spacing_64dp">64dp</dimen>
+
+    <dimen name="font_16sp">16sp</dimen>
 </resources>

@@ -69,6 +69,7 @@ dependencies {
     implementation(project(":settings"))
     implementation(project(":account"))
     implementation(project(":firebase"))
+    implementation(project(":exoplayer"))
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)

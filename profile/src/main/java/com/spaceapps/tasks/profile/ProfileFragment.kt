@@ -37,9 +37,6 @@ class ProfileFragment : BaseFragment() {
     private val profileImageView by lazy { binding.profileImageImageView }
     private val loadingProgressBar by lazy { binding.loadingProgressBar }
 
-    override fun setupDependencies() {
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.getUserProfile()

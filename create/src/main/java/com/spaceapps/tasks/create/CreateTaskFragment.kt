@@ -18,7 +18,6 @@ import com.spaceapps.tasks.create.model.SubTaskView
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class CreateTaskFragment : BaseFragment() {
@@ -37,9 +36,6 @@ class CreateTaskFragment : BaseFragment() {
     private val viewModel: CreateTaskViewModel by viewModels()
 
     private val subTasksAdapter by lazy { GroupAdapter<GroupieViewHolder>() }
-
-    override fun setupDependencies() {
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
