@@ -46,10 +46,14 @@ android {
 }
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to arrayOf("*.jar")))
+    implementation(project(":core"))
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.hilt.core)
     kapt(libs.hilt.androidCompiler)
     compileOnly(libs.androidx.annotations)
+    implementation(libs.google.location)
+    implementation(libs.logging.timber)
+    implementation(libs.coroutines.core)
 }
