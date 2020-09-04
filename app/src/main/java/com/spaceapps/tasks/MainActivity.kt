@@ -40,7 +40,8 @@ class MainActivity : AppCompatActivity() {
                 when (destination.id) {
                     R.id.navigation_splash,
                     R.id.navigation_login,
-                    R.id.navigation_create -> {
+                    R.id.navigation_create,
+                    R.id.navigation_audio_player -> {
                         bottomNavigationView.gone()
                     }
                     else -> {

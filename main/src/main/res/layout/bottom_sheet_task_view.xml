@@ -6,9 +6,9 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/taskImageView"
-        android:layout_width="@dimen/huge"
-        android:layout_height="@dimen/huge"
-        android:layout_margin="@dimen/normal"
+        android:layout_width="@dimen/spacing_48dp"
+        android:layout_height="@dimen/spacing_48dp"
+        android:layout_margin="@dimen/spacing_8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -16,7 +16,7 @@
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/normal"
+        android:layout_marginStart="@dimen/spacing_8dp"
         app:layout_constraintBottom_toBottomOf="@id/taskImageView"
         app:layout_constraintStart_toEndOf="@id/taskImageView"
         app:layout_constraintTop_toTopOf="@id/taskImageView" />
@@ -25,7 +25,7 @@
         android:id="@+id/subTasksRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/large"
+        android:layout_margin="@dimen/spacing_16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/saveButton"
@@ -36,7 +36,7 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/large"
+        android:layout_margin="@dimen/spacing_16dp"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:strokeColor="?colorPrimary" />

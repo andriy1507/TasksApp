@@ -4,6 +4,7 @@ import android.accounts.AccountManager
 import android.os.Bundle
 import android.view.View
 import com.spaceapps.tasks.core.extensions.isNull
+import com.spaceapps.tasks.core.extensions.navigate
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.core_ui.visibleIf
 import com.spaceapps.tasks.settings.databinding.FragmentSettingsBinding
@@ -19,13 +20,12 @@ class SettingsFragment : BaseFragment() {
     private val deleteAccountButton by lazy { binding.deleteAccountButton }
     private val accountType by lazy { getString(R.string.account_type) }
 
-    override fun setupDependencies() = Unit
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initListeners()
         initData()
         applyInsets()
+        navigate(SettingsFragmentDirections.navigateAudioPlayer())
     }
 
     private fun applyInsets() {
