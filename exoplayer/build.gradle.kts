@@ -54,8 +54,13 @@ dependencies {
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.constraint.layout)
+    implementation(libs.androidx.insetter)
     implementation(libs.google.exoplayer.core)
+    implementation(libs.google.material.design)
     implementation(libs.hilt.core)
     kapt(libs.hilt.androidCompiler)
     kapt(libs.hilt.compiler)
+    compileOnly(libs.androidx.annotations)
 }
