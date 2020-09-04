@@ -60,7 +60,7 @@ class AudioPlayerFragment : BaseFragment() {
             }
         }
         toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack(R.id.navigation_main, false)
+            findNavController().popBackStack()
         }
     }
 

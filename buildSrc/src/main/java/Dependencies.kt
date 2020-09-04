@@ -102,6 +102,9 @@ object libs {
         const val gson = "com.google.code.gson:gson:$gson_version"
         private const val location_version = "17.0.0"
         const val location = "com.google.android.gms:play-services-location:$location_version"
+        private const val maps_version = "17.0.0"
+        const val maps = "com.google.android.gms:play-services-maps:$maps_version"
+
         object material {
             private const val material_version = "1.1.0-alpha10"
             const val design = "com.google.android.material:material:$material_version"

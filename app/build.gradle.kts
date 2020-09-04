@@ -71,6 +71,7 @@ dependencies {
     implementation(project(":firebase"))
     implementation(project(":location"))
     implementation(project(":exoplayer"))
+    implementation(project(":maps"))
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
