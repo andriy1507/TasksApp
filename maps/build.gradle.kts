@@ -53,5 +53,7 @@ dependencies {
     implementation(project(":core-ui"))
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.insetter)
     implementation(libs.google.maps)
 }

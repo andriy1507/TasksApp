@@ -66,4 +66,5 @@ dependencies {
     kapt(libs.hilt.compiler)
     implementation(libs.picasso.core)
     implementation(libs.logging.timber)
+    implementation(libs.google.auth)
 }

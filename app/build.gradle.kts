@@ -20,7 +20,14 @@ android {
         multiDexEnabled = true
         testInstrumentationRunner = variables.testRunner
     }
-
+    signingConfigs {
+        getByName("debug") {
+            keyAlias = "tasks"
+            keyPassword = "15ab0c7de1f9gh98"
+            storePassword = "15ab0c7de1f9gh98"
+            storeFile = file("debug-keystore.jks")
+        }
+    }
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
@@ -35,6 +42,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     buildFeatures {
