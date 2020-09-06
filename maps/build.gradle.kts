@@ -3,7 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
-    id("dagger.hilt.android.plugin")
+    id("androidx.navigation.safeargs.kotlin")
 }
 android {
     compileSdkVersion(variables.compileSdk)
@@ -22,15 +22,15 @@ android {
         getByName("release") {
             isMinifyEnabled = true
             proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
         }
         getByName("debug") {
             isMinifyEnabled = false
             proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
         }
     }
@@ -54,17 +54,6 @@ dependencies {
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.lifecycle.livedata)
-    compileOnly(libs.androidx.annotations)
-    implementation(libs.coroutines.core)
-    implementation(libs.androidx.navigation.fragment)
-    implementation(libs.androidx.navigation.extensions)
-    implementation(libs.androidx.constraint.layout)
-    implementation(libs.hilt.core)
-    implementation(libs.hilt.viewModel)
-    kapt(libs.hilt.androidCompiler)
-    kapt(libs.hilt.compiler)
-    implementation(libs.picasso.core)
-    implementation(libs.logging.timber)
-    implementation(libs.google.auth)
+    implementation(libs.androidx.insetter)
+    implementation(libs.google.maps)
 }

@@ -1,3 +1,4 @@
+include(":maps")
 include(":exoplayer")
 include(":location")
 include(":remote")

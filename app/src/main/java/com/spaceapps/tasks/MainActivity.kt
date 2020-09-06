@@ -41,12 +41,9 @@ class MainActivity : AppCompatActivity() {
                     R.id.navigation_splash,
                     R.id.navigation_login,
                     R.id.navigation_create,
-                    R.id.navigation_audio_player -> {
-                        bottomNavigationView.gone()
-                    }
-                    else -> {
-                        bottomNavigationView.visible()
-                    }
+                    R.id.navigation_google_maps,
+                    R.id.navigation_audio_player -> bottomNavigationView.gone()
+                    else -> bottomNavigationView.visible()
                 }
             }
     }

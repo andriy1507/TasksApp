@@ -7,6 +7,8 @@ import com.spaceapps.tasks.core.extensions.isNull
 import com.spaceapps.tasks.core.extensions.navigate
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.core_ui.visibleIf
+import com.spaceapps.tasks.settings.SettingsFragmentDirections.Companion.navigateAudioPlayer
+import com.spaceapps.tasks.settings.SettingsFragmentDirections.Companion.navigateGoogleMaps
 import com.spaceapps.tasks.settings.databinding.FragmentSettingsBinding
 import dev.chrisbanes.insetter.applySystemWindowInsetsToPadding
 
@@ -19,13 +21,14 @@ class SettingsFragment : BaseFragment() {
     private val notificationsTitleTextView by lazy { binding.notificationsTitleTextView }
     private val deleteAccountButton by lazy { binding.deleteAccountButton }
     private val accountType by lazy { getString(R.string.account_type) }
+    private val goPlayerButton by lazy { binding.goToPlayerButton }
+    private val goMapsButton by lazy { binding.goToMapsButton }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initListeners()
         initData()
         applyInsets()
-        navigate(SettingsFragmentDirections.navigateAudioPlayer())
     }
 
     private fun applyInsets() {
@@ -58,5 +61,7 @@ class SettingsFragment : BaseFragment() {
             }
             visibleIf(!accountManager.getAccountsByType(accountType).firstOrNull().isNull())
         }
+        goPlayerButton.setOnClickListener { navigate(navigateAudioPlayer()) }
+        goMapsButton.setOnClickListener { navigate(navigateGoogleMaps()) }
     }
 }
