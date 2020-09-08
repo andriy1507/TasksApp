@@ -55,7 +55,6 @@ class AudioPlayerFragment : BaseFragment(), ServiceConnection {
                 playButton.setImageResource(imageRes)
             }
         })
-
     }
 
     private fun initClickListeners() {

@@ -33,12 +33,20 @@ class TasksApplication : Application() {
     }
 
     private fun initFirebaseNotificationsChannel() = oreo {
-        val channel = NotificationChannel(
+        val firebaseChannel = NotificationChannel(
             getString(R.string.firebase_notifications_channel_id),
             getString(R.string.firebase_notifications_channel_name),
             NotificationManager.IMPORTANCE_HIGH
         )
-        notificationManager.createNotificationChannel(channel)
+        val mediaChannel = NotificationChannel(
+            getString(R.string.media_player_notifications_channel_id),
+            getString(R.string.media_player_notifications_channel_id),
+            NotificationManager.IMPORTANCE_LOW
+        )
+        notificationManager.apply {
+            createNotificationChannel(firebaseChannel)
+            createNotificationChannel(mediaChannel)
+        }
     }
 
 }
