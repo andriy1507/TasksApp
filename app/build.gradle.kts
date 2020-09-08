@@ -108,4 +108,5 @@ dependencies {
     implementation(libs.groupie.core)
     implementation(libs.androidx.paging.core)
     implementation(libs.google.firebase.messaging)
+    implementation(libs.google.exoplayer.core)
 }

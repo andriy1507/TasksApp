@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="media_player_notifications_channel_id">MEDIA_PLAYER_NOTIFICATIONS_CHANNEL</string>
+    <string name="media_player_notifications_channel_name">Media player</string>
+</resources>
