@@ -22,7 +22,7 @@ class TasksApplication : Application() {
         super.onCreate()
         initStetho()
         initTimber()
-        initFirebaseNotificationsChannel()
+        initNotificationsChannels()
     }
 
     private fun initStetho() = debug { Stetho.initializeWithDefaults(this) }
@@ -32,7 +32,7 @@ class TasksApplication : Application() {
         release { Timber.plant(ReleaseTree()) }
     }
 
-    private fun initFirebaseNotificationsChannel() = oreo {
+    private fun initNotificationsChannels() = oreo {
         val firebaseChannel = NotificationChannel(
             getString(R.string.firebase_notifications_channel_id),
             getString(R.string.firebase_notifications_channel_name),

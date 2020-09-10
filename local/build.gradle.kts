@@ -28,6 +28,10 @@ android {
         }
     }
 
+    sourceSets {
+        getByName("androidTest").assets.srcDirs(files("$projectDir/schemas"))
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
@@ -73,4 +77,8 @@ dependencies {
     testImplementation(libs.testing.androidJunit)
     testImplementation(libs.testing.robolectric)
     testImplementation(libs.coroutines.testing)
+    androidTestImplementation(libs.androidx.room.testing)
+    androidTestImplementation(libs.testing.androidRunner)
+    androidTestImplementation(libs.testing.junit)
+    androidTestImplementation(libs.testing.androidJunit)
 }
