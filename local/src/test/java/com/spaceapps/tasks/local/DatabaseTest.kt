@@ -5,6 +5,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.spaceapps.tasks.local.model.SubTaskLocal
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain
@@ -45,7 +46,7 @@ class DatabaseTest {
         CoroutineScope(Dispatchers.Main).launch {
             database.getSubTasksDao().insert(mockSubTask)
             val subTasks = database.getSubTasksDao().selectAll()
-            assert(subTasks.isNotEmpty())
+            subTasks.collect { assert(it.isNotEmpty()) }
         }
     }
 
@@ -54,9 +55,9 @@ class DatabaseTest {
         CoroutineScope(Dispatchers.Main).launch {
             with(database.getSubTasksDao()){
                 insert(mockSubTask)
-                assert(selectAll().isNotEmpty())
+                selectAll().collect { assert(it.isNotEmpty()) }
                 delete(mockSubTask)
-                assert(selectAll().isEmpty())
+                selectAll().collect { assert(it.isEmpty()) }
             }
         }
     }
