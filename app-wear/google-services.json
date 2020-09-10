@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "483715168039",
+    "firebase_url": "https://spaceapps-tasks-30ed9.firebaseio.com",
+    "project_id": "spaceapps-tasks-30ed9",
+    "storage_bucket": "spaceapps-tasks-30ed9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483715168039:android:7b79bdc80459ed8abe1b02",
+        "android_client_info": {
+          "package_name": "com.spaceapps.tasks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "483715168039-e5a1lq4a086bfjmj56m1qdcfpjjtcbh8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spaceapps.tasks",
+            "certificate_hash": "955ff081dc7b7e9aa4825eda75a6ad908dd0035d"
+          }
+        },
+        {
+          "client_id": "483715168039-0d774ljqur3t0t028e6rcpeehi6a9p1m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spaceapps.tasks",
+            "certificate_hash": "c578f254ae216d9cfdfb9348e35b926300742d56"
+          }
+        },
+        {
+          "client_id": "483715168039-tqas0t7a81rd65o0r61u7gef4gnfkjdl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIgOUKHsSd9ChgEssC0PnuCxYrJ97VS4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "483715168039-nq56t22e7jumklsfuou772h4hra739q2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

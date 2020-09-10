@@ -1,3 +1,4 @@
+include(":app-wear")
 include(":maps")
 include(":exoplayer")
 include(":location")
