@@ -26,6 +26,7 @@ object libs {
             const val extensions = "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
             const val compiler = "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
             const val runtime = "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+            const val common = "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
         }
 
         object room {
@@ -42,7 +43,7 @@ object libs {
         }
 
         object navigation {
-            private const val navigation_version = "2.3.0-alpha06"
+            private const val navigation_version = "2.3.0"
             const val fragment = "androidx.navigation:navigation-fragment-ktx:$navigation_version"
             const val extensions = "androidx.navigation:navigation-ui-ktx:$navigation_version"
             const val safe_args =
@@ -70,6 +71,13 @@ object libs {
             const val core = "androidx.work:work-runtime:$work_manager_version"
             const val ktx = "androidx.work:work-runtime-ktx:$work_manager_version"
             const val testing = "androidx.work:work-testing:$work_manager_version"
+        }
+
+        object wear {
+            private const val ui_version = "1.1.0-rc03"
+            const val ui = "androidx.wear:wear:$ui_version"
+            private const val input_version = "1.0.0-alpha01"
+            const val input = "androidx.wear:wear-input:$input_version"
         }
     }
 

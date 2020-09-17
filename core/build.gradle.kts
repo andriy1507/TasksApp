@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.livedata)
+    implementation(libs.androidx.lifecycle.common)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.paging.core)
     compileOnly(libs.androidx.annotations)

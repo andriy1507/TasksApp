@@ -13,13 +13,14 @@ android {
     buildToolsVersion = variables.buildTools
     defaultConfig {
         applicationId = "com.spaceapps.tasks"
-        minSdkVersion(variables.minSdk)
-        targetSdkVersion(variables.compileSdk)
+        minSdkVersion(28)
+        targetSdkVersion(30)
         versionCode = variables.version
         versionName = variables.versionCode
         multiDexEnabled = true
         testInstrumentationRunner = variables.testRunner
     }
+
     signingConfigs {
         getByName("debug") {
             keyAlias = "tasks"
@@ -56,58 +57,39 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
         useIR = true
     }
-    composeOptions {
-        kotlinCompilerVersion = libs.kotlin.version
-        kotlinCompilerExtensionVersion = libs.androidx.compose.version
-    }
 }
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to arrayOf("*.jar")))
-    wearApp(project(":app-wear"))
     implementation(project(":core"))
     implementation(project(":core-utils"))
-    implementation(project(":core-ui"))
     implementation(project(":repository"))
-    implementation(project(":remote"))
     implementation(project(":local"))
-    implementation(project(":splash"))
-    implementation(project(":main"))
-    implementation(project(":create"))
-    implementation(project(":profile"))
-    implementation(project(":settings"))
-    implementation(project(":account"))
-    implementation(project(":firebase"))
-    implementation(project(":location"))
-    implementation(project(":exoplayer"))
-    implementation(project(":maps"))
-    implementation(libs.google.auth)
+    implementation(project(":remote"))
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.multidex)
+    implementation(libs.androidx.lifecycle.extensions)
+    implementation(libs.androidx.lifecycle.livedata)
+    implementation(libs.androidx.wear.ui)
+    implementation(libs.androidx.wear.input)
     implementation(libs.hilt.core)
     implementation(libs.hilt.viewModel)
     kapt(libs.hilt.androidCompiler)
     kapt(libs.hilt.compiler)
     compileOnly(libs.androidx.annotations)
-    implementation(libs.androidx.constraint.layout)
-    implementation(libs.google.material.design)
-    implementation(libs.androidx.navigation.fragment)
-    implementation(libs.androidx.navigation.extensions)
-    implementation(libs.stetho.core)
-    implementation(libs.logging.timber)
     implementation(libs.google.firebase.analytics)
     implementation(libs.google.firebase.crashlytics)
-    implementation(libs.picasso.core)
+    implementation(libs.androidx.navigation.extensions)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.groupie.core)
+    implementation(libs.groupie.viewBinding)
     implementation(libs.retrofit.core)
-    implementation(libs.androidx.room.core)
     implementation(libs.okhttp.loggingInterceptor)
+    implementation(libs.okhttp.core)
+    implementation(libs.androidx.room.core)
+    implementation(libs.picasso.core)
     implementation(libs.stetho.okhttp)
     implementation(libs.google.gson)
     implementation(libs.tinder.scarlet)
-    implementation(libs.groupie.core)
-    implementation(libs.androidx.paging.core)
-    implementation(libs.google.firebase.messaging)
-    implementation(libs.google.exoplayer.core)
 }
