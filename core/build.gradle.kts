@@ -54,7 +54,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
@@ -62,11 +62,15 @@ dependencies {
     implementation(fileTree("dir" to "libs", "include" to arrayOf("*.jar")))
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
+    implementation(libs.androidx.lifecycle.livedata)
+    implementation(libs.androidx.lifecycle.common)
     implementation(libs.androidx.appcompat)
-    implementation(libs.paging.core)
+    implementation(libs.androidx.paging.core)
     compileOnly(libs.androidx.annotations)
     implementation(libs.coroutines.core)
-    implementation(libs.navigation.fragment)
-    implementation(libs.navigation.extensions)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.extensions)
     implementation(libs.picasso.core)
+    testImplementation(libs.testing.junit)
+    testImplementation(libs.coroutines.testing)
 }

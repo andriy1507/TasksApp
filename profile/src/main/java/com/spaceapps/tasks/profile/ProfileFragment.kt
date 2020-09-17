@@ -6,19 +6,19 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.spaceapps.tasks.core.extensions.*
-import com.spaceapps.tasks.core.model.Status
-import com.spaceapps.tasks.core.model.UserProfileModel
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.profile.databinding.FragmentProfileBinding
-import com.spaceapps.tasks.profile.di.ProfileScreenComponent
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class ProfileFragment : BaseFragment() {
 
     companion object {
@@ -26,8 +26,7 @@ class ProfileFragment : BaseFragment() {
         private const val PERMISSION_REQUEST_CODE = 0x1254
     }
 
-    @Inject
-    lateinit var viewModel: ProfileScreenViewModel
+    private val viewModel: ProfileScreenViewModel by viewModels()
 
     @Inject
     lateinit var picasso: Picasso
@@ -38,16 +37,9 @@ class ProfileFragment : BaseFragment() {
     private val profileImageView by lazy { binding.profileImageImageView }
     private val loadingProgressBar by lazy { binding.loadingProgressBar }
 
-    override fun setupDependencies() {
-        ProfileScreenComponent.init(this).inject(this)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.apply {
-            getUserProfile()
-            getSubTasks()
-        }
+        viewModel.getUserProfile()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,12 +69,15 @@ class ProfileFragment : BaseFragment() {
                 if (!list.isNullOrEmpty()) {
                     val progress = list.count { it.isDone } / list.size * 100
                     progressBar.progress = progress
+
                 }
             }
-            observe(userProfile) {status ->
+            observe(userProfile) { status ->
                 status.onSuccess {
-                    it?.let { picasso.loadFromBackend(it.profileImage)
-                        .onCompleted { loadingProgressBar.hide() }.into(profileImageView) }
+                    it?.let {
+                        picasso.loadFromBackend(it.profileImage)
+                            .onCompleted { loadingProgressBar.hide() }.into(profileImageView)
+                    }
                 }.onError {
                     loadingProgressBar.hide()
                     binding.root.showErrorSnackBar(R.string.some_error_occurred)
@@ -97,6 +92,7 @@ class ProfileFragment : BaseFragment() {
                     picasso.loadFromBackend(it)
                         .onCompleted { loadingProgressBar.hide() }.into(profileImageView)
                 }.onError {
+                    loadingProgressBar.hide()
                     binding.root.showErrorSnackBar(R.string.some_error_occurred)
                     Timber.e(it)
                 }.onLoading {
@@ -138,12 +134,10 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun parseImageFromIntent(data: Intent?) {
-        val uri = data?.data
-        profileImageView.setImageURI(uri)
         try {
-            uri?.let {
-                val fileDescriptor = context?.contentResolver?.openFileDescriptor(uri, "r")
-                context?.contentResolver?.getFileName(uri)?.let { fileName ->
+            data?.data?.let {
+                val fileDescriptor = context?.contentResolver?.openFileDescriptor(it, "r")
+                context?.contentResolver?.getFileName(it)?.let { fileName ->
                     val file = File(context?.cacheDir, fileName)
                     val inputStream = FileInputStream(fileDescriptor?.fileDescriptor)
                     val outputStream = FileOutputStream(file)

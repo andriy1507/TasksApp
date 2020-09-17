@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    app:startDestination="@id/one"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph">
+
+    <fragment android:id="@+id/one"
+        android:name="com.spaceapps.tasks.SplashWearableFragment">
+        <action android:id="@+id/goFragmentTwo" app:destination="@id/two"/>
+    </fragment>
+
+    <fragment android:id="@+id/two"
+        android:name="com.spaceapps.tasks.MenuFragment"/>
+
+</navigation>

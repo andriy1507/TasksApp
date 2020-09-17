@@ -1,22 +1,26 @@
 package com.spaceapps.tasks.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import androidx.fragment.app.viewModels
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.spaceapps.tasks.core.extensions.*
 import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.core_ui.gone
 import com.spaceapps.tasks.core_ui.visible
 import com.spaceapps.tasks.profile.SignInFragmentDirections.Companion.navigationUserProfile
 import com.spaceapps.tasks.profile.databinding.FragmentSignInBinding
-import com.spaceapps.tasks.profile.di.SignInScreenComponent
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
+@AndroidEntryPoint
 class SignInFragment : BaseFragment() {
 
-    @Inject
-    lateinit var viewModel: SignInViewModel
+    private val viewModel: SignInViewModel by viewModels()
 
     override val binding by lazy { FragmentSignInBinding.inflate(layoutInflater) }
 
@@ -27,10 +31,7 @@ class SignInFragment : BaseFragment() {
     private val loadingProgressBar by lazy { binding.loadingProgressBar }
     private val noteTextView by lazy { binding.noteTextView }
     private val buttonTextView by lazy { binding.buttonTextView }
-
-    override fun setupDependencies() {
-        SignInScreenComponent.init(this).inject(this)
-    }
+    private val googleSignInButton by lazy { binding.googleSignInButton }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,6 +41,13 @@ class SignInFragment : BaseFragment() {
 
     private fun initClickListeners() {
         buttonTextView.setOnClickListener { viewModel.toggleState() }
+        googleSignInButton.setOnClickListener {
+            val options =
+                GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail()
+                    .build()
+            val client = GoogleSignIn.getClient(requireContext(), options)
+            startActivityForResult(client.signInIntent, GOOGLE_SING_IN_RC)
+        }
     }
 
     private fun initObservers() {
@@ -66,11 +74,11 @@ class SignInFragment : BaseFragment() {
                             navigate(navigationUserProfile())
                         }, LOG_IN_THRESHOLD)
                     }
+                }.onLoading {
+                    loadingProgressBar.visible()
                 }.onError {
                     loadingProgressBar.gone()
                     binding.root.showErrorSnackBar(R.string.some_error_occurred)
-                }.onLoading {
-                    loadingProgressBar.visible()
                 }
             }
         }
@@ -102,7 +110,22 @@ class SignInFragment : BaseFragment() {
         signInButton.setText(R.string.sign_up)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            GOOGLE_SING_IN_RC -> {
+                GoogleSignIn.getSignedInAccountFromIntent(data)?.addOnSuccessListener {
+                    binding.root.showSuccessSnackBar(R.string.successfully_logged_in)
+                }?.addOnFailureListener {
+                    binding.root.showErrorSnackBar(R.string.some_error_occurred)
+                    Timber.e(it)
+                }
+            }
+        }
+    }
+
     companion object {
         private const val LOG_IN_THRESHOLD: Long = 1500
+        private const val GOOGLE_SING_IN_RC = 0x1234
     }
 }

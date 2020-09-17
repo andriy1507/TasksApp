@@ -14,8 +14,6 @@ class SplashFragment : BaseFragment() {
         private const val SPLASH_SCREEN_DELAY: Long = 1500
     }
 
-    override fun setupDependencies() = Unit
-
     override fun onResume() {
         super.onResume()
         Handler(Looper.getMainLooper()).postDelayed({

@@ -9,8 +9,8 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/large"
-        android:layout_marginTop="@dimen/giant"
+        android:layout_marginStart="@dimen/spacing_16dp"
+        android:layout_marginTop="@dimen/spacing_64dp"
         android:text="@string/sign_in"
         android:textAppearance="@style/TextAppearance.AppTheme.Headline4.SignIn"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,7 +20,7 @@
         style="@style/Widget.AppTheme.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/large"
+        android:layout_margin="@dimen/spacing_16dp"
         app:layout_constraintTop_toBottomOf="@id/header">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -36,7 +36,7 @@
         style="@style/Widget.AppTheme.TextInputLayout.OutlinedBox.Password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/large"
+        android:layout_margin="@dimen/spacing_16dp"
         app:layout_constraintTop_toBottomOf="@id/loginInputContainer">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -53,7 +53,7 @@
         style="@style/Widget.AppTheme.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/large"
+        android:layout_margin="@dimen/spacing_16dp"
         android:text="@string/sign_in"
         app:layout_constraintTop_toBottomOf="@id/passwordInputContainer" />
 
@@ -61,7 +61,7 @@
         android:id="@+id/noteTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/large"
+        android:layout_marginTop="@dimen/spacing_16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signInButton" />
@@ -74,6 +74,14 @@
         app:layout_constraintBottom_toBottomOf="@id/noteTextView"
         app:layout_constraintStart_toEndOf="@id/noteTextView"
         app:layout_constraintTop_toTopOf="@id/noteTextView" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/googleSignInButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_16dp"
+        app:layout_constraintTop_toBottomOf="@id/buttonTextView" />
+
 
     <ProgressBar
         android:id="@+id/loadingProgressBar"

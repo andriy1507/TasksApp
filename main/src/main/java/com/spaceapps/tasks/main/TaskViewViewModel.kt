@@ -1,33 +1,26 @@
 package com.spaceapps.tasks.main
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.liveData
 import com.spaceapps.tasks.core.extensions.async
+import com.spaceapps.tasks.core.extensions.safeAsync
+import com.spaceapps.tasks.core.model.Status
 import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core.repository.TasksRepository
-import javax.inject.Inject
 
-class TaskViewViewModel @Inject constructor(private val tasksRepository: TasksRepository) :
+class TaskViewViewModel @ViewModelInject constructor(private val tasksRepository: TasksRepository) :
     ViewModel() {
 
-    var task: LiveData<Task?> = MutableLiveData()
+    var task: LiveData<Task?> = MutableLiveData<Task?>()
 
     fun updateTask(task: Task) = async {
         tasksRepository.changeTasks(task)
     }
 
     fun getTask(id: Long) {
-        task = tasksRepository.getTaskById(id)
-    }
-
-    class Factory @Inject constructor(private val tasksRepository: TasksRepository) :
-        ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return TaskViewViewModel(tasksRepository) as T
-        }
-
+        task = liveData { emit(tasksRepository.getTaskById(id)) }
     }
 }

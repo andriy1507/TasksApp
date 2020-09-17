@@ -3,16 +3,17 @@ name: spaceApps Android CI
 on:
   pull_request:
     branches:
+      - "master"
       - "dev"
       - "ag/*"
     types:
       - opened
       - reopened
       - edited
-      - synchronize
+      - synchronized
 
 jobs:
-  apk:
+  build:
     name: Build TasksApp debug
     runs-on: ubuntu-latest
 

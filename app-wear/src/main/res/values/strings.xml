@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TasksApp</string>
+    <string name="create_task">Create task</string>
+    <string name="all_tasks">All tasks</string>
+</resources>

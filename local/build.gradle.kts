@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 android {
     compileSdkVersion(variables.compileSdk)
@@ -16,9 +17,19 @@ android {
         testInstrumentationRunner = variables.testRunner
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments(mapOf("room.incremental" to "true"))
+                arguments(
+                    mapOf(
+                        "room.schemaLocation" to "$projectDir/schemas",
+                        "room.incremental" to "true",
+                        "room.expandProjection" to "true"
+                    )
+                )
             }
         }
+    }
+
+    sourceSets {
+        getByName("androidTest").assets.srcDirs(files("$projectDir/schemas"))
     }
 
     buildTypes {
@@ -42,7 +53,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    testOptions {
+        unitTests.isReturnDefaultValues = true
     }
 }
 dependencies {
@@ -50,11 +64,21 @@ dependencies {
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
-    implementation(libs.dagger.core)
-    kapt(libs.dagger.compiler)
-    implementation(libs.room.core)
-    implementation(libs.room.extensions)
-    kapt(libs.room.compiler)
+    implementation(libs.hilt.core)
+    kapt(libs.hilt.androidCompiler)
+    implementation(libs.androidx.room.core)
+    implementation(libs.androidx.room.extensions)
+    kapt(libs.androidx.room.compiler)
     compileOnly(libs.androidx.annotations)
-    implementation(libs.paging.core)
+    testImplementation(libs.androidx.room.testing)
+    testImplementation(libs.testing.androidx)
+    testImplementation(libs.testing.androidRunner)
+    testImplementation(libs.testing.junit)
+    testImplementation(libs.testing.androidJunit)
+    testImplementation(libs.testing.robolectric)
+    testImplementation(libs.coroutines.testing)
+    androidTestImplementation(libs.androidx.room.testing)
+    androidTestImplementation(libs.testing.androidRunner)
+    androidTestImplementation(libs.testing.junit)
+    androidTestImplementation(libs.testing.androidJunit)
 }

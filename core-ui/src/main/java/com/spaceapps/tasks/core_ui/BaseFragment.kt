@@ -11,13 +11,6 @@ abstract class BaseFragment : Fragment() {
 
     protected abstract val binding: ViewBinding
 
-    abstract fun setupDependencies()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setupDependencies()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

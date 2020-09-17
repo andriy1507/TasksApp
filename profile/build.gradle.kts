@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 android {
     compileSdkVersion(variables.compileSdk)
@@ -41,7 +42,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        useIR = true
     }
 }
 
@@ -52,13 +54,17 @@ dependencies {
     implementation(libs.kotlin.std)
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.lifecycle.livedata)
     compileOnly(libs.androidx.annotations)
     implementation(libs.coroutines.core)
-    implementation(libs.navigation.fragment)
-    implementation(libs.navigation.extensions)
-    implementation(libs.constraint.layout)
-    implementation(libs.dagger.core)
-    kapt(libs.dagger.compiler)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.extensions)
+    implementation(libs.androidx.constraint.layout)
+    implementation(libs.hilt.core)
+    implementation(libs.hilt.viewModel)
+    kapt(libs.hilt.androidCompiler)
+    kapt(libs.hilt.compiler)
     implementation(libs.picasso.core)
     implementation(libs.logging.timber)
+    implementation(libs.google.auth)
 }

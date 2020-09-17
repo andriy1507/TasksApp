@@ -1,32 +1,31 @@
 package com.spaceapps.tasks.local.dao
 
-import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
 import com.spaceapps.tasks.local.model.TaskLocal
 import com.spaceapps.tasks.local.model.TaskWithSubs
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface TasksDao : BaseDao<TaskLocal> {
+interface TasksDao {
 
     @Insert(onConflict = REPLACE)
-    override fun insert(vararg items: TaskLocal): List<Long>
+    suspend fun insert(vararg items: TaskLocal): List<Long>
 
     @Delete
-    override fun delete(vararg items: TaskLocal)
+    suspend fun delete(vararg items: TaskLocal)
 
     @Update
-    override fun update(vararg items: TaskLocal)
+    suspend fun update(vararg items: TaskLocal)
 
     @Query("SELECT * FROM TASKS")
-    override fun selectAll(): DataSource.Factory<Int, TaskLocal>
+    fun selectAll(): Flow<List<TaskLocal>>
 
     @Transaction
     @Query("SELECT * FROM TASKS")
-    fun selectAllWithSubTasks(): DataSource.Factory<Int, TaskWithSubs>
+    fun selectAllWithSubTasks(): Flow<List<TaskWithSubs>>
 
     @Transaction
     @Query("SELECT * FROM TASKS WHERE id = :id LIMIT 1")
-    fun selectTaskWithSubTasksById(id: Long): LiveData<TaskWithSubs?>
+    suspend fun selectTaskWithSubTasksById(id: Long): TaskWithSubs?
 }

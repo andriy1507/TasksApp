@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/huge"
-    android:layout_height="@dimen/huge"
-    android:layout_margin="@dimen/small">
+    android:layout_width="@dimen/spacing_48dp"
+    android:layout_height="@dimen/spacing_48dp"
+    android:layout_margin="@dimen/spacing_4dp">
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/colorCircleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="@dimen/big" >
+        app:cardCornerRadius="@dimen/spacing_24dp">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/huge"
-            android:layout_height="@dimen/huge"
+            android:layout_width="@dimen/spacing_48dp"
+            android:layout_height="@dimen/spacing_48dp"
             android:tint="?colorOnBackground"
             android:id="@+id/checkImageView"
             android:visibility="gone"
-            android:src="@drawable/ic_check"/>
+            android:src="@drawable/ic_check" />
 
     </androidx.cardview.widget.CardView>
 

@@ -1,23 +1,22 @@
 package com.spaceapps.tasks.local.dao
 
-import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
 import com.spaceapps.tasks.local.model.SubTaskLocal
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SubTasksDao {
 
     @Insert(onConflict = REPLACE)
-    fun insert(vararg items: SubTaskLocal): List<Long>
+    suspend fun insert(vararg items: SubTaskLocal): List<Long>
 
     @Delete
-    fun delete(vararg items: SubTaskLocal)
+    suspend fun delete(vararg items: SubTaskLocal)
 
     @Update
-    fun update(vararg items: SubTaskLocal)
+    suspend fun update(vararg items: SubTaskLocal)
 
     @Query("SELECT * FROM SUBTASKS")
-    fun selectAll(): List<SubTaskLocal>
+    fun selectAll(): Flow<List<SubTaskLocal>>
 }

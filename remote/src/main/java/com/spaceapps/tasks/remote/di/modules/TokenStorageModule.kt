@@ -6,8 +6,11 @@ import com.spaceapps.tasks.remote.BuildConfig
 import com.spaceapps.tasks.remote.source.AuthTokenStorage
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class TokenStorageModule {
 
     companion object {

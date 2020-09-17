@@ -1,3 +1,7 @@
+include(":app-wear")
+include(":maps")
+include(":exoplayer")
+include(":location")
 include(":remote")
 include(":core-utils")
 include(":firebase")
