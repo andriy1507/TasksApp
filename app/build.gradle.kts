@@ -64,6 +64,7 @@ android {
 
 dependencies {
     implementation(fileTree("dir" to "libs", "include" to arrayOf("*.jar")))
+    wearApp(project(":app-wear"))
     implementation(project(":core"))
     implementation(project(":core-utils"))
     implementation(project(":core-ui"))
