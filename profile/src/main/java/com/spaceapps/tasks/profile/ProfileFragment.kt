@@ -6,9 +6,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.spaceapps.tasks.core.extensions.*
-import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.profile.databinding.FragmentProfileBinding
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +19,7 @@ import java.io.FileOutputStream
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ProfileFragment : BaseFragment() {
+class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     companion object {
         private const val PICK_FROM_GALLERY_REQUEST_CODE = 0x1432
@@ -31,7 +31,7 @@ class ProfileFragment : BaseFragment() {
     @Inject
     lateinit var picasso: Picasso
 
-    override val binding by lazy { FragmentProfileBinding.inflate(layoutInflater) }
+    private val binding by viewBinding(FragmentProfileBinding::bind)
 
     private val progressBar by lazy { binding.completedTasksMeasure }
     private val profileImageView by lazy { binding.profileImageImageView }

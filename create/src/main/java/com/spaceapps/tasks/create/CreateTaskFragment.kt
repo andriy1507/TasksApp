@@ -4,13 +4,14 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.spaceapps.tasks.core.extensions.indexInList
+import com.spaceapps.tasks.core.extensions.viewBinding
 import com.spaceapps.tasks.core.model.SubTask
 import com.spaceapps.tasks.core.model.Task
-import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.core_ui.SelectableResources
 import com.spaceapps.tasks.core_ui.getThemeColor
 import com.spaceapps.tasks.create.databinding.FragmentCreateTaskBinding
@@ -20,9 +21,9 @@ import com.xwray.groupie.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CreateTaskFragment : BaseFragment() {
+class CreateTaskFragment : Fragment(R.layout.fragment_create_task) {
 
-    override val binding by lazy { FragmentCreateTaskBinding.inflate(layoutInflater) }
+    private val binding by viewBinding(FragmentCreateTaskBinding::bind)
 
     private val titleEditText by lazy { binding.titleEditText }
     private val colorPickerView by lazy { binding.colorPickerView }

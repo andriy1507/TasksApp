@@ -5,18 +5,19 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.spaceapps.tasks.core_ui.BaseFragment
+import com.spaceapps.tasks.core.extensions.viewBinding
 import com.spaceapps.tasks.maps.databinding.FragmentGoogleMapsBinding
 import dev.chrisbanes.insetter.applySystemWindowInsetsToPadding
 
-class GoogleMapsFragment : BaseFragment(), OnMapReadyCallback {
+class GoogleMapsFragment : Fragment(R.layout.fragment_google_maps), OnMapReadyCallback {
 
-    override val binding by lazy { FragmentGoogleMapsBinding.inflate(layoutInflater) }
+    private val binding by viewBinding(FragmentGoogleMapsBinding::bind)
 
     private val toolbar by lazy { binding.toolbar }
     private var googleMap: GoogleMap? = null
