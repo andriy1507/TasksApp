@@ -1,6 +1,5 @@
 package com.spaceapps.tasks.repository
 
-import com.spaceapps.tasks.core.model.Status
 import com.spaceapps.tasks.core.model.SubTask
 import com.spaceapps.tasks.core.model.Task
 import com.spaceapps.tasks.core.repository.TasksRepository
@@ -11,8 +10,6 @@ import com.spaceapps.tasks.repository.mapper.toSubTask
 import com.spaceapps.tasks.repository.mapper.toTask
 import com.spaceapps.tasks.repository.mapper.toTaskLocal
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -26,7 +23,7 @@ class TasksRepositoryImpl
         return tasksDataSource.getTaskById(id)?.toTask()
     }
 
-    override suspend fun getAllTasks(): Flow<List<Task>> {
+    override fun getAllTasks(): Flow<List<Task>> {
         return tasksDataSource.getTasks().map { list -> list.map { it.toTask() } }
     }
 

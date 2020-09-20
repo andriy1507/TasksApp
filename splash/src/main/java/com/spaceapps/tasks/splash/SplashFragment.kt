@@ -2,13 +2,14 @@ package com.spaceapps.tasks.splash
 
 import android.os.Handler
 import android.os.Looper
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.spaceapps.tasks.core_ui.BaseFragment
+import com.spaceapps.tasks.core.extensions.viewBinding
 import com.spaceapps.tasks.splash.databinding.FragmentSplashBinding
 
-class SplashFragment : BaseFragment() {
+class SplashFragment : Fragment(R.layout.fragment_splash) {
 
-    override val binding by lazy { FragmentSplashBinding.inflate(layoutInflater) }
+    private val binding by viewBinding(FragmentSplashBinding::bind)
 
     companion object {
         private const val SPLASH_SCREEN_DELAY: Long = 1500

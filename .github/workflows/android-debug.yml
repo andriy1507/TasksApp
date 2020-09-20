@@ -1,16 +1,6 @@
 name: spaceApps Android CI
 
-on:
-  pull_request:
-    branches:
-      - "master"
-      - "dev"
-      - "ag/*"
-    types:
-      - opened
-      - reopened
-      - edited
-      - synchronized
+on: [pull_request]
 
 jobs:
   build:

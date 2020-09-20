@@ -5,8 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
-import androidx.paging.PagedListAdapter
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.spaceapps.tasks.core.extensions.indexInList
 import com.spaceapps.tasks.core.model.Task
@@ -14,18 +12,16 @@ import com.spaceapps.tasks.core_ui.SelectableResources
 import com.spaceapps.tasks.main.databinding.ItemTaskBinding
 import javax.inject.Inject
 
-class TasksAdapter @Inject constructor() : PagedListAdapter<Task, TasksAdapter.TaskViewHolder>(
-    object : DiffUtil.ItemCallback<Task>() {
-        override fun areItemsTheSame(oldItem: Task, newItem: Task) =
-            oldItem.timestamp == newItem.timestamp
+class TasksAdapter @Inject constructor() : RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
 
-        override fun areContentsTheSame(oldItem: Task, newItem: Task) =
-            oldItem.timestamp == newItem.timestamp
-    }
-) {
+    private val items = mutableListOf<Task>()
 
-    fun setOnTaskClickAction(action: ((Task?) -> Unit)?) {
-        onTaskClickAction = action
+    fun update(list: List<Task>) {
+        with(items) {
+            clear()
+            addAll(list)
+            notifyDataSetChanged()
+        }
     }
 
     private var onTaskClickAction: ((Task?) -> Unit)? = null
@@ -37,7 +33,7 @@ class TasksAdapter @Inject constructor() : PagedListAdapter<Task, TasksAdapter.T
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(getItem(position), onTaskClickAction)
+        holder.bind(items[position], onTaskClickAction)
     }
 
     class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -78,4 +74,6 @@ class TasksAdapter @Inject constructor() : PagedListAdapter<Task, TasksAdapter.T
             }
         }
     }
+
+    override fun getItemCount() = items.size
 }

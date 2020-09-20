@@ -12,7 +12,7 @@ interface TasksLocalDataSource {
 
     suspend fun changeTasks(vararg tasks: TaskLocal)
 
-    suspend fun getTasks(): Flow<List<TaskWithSubs>>
+    fun getTasks(): Flow<List<TaskWithSubs>>
 
     suspend fun getTaskById(id: Long): TaskWithSubs?
 }

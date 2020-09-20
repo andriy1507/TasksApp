@@ -8,20 +8,21 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.IBinder
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import com.spaceapps.tasks.core_ui.BaseFragment
+import com.spaceapps.tasks.core.extensions.viewBinding
 import com.spaceapps.tasks.exoplayer.databinding.FragmentAudioPlayerBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dev.chrisbanes.insetter.applySystemWindowInsetsToPadding
 
 @AndroidEntryPoint
-class AudioPlayerFragment : BaseFragment(), ServiceConnection {
+class AudioPlayerFragment : Fragment(R.layout.fragment_audio_player), ServiceConnection {
 
-    override val binding by lazy { FragmentAudioPlayerBinding.inflate(layoutInflater) }
+    private val binding by viewBinding(FragmentAudioPlayerBinding::bind)
 
     private val playButton by lazy { binding.playButton }
     private val toolbar by lazy { binding.toolbar }

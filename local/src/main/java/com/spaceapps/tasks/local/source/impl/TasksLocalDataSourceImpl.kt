@@ -26,7 +26,7 @@ class TasksLocalDataSourceImpl
         tasksDao.update(*tasks)
     }
 
-    override suspend fun getTasks(): Flow<List<TaskWithSubs>> {
+    override fun getTasks(): Flow<List<TaskWithSubs>> {
         return tasksDao.selectAllWithSubTasks()
     }
 }

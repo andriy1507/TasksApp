@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.compiler)
     implementation(libs.androidx.lifecycle.livedata)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.swipeRefresh)
     implementation(libs.androidx.paging.core)
     compileOnly(libs.androidx.annotations)
     implementation(libs.coroutines.core)

@@ -19,6 +19,9 @@ object libs {
         const val multidex = "androidx.multidex:multidex:$multidex_version"
         private const val insetter_version = "0.3.0"
         const val insetter = "dev.chrisbanes:insetter-ktx:$insetter_version"
+        private const val swipe_refresh_version = "1.1.0"
+        const val swipeRefresh =
+            "androidx.swiperefreshlayout:swiperefreshlayout:$swipe_refresh_version"
 
         object lifecycle {
             private const val lifecycle_version = "2.2.0"
@@ -38,7 +41,7 @@ object libs {
         }
 
         object paging {
-            private const val paging_version = "2.1.2"
+            private const val paging_version = "3.0.0-alpha06"
             const val core = "androidx.paging:paging-runtime:$paging_version"
         }
 

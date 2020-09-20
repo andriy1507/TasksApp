@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.spaceapps.tasks.core.extensions.*
-import com.spaceapps.tasks.core_ui.BaseFragment
 import com.spaceapps.tasks.core_ui.gone
 import com.spaceapps.tasks.core_ui.visible
 import com.spaceapps.tasks.profile.SignInFragmentDirections.Companion.navigationUserProfile
@@ -18,11 +18,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class SignInFragment : BaseFragment() {
+class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
     private val viewModel: SignInViewModel by viewModels()
 
-    override val binding by lazy { FragmentSignInBinding.inflate(layoutInflater) }
+    private val binding by viewBinding(FragmentSignInBinding::bind)
 
     private val header by lazy { binding.header }
     private val signInButton by lazy { binding.signInButton }

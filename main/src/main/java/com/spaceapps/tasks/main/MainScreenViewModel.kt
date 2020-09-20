@@ -2,9 +2,11 @@ package com.spaceapps.tasks.main
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
-import com.spaceapps.tasks.core.model.Task
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import com.spaceapps.tasks.core.repository.TasksRepository
+import kotlinx.coroutines.flow.collect
 
 class MainScreenViewModel
 @ViewModelInject constructor(
@@ -12,5 +14,5 @@ class MainScreenViewModel
     private val tasksRepository: TasksRepository
 ) : ViewModel() {
 
-    var taskList: LiveData<List<Task>> = liveData { emitSource(tasksRepository.getAllTasks().asLiveData()) }
+    val taskList = liveData { tasksRepository.getAllTasks().collect { emit(it) } }
 }
