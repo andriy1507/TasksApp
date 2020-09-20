@@ -41,7 +41,7 @@ object libs {
         }
 
         object paging {
-            private const val paging_version = "2.1.2"
+            private const val paging_version = "3.0.0-alpha06"
             const val core = "androidx.paging:paging-runtime:$paging_version"
         }
 

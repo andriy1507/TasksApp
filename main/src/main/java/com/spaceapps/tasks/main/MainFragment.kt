@@ -54,8 +54,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         binding.tasksRecyclerView.apply {
             adapter = recyclerViewAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            recyclerViewAdapter.setOnTaskClickAction(::onTaskClick)
-            recyclerViewAdapter.setOnTaskClickAction { }
         }
     }
 

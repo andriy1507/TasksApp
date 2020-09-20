@@ -17,4 +17,15 @@
         android:background="@android:color/transparent"
         android:navigationIcon="@drawable/ic_arrow_back"
         app:menu="@menu/menu_google_maps" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/buttonCurrentLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/spacing_16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:src="@drawable/ic_location"
+        app:borderWidth="0dp"
+        app:fabCustomSize="@dimen/spacing_48dp" />
 </FrameLayout>
