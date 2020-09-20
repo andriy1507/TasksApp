@@ -33,7 +33,7 @@ object libs {
         }
 
         object room {
-            private const val room_version = "2.2.5"
+            private const val room_version = "2.3.0-alpha02"
             const val core = "androidx.room:room-runtime:$room_version"
             const val compiler = "androidx.room:room-compiler:$room_version"
             const val extensions = "androidx.room:room-ktx:$room_version"
