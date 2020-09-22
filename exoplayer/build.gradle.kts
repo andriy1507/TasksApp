@@ -63,4 +63,5 @@ dependencies {
     kapt(libs.hilt.androidCompiler)
     kapt(libs.hilt.compiler)
     compileOnly(libs.androidx.annotations)
+    compileOnly(libs.logging.timber)
 }
