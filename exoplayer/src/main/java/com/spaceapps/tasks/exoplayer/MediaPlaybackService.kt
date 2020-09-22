@@ -3,7 +3,9 @@ package com.spaceapps.tasks.exoplayer
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.media.MediaBrowserCompat
+import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
+import android.support.v4.media.session.PlaybackStateCompat
 import androidx.media.MediaBrowserServiceCompat
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.SimpleExoPlayer
@@ -14,6 +16,7 @@ class MediaPlaybackService : MediaBrowserServiceCompat() {
 
     private var mediaSession: MediaSessionCompat? = null
     private var exoPlayer: ExoPlayer? = null
+    private lateinit var stateBuilder: PlaybackStateCompat.Builder
     private val callback = object : MediaSessionCompat.Callback() {
         override fun onPlay() {
             exoPlayer?.playWhenReady = true
@@ -46,18 +49,25 @@ class MediaPlaybackService : MediaBrowserServiceCompat() {
 
     override fun onCreate() {
         super.onCreate()
-        mediaSession = MediaSessionCompat(this, javaClass.simpleName)
-        mediaSession?.apply {
-            setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS or MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS)
-            setCallback(callback)
-            isActive = true
-        }
         exoPlayer = SimpleExoPlayer.Builder(this).build()
         val uri =
             "https://firebasestorage.googleapis.com/v0/b/spaceapps-tasks-30ed9.appspot.com/o/Top%20Features%20in%20Android%2011.mp3?alt=media&token=277488f9-3fdc-4c74-a547-fac635780dca"
         val factory = DefaultDataSourceFactory(this, BuildConfig.LIBRARY_PACKAGE_NAME)
         val mediaSource = ProgressiveMediaSource.Factory(factory).createMediaSource(Uri.parse(uri))
         exoPlayer?.prepare(mediaSource)
+        mediaSession = MediaSessionCompat(this, javaClass.simpleName)
+        mediaSession?.apply {
+            setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS or MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS)
+            setCallback(callback)
+            isActive = true
+            stateBuilder = PlaybackStateCompat.Builder()
+                .setActions(
+                    PlaybackStateCompat.ACTION_PLAY
+                            or PlaybackStateCompat.ACTION_PLAY_PAUSE
+                )
+            setPlaybackState(stateBuilder.build())
+            setSessionToken(sessionToken)
+        }
     }
 
 

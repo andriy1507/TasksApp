@@ -51,6 +51,11 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        stopService(Intent(this, MediaPlaybackService::class.java))
+    }
+
     private fun setupNavigation() {
         NavigationUI.setupWithNavController(
             bottomNavigationView,
