@@ -2,7 +2,7 @@
 object libs {
 
     object kotlin {
-        const val version = "1.4.0"
+        const val version = "1.4.10"
         const val std = "org.jetbrains.kotlin:kotlin-stdlib:$version"
         const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val reflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
