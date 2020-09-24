@@ -211,6 +211,8 @@ object libs {
         const val robolectric = "org.robolectric:robolectric:$robolectric_version"
         private const val android_junit_version = "1.1.2"
         const val androidJunit = "androidx.test.ext:junit:$android_junit_version"
+        private const val truth_version = "1.0.1"
+        const val truth = "com.google.truth:truth:$truth_version"
     }
 }
 
