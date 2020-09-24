@@ -8,8 +8,8 @@ import com.spaceapps.tasks.core.extensions.isNull
 import com.spaceapps.tasks.core.extensions.navigate
 import com.spaceapps.tasks.core.extensions.viewBinding
 import com.spaceapps.tasks.core_ui.visibleIf
-import com.spaceapps.tasks.settings.SettingsFragmentDirections.Companion.navigateAudioPlayer
 import com.spaceapps.tasks.settings.SettingsFragmentDirections.Companion.navigateGoogleMaps
+import com.spaceapps.tasks.settings.SettingsFragmentDirections.Companion.navigationMediaPlayer
 import com.spaceapps.tasks.settings.databinding.FragmentSettingsBinding
 import dev.chrisbanes.insetter.applySystemWindowInsetsToPadding
 
@@ -62,7 +62,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             }
             visibleIf(!accountManager.getAccountsByType(accountType).firstOrNull().isNull())
         }
-        goPlayerButton.setOnClickListener { navigate(navigateAudioPlayer()) }
+        goPlayerButton.setOnClickListener { navigate(navigationMediaPlayer()) }
         goMapsButton.setOnClickListener { navigate(navigateGoogleMaps()) }
     }
 }

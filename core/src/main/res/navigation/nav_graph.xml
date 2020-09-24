@@ -74,10 +74,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_audio_player"
-        android:name="com.spaceapps.tasks.exoplayer.AudioPlayerFragment"
-        android:label="AudioPlayerFragment" />
-    <fragment
         android:id="@+id/navigation_google_maps"
         android:name="com.spaceapps.tasks.maps.GoogleMapsFragment"
         android:label="GoogleMapsFragment" />
@@ -86,8 +82,8 @@
         android:name="com.spaceapps.tasks.settings.SettingsFragment"
         android:label="SettingsFragment">
         <action
-            android:id="@+id/navigateAudioPlayer"
-            app:destination="@id/navigation_audio_player" />
+            android:id="@+id/navigationMediaPlayer"
+            app:destination="@id/navigation_media_player" />
         <action
             android:id="@+id/navigateGoogleMaps"
             app:destination="@id/navigation_google_maps" />
@@ -97,4 +93,7 @@
         android:id="@+id/navigation_progress"
         android:name="com.spaceapps.tasks.core_ui.ProgressDialog"
         android:label="ProgressDialog" />
+    <fragment
+        android:id="@+id/navigation_media_player"
+        android:name="com.spaceapps.tasks.exoplayer.MediaPlaybackFragment" />
 </navigation>

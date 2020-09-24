@@ -1,5 +1,6 @@
 package com.spaceapps.tasks
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import com.spaceapps.tasks.core.NavigationDispatcher
 import com.spaceapps.tasks.core_ui.gone
 import com.spaceapps.tasks.core_ui.visible
 import com.spaceapps.tasks.databinding.ActivityMainBinding
+import com.spaceapps.tasks.exoplayer.MediaPlaybackService
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
                     .navigate(destination)
             }
         }
+        startService(Intent(this, MediaPlaybackService::class.java))
     }
 
     override fun onResume() {
@@ -42,10 +45,15 @@ class MainActivity : AppCompatActivity() {
                     R.id.navigation_login,
                     R.id.navigation_create,
                     R.id.navigation_google_maps,
-                    R.id.navigation_audio_player -> bottomNavigationView.gone()
+                    R.id.navigation_media_player -> bottomNavigationView.gone()
                     else -> bottomNavigationView.visible()
                 }
             }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopService(Intent(this, MediaPlaybackService::class.java))
     }
 
     private fun setupNavigation() {
