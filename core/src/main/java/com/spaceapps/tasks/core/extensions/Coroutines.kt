@@ -9,9 +9,9 @@ import kotlinx.coroutines.async
 
 suspend fun <T> safeAsync(async: suspend () -> T): Status<T> {
     return try {
-        Success(async())
+        Status.success(async())
     } catch (e: Exception) {
-        Error(e)
+        Status.error(e)
     }
 }
 
